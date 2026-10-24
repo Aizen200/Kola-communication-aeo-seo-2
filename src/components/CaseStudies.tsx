@@ -1,73 +1,37 @@
 import React from 'react';
 
+// Verbatim from Kola's project CMS (cms.kolacommunications.com). Only projects whose
+// SEO/AEO work is visible on the client's live site are listed here.
 const caseStudies = [
   {
     client: 'Dhanuka Investments',
-    industry: 'Wealth Management & Financial Advisory',
+    industry: 'Wealth Management & Financial Advisory Services',
     website: 'dhanukainvestments.com',
-    description:
-      'SEO, AEO & GEO for a wealth management and financial advisory firm. We structured the site for wealth management search with target keyphrases, FinancialService and LocalBusiness schema, and FAQ content built around their advisory services and how they build long-term client wealth.',
+    category: 'SEO, AEO & GEO',
+    description: 'How we built trust into every page of Dhanuka Investments',
     deliverables: [
       'SEO structure for wealth management search',
-      'FinancialService + LocalBusiness schema markup',
-      'AEO FAQs with FAQPage schema',
+      'Dhanuka Investments advisory services & financial expertise',
+      'How Dhanuka Investments builds long-term client wealth',
     ],
     results: [
-      '4 target keyphrases (SEO)',
-      '2 schema types (FinancialService + LocalBusiness)',
-      '3 AEO FAQs live (FAQPage schema)',
+      '4 Target Keyphrases (SEO)',
+      '2 Schema Types (FinancialService + LocalBusiness)',
+      '3 AEO FAQs Live (Schema: FAQPage)',
     ],
   },
   {
     client: 'Kanodia Enterprises',
     industry: 'Steel Solutions & Industrial Products',
     website: 'kanodiaenterprise.com',
-    description:
-      'SEO and AEO for a steel solutions and industrial products business. We structured the site for steel solutions search with target keyphrases, LocalBusiness and Product schema, and FAQ content covering their product range, industrial expertise and B2B client acquisition.',
+    category: 'SEO',
+    description: 'How we positioned Kanodia Enterprises as an industrial brand online',
     deliverables: [
       'SEO structure for steel solutions search',
-      'LocalBusiness + Product schema markup',
-      'AEO FAQs with FAQPage schema',
+      'Kanodia Enterprises product range & industrial expertise',
+      'Kanodia Enterprises B2B digital presence & client acquisition',
     ],
-    results: [
-      '4 target keyphrases (SEO)',
-      '2 schema types (LocalBusiness + Product)',
-      '3 AEO FAQs live (FAQPage schema)',
-    ],
-  },
-  {
-    client: 'Revent AI',
-    industry: 'AI Document-to-Presentation Platform',
-    website: 'revent.ai',
-    description:
-      'SEO and AEO for an AI platform that converts documents into branded slides. We structured the site for AI presentation search with target keyphrases, SoftwareApplication and FAQPage schema, and FAQ content on its templates, brand sync, one-click workflow and use across 63+ countries.',
-    deliverables: [
-      'SEO structure for AI presentation search',
-      'SoftwareApplication + FAQPage schema markup',
-      'AEO FAQs with FAQPage schema',
-    ],
-    results: [
-      '5 target keyphrases (SEO)',
-      '2 schema types (SoftwareApplication + FAQPage)',
-      '3 AEO FAQs live (FAQPage schema)',
-    ],
-  },
-  {
-    client: 'Veena Developers',
-    industry: 'Real Estate · Mumbai',
-    website: 'veenadevelopers.com',
-    description:
-      'SEO and AEO for one of Mumbai’s trusted real estate builders. We structured the site for Mumbai real estate search with target keyphrases, RealEstateAgent and LocalBusiness schema, and FAQ content covering their residential and commercial portfolio, redevelopment services and community impact.',
-    deliverables: [
-      'SEO structure for Mumbai real estate search',
-      'RealEstateAgent + LocalBusiness schema markup',
-      'AEO FAQs with FAQPage schema',
-    ],
-    results: [
-      '5 target keyphrases (SEO)',
-      '2 schema types (RealEstateAgent + LocalBusiness)',
-      '3 AEO FAQs live (FAQPage schema)',
-    ],
+    results: ['4 Target Keyphrases (SEO)', '3 AEO FAQs Live (Schema: FAQPage)'],
   },
 ];
 
@@ -78,23 +42,21 @@ export default function CaseStudies() {
         <div className="section-header">
           <div>
             <div className="eyebrow">
-              <i className="dot"></i> 02 / CLIENT WORK
+              <i className="dot"></i> 02 / PROJECTS
             </div>
             <h2>
-              Real clients.
-              <br />
-              Real search foundations.
+              Our Work
             </h2>
           </div>
           <p>
-            Each client gets target keyphrases, schema markup and AEO-ready FAQ content, structured so Google and AI answer engines can understand, rank and cite the business.
+            This is why Kola Communications builds FAQ sections into every client project page we publish, not for decoration, but because the question-and-answer format is directly indexed by AI systems as answer-ready content.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-          {caseStudies.map((study, idx) => (
+          {caseStudies.map((study) => (
             <article
-              key={idx}
+              key={study.client}
               className="bg-paper p-8 sm:p-10 rounded-lg border border-line-subtle shadow-sm flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1"
             >
               <div>
@@ -107,6 +69,8 @@ export default function CaseStudies() {
                   </h3>
                   <div className="text-[12px] text-muted font-normal mt-1 flex items-center gap-1.5">
                     <a href={`https://${study.website}`} target="_blank" rel="noopener noreferrer" className="hover:text-green">{study.website} ↗</a>
+                    <span>·</span>
+                    <span>{study.category}</span>
                   </div>
                 </div>
 
@@ -115,12 +79,9 @@ export default function CaseStudies() {
                 </p>
 
                 <div className="mb-6">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-ink mb-3">
-                    SEO, AEO & GEO Work:
-                  </div>
                   <ul className="space-y-2">
-                    {study.deliverables.map((item, dIdx) => (
-                      <li key={dIdx} className="flex items-start gap-2 text-[13px] text-muted">
+                    {study.deliverables.map((item) => (
+                      <li key={item} className="flex items-start gap-2 text-[13px] text-muted">
                         <svg
                           width="16"
                           height="16"
@@ -138,9 +99,6 @@ export default function CaseStudies() {
               </div>
 
               <div className="border-t border-line-subtle pt-5 mt-2 bg-wash/60 -mx-8 sm:-mx-10 -mb-8 sm:-mb-10 p-6 sm:px-10 rounded-b-lg">
-                <div className="text-[11px] font-bold uppercase tracking-wider text-green mb-2">
-                  Search Foundations Shipped:
-                </div>
                 <div className="text-[13px] text-ink font-medium leading-relaxed">
                   {study.results.join(' · ')}
                 </div>
@@ -151,10 +109,10 @@ export default function CaseStudies() {
 
         <div className="mt-12 text-center">
           <p className="text-[14px] text-muted mb-4">
-            +218% average organic traffic growth across clients · 199+ brands scaled across 6 markets.
+            +218% Organic traffic, average client growth · 199+ Brands Scaled Across 6 Markets
           </p>
-          <a className="button" href="#contact">
-            Discuss your search visibility{' '}
+          <a className="button" href="https://kolacommunications.com/projects" target="_blank" rel="noopener noreferrer">
+            View Projects{' '}
             <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
               <use href="#arrow-up" />
             </svg>
@@ -164,4 +122,3 @@ export default function CaseStudies() {
     </section>
   );
 }
-

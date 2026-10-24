@@ -20,9 +20,9 @@ const kolaSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'Kola Communications · Search & AI Visibility',
+  title: 'SEO, AEO & GEO | Kola Communications',
   description:
-    'SEO, AEO & GEO by Kola Communications, Mumbai. Own search rankings across Google and AI search engines like ChatGPT, Perplexity and Google Gemini.',
+    'Search is evolving rapidly. We optimize your digital presence not only for traditional search engines like Google and Bing, but also for generative AI answer engines (ChatGPT, Perplexity, Google Gemini).',
   icons: {
     icon: '/icon.svg',
     shortcut: '/favicon.ico',

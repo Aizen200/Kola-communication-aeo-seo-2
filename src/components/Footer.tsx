@@ -11,28 +11,28 @@ export default function Footer() {
             <span className="brand-sub">
               communications
               <br />
-              Search & AI visibility
+              SEO, AEO & GEO
             </span>
           </a>
           <p>
-            SEO, AEO and GEO that get you found on Google and cited by AI search engines. Real results, not just good looks.
+            SEO, AEO & GEO for Google and AI search engines
           </p>
           <nav className="footer-links flex-wrap" aria-label="Footer navigation">
-            <a href="#expertise">Expertise</a>
-            <a href="#case-studies">Case Studies</a>
+            <a href="#expertise">SEO, AEO & GEO</a>
+            <a href="#case-studies">Projects</a>
             <a href="#packages">Packages</a>
-            <a href="#audit">Website Audit</a>
-            <a href="#approach">Approach</a>
+            <a href="#audit">SEO Audits</a>
+            <a href="#approach">How we work</a>
             <a href="#faq">FAQs</a>
             <a href="#contact">Contact</a>
           </nav>
         </div>
         <div className="footer-bottom">
-          <span>© 2026 Kola Communications. Mumbai, Maharashtra, India.</span>
+          <span>© 2026 Kola Communications. All rights reserved.</span>
           <span>
             <a href="mailto:business@kolacommunications.com" className="hover:text-green">business@kolacommunications.com</a>
             {' · '}
-            <a href="tel:+918928984774" className="hover:text-green">+91 89289 84774</a>
+            <a href="tel:+918928984774" className="hover:text-green">+91-8928984774</a>
           </span>
         </div>
       </div>

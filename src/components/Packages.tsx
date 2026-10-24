@@ -1,19 +1,19 @@
 import React from 'react';
 
+// Verbatim from kolacommunications.com/services ("Transparent ways to collaborate."),
+// limited to the SEO, AEO & GEO deliverables.
 const packages = [
   {
     tag: 'Continuous Scaling',
     badge: 'Most Popular',
-    name: 'Monthly SEO, AEO & GEO Retainer',
+    name: 'Monthly Growth Retainer',
     description:
-      'A fully managed monthly engagement covering search strategy, execution and reporting across Google and AI search engines, so you can focus on running your business.',
-    timeline: 'Monthly · Weekly Sprints',
+      'A fully managed monthly engagement covering strategy, execution and reporting, so you can focus on running your business.',
     features: [
       'Dedicated account manager & weekly sprints',
       'SEO, AEO & GEO for Google and AI search engines',
-      'High-intent keyword strategy & content topic clusters',
-      'Question-led FAQ content with FAQPage schema',
-      'High-quality white-hat editorial link acquisition',
+      'High-Intent Keyword Strategy & Content Topic Clusters',
+      'High-Quality White-Hat Editorial Link Acquisition',
       'Monthly executive analytics reports',
     ],
     ctaText: 'Inquire for Retainer',
@@ -21,17 +21,15 @@ const packages = [
   },
   {
     tag: 'Milestone Based',
-    badge: 'Fixed Scope',
-    name: 'One-Time SEO, AEO & GEO Setup',
-    description:
-      'End-to-end execution of a defined search scope: fix what stops Google from indexing and ranking your site, then structure your key pages so AI answer engines can cite them.',
-    timeline: 'Clearly Defined Scope & Milestones',
+    badge: 'One-Time Project',
+    name: 'One-Time Project',
+    description: 'Clearly defined scope & fixed timeline',
     features: [
-      'Technical SEO audit & Core Web Vitals remediation',
+      'Technical SEO Audits & Core Web Vitals Remediation',
       'Answer & Generative Engine Optimization (AEO & GEO) for LLMs & AI Search',
-      'Structured schema markup & rich snippet engineering',
-      'FAQ sections & FAQPage schema on key pages',
+      'Structured Schema Markup & Rich Snippet Engineering',
       'Dedicated project manager & milestone reviews',
+      'Strict adherence to budgets & deliverables',
     ],
     ctaText: 'Request Project Proposal',
     popular: false,
@@ -45,23 +43,20 @@ export default function Packages() {
         <div className="section-header">
           <div>
             <div className="eyebrow">
-              <i className="dot"></i> 03 / ENGAGEMENT MODELS
+              <i className="dot"></i> 03 / PACKAGES
             </div>
             <h2>
-              Two ways to work with us.
+              Transparent ways
               <br />
-              Clear scope, no surprises.
+              to collaborate.
             </h2>
           </div>
-          <p>
-            Choose a one-time setup for a defined search scope, or a monthly retainer for ongoing SEO, AEO and GEO. Either way you get clear milestones and transparent reporting.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {packages.map((pkg, idx) => (
+          {packages.map((pkg) => (
             <div
-              key={idx}
+              key={pkg.name}
               className={`p-8 sm:p-10 rounded-lg border flex flex-col justify-between transition-all duration-200 ${
                 pkg.popular
                   ? 'border-green bg-wash/80 shadow-md ring-1 ring-green/20'
@@ -73,15 +68,11 @@ export default function Packages() {
                   <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
                     {pkg.tag}
                   </span>
-                  <span
-                    className={`px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider ${
-                      pkg.popular
-                        ? 'bg-green text-white'
-                        : 'bg-sage/70 text-ink'
-                    }`}
-                  >
-                    {pkg.badge}
-                  </span>
+                  {pkg.popular && (
+                    <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-green text-white">
+                      {pkg.badge}
+                    </span>
+                  )}
                 </div>
 
                 <h3 className="text-[25px] font-bold text-ink tracking-tight mb-3">
@@ -91,17 +82,13 @@ export default function Packages() {
                   {pkg.description}
                 </p>
 
-                <div className="text-[12px] font-semibold text-green bg-sage/40 rounded px-3 py-2 mb-6 inline-block">
-                  Timeline: {pkg.timeline}
-                </div>
-
                 <div className="space-y-3 mb-8">
                   <div className="text-[11px] font-bold uppercase tracking-wider text-ink mb-3">
-                    What’s Included:
+                    Key Deliverables:
                   </div>
-                  {pkg.features.map((feature, fIdx) => (
+                  {pkg.features.map((feature) => (
                     <div
-                      key={fIdx}
+                      key={feature}
                       className="flex items-start gap-2.5 text-[13px] text-muted leading-snug"
                     >
                       <svg
@@ -139,16 +126,11 @@ export default function Packages() {
         </div>
 
         <div className="mt-12 p-6 sm:p-8 bg-wash rounded-lg border border-line-subtle flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div>
-            <div className="text-[16px] font-bold text-ink mb-1">
-              Not sure which engagement fits?
-            </div>
-            <p className="text-[14px] text-muted">
-              We review your current organic search rankings, Core Web Vitals, and AI citation footprint before recommending an engagement model.
-            </p>
+          <div className="text-[16px] font-bold text-ink">
+            How do we choose between a monthly retainer and a one-time project?
           </div>
-          <a className="button shrink-0 text-[13px] py-3 px-5" href="#audit">
-            Start with a Technical Audit{' '}
+          <a className="button shrink-0 text-[13px] py-3 px-5" href="#contact">
+            Schedule a Discovery Call{' '}
             <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" className="w-3.5 h-3.5">
               <use href="#arrow-right" />
             </svg>
@@ -158,4 +140,3 @@ export default function Packages() {
     </section>
   );
 }
-

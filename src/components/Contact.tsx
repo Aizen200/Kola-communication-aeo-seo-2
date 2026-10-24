@@ -7,7 +7,7 @@ export default function Contact() {
     name: '',
     email: '',
     website: '',
-    service: 'Monthly SEO, AEO & GEO Retainer',
+    service: 'Monthly Growth Retainer',
     goal: '',
   });
 
@@ -20,18 +20,15 @@ export default function Contact() {
     e.preventDefault();
 
     const body =
-      `Website Review & Partnership Request\n\n` +
       `Name: ${formData.name}\n` +
       `Work Email: ${formData.email}\n` +
-      `Website: ${formData.website}\n` +
+      `Company: ${formData.website}\n` +
       `Preferred Engagement: ${formData.service}\n\n` +
-      `Goals & Requirements:\n` +
-      (formData.goal ||
-        'I would like to discuss SEO, AEO, and search visibility for my B2B business.');
+      `Project:\n${formData.goal}`;
 
     const mailtoUrl =
       'mailto:business@kolacommunications.com?subject=' +
-      encodeURIComponent(`Search & AEO Consultation Request - ${formData.website || formData.name}`) +
+      encodeURIComponent(`Free Strategy Call - ${formData.website || formData.name}`) +
       '&body=' +
       encodeURIComponent(body);
 
@@ -46,15 +43,15 @@ export default function Contact() {
       <div className="wrap contact-grid">
         <div className="contact-copy">
           <div className="eyebrow">
-            <i className="dot"></i> 08 / START A CONVERSATION
+            <i className="dot"></i> 08 / CONTACT
           </div>
           <h2>
-            Your next chapter
+            Let's build something
             <br />
-            in search <span>starts here.</span>
+            <span>extraordinary together.</span>
           </h2>
           <p>
-            Share your website and what you want to improve. We’ll review your live search presence and schedule a strategic consultation with our technical team in Mumbai.
+            Tell us about your timeline, goals, and project scope.
           </p>
 
           <div className="mt-8 space-y-4">
@@ -66,24 +63,22 @@ export default function Contact() {
             </a>
 
             <div className="text-[13px] text-muted-foreground/80 text-[#c6d0c2] leading-relaxed pt-2">
-              <strong>Direct Phone:</strong> <a href="tel:+918928984774" className="hover:text-white underline">+91 89289 84774</a>
+              <strong>Phone:</strong> <a href="tel:+918928984774" className="hover:text-white underline">+91-8928984774</a>
               <br />
-              <strong>Office:</strong> 23, 2nd Floor, Sharda Bhavan, Fatak Road / Narayan Joshi Road, Kandivali West, Mumbai – 400067
+              <strong>Address:</strong> 23, 2nd Floor, Sharda Bhavan, Opposite Gala Provision Store, Fatak Road / Narayan Joshi Road, Kandivali West, Mumbai – 400067, Maharashtra, India
               <br />
-              <strong>Hours:</strong> Mon – Fri, 9:30 AM – 9:00 PM IST
-              <br />
-              <strong>Global Clientele:</strong> India · Australia · United States · United Kingdom · UAE
+              <strong>Business Hours:</strong> Mon – Fri: 9:30 AM – 9:00 PM IST (Flexible timezone coverage for US, UK, Australia & UAE)
             </div>
           </div>
         </div>
 
         <form className="contact-form" id="review-form" onSubmit={handleSubmit}>
           <div className="field">
-            <label htmlFor="name">Your name</label>
+            <label htmlFor="name">Your Name</label>
             <input
               id="name"
               name="name"
-              placeholder="Full name"
+              placeholder="Jane Smith"
               autoComplete="name"
               required
               maxLength={120}
@@ -93,12 +88,12 @@ export default function Contact() {
           </div>
 
           <div className="field">
-            <label htmlFor="email">Work email</label>
+            <label htmlFor="email">Email Address</label>
             <input
               id="email"
               name="email"
               type="email"
-              placeholder="you@company.com"
+              placeholder="jane@company.com"
               autoComplete="email"
               required
               maxLength={160}
@@ -108,13 +103,12 @@ export default function Contact() {
           </div>
 
           <div className="field">
-            <label htmlFor="website">Company website</label>
+            <label htmlFor="website">Company / Brand</label>
             <input
               id="website"
               name="website"
               type="text"
-              inputMode="url"
-              placeholder="www.yourcompany.com"
+                            placeholder="Acme Inc."
               required
               maxLength={300}
               value={formData.website}
@@ -123,33 +117,30 @@ export default function Contact() {
           </div>
 
           <div className="field">
-            <label htmlFor="service">Engagement of interest</label>
+            <label htmlFor="service">Engagement</label>
             <select
               id="service"
               name="service"
               value={formData.service}
               onChange={(e) => setFormData({ ...formData, service: e.target.value })}
             >
-              <option value="SEO, AEO & GEO Website Audit" className="bg-[#203c32] text-white">
-                SEO, AEO & GEO Website Audit
+              <option value="Monthly Growth Retainer" className="bg-[#203c32] text-white">
+                Monthly Growth Retainer
               </option>
-              <option value="Monthly SEO, AEO & GEO Retainer" className="bg-[#203c32] text-white">
-                Monthly SEO, AEO & GEO Retainer
-              </option>
-              <option value="One-Time SEO, AEO & GEO Setup" className="bg-[#203c32] text-white">
-                One-Time SEO, AEO & GEO Setup
+              <option value="One-Time Project" className="bg-[#203c32] text-white">
+                One-Time Project
               </option>
             </select>
           </div>
 
           <div className="field wide">
             <label htmlFor="goal">
-              What are your key goals or challenges? <span>Optional</span>
+              Tell us about your project
             </label>
             <textarea
               id="goal"
               name="goal"
-              placeholder="Tell us about your current rankings, indexing issues, or the questions you want to be found for."
+              placeholder="Goals, timeline, budget…"
               rows={2}
               maxLength={2000}
               value={formData.goal}
@@ -159,20 +150,20 @@ export default function Contact() {
 
           <div className="form-submit">
             <button className="button" type="submit">
-              Request a website review{' '}
+              Send Message{' '}
               <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
                 <use href="#arrow-up" />
               </svg>
             </button>
             <span className="form-note">
-              Prepares an email draft to business@kolacommunications.com. You review before sending. We respond within 3–4 hours.
+              Response within 3–4 hours
             </span>
           </div>
 
           <div className="form-status" aria-live="polite" id="form-status">
             {status?.submitted && (
               <>
-                <span>Your consultation draft is ready. Nothing has been sent yet. </span>
+                <span>We'll be in touch! </span>
                 <a href={status.mailtoUrl} className="text-[#dcebcf] underline font-bold">
                   Open email draft in your mail app ↗
                 </a>

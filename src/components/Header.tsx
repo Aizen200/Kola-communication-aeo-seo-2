@@ -28,7 +28,7 @@ export default function Header() {
           <span className="brand-sub">
             communications
             <br />
-            Search & AI visibility
+            SEO, AEO & GEO
           </span>
         </a>
         <nav
@@ -37,25 +37,25 @@ export default function Header() {
           aria-label="Main navigation"
         >
           <a href="#expertise" onClick={closeMenu}>
-            Expertise
+            SEO, AEO & GEO
           </a>
           <a href="#case-studies" onClick={closeMenu}>
-            Case Studies
+            Projects
           </a>
           <a href="#packages" onClick={closeMenu}>
             Packages
           </a>
           <a href="#audit" onClick={closeMenu}>
-            Website Audit
+            SEO Audits
           </a>
           <a href="#approach" onClick={closeMenu}>
-            Our approach
+            How we work
           </a>
           <a href="#faq" onClick={closeMenu}>
             FAQs
           </a>
           <a className="button" href="#contact" onClick={closeMenu}>
-            Let’s talk{' '}
+            Contact{' '}
             <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
               <use href="#arrow-up" />
             </svg>
