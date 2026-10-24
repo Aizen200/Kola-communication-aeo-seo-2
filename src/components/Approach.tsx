@@ -6,108 +6,116 @@ export default function Approach() {
       <div className="wrap">
         <div className="section-header">
           <div>
-            <div className="eyebrow">03 / HOW WE WORK</div>
+            <div className="eyebrow">
+              <i className="dot"></i> 06 / SEO, AEO & GEO EXECUTION METHODOLOGY
+            </div>
             <h2>
-              A clear plan.
+              A structured search roadmap.
               <br />
-              Practical execution.
+              Relentless technical execution.
             </h2>
           </div>
           <p>
-            Understand the opportunity.
-            <br />
-            Agree the priorities. Move forward.
+            Every project starts with a clear goal and ends with a result we can point to. We agree clear deliverables across SEO, AEO and GEO, ship code, content and schema improvements, and report on what moved.
           </p>
         </div>
         <div className="process">
           <article className="process-step">
             <div className="process-kicker">
               01 / DISCOVER
-              <svg aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
                 <use href="#arrow-right" />
               </svg>
             </div>
-            <h3>Understand.</h3>
-            <p>Review your website, audience, competitors and current search presence.</p>
+            <h3>Discovery & Audit.</h3>
+            <p>
+              We dive deep into your brand, audience, and business goals on a discovery call, and check how your website shows up on Google and in AI answers today.
+            </p>
           </article>
           <article className="process-step">
             <div className="process-kicker">
               02 / PLAN
-              <svg aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
                 <use href="#arrow-right" />
               </svg>
             </div>
-            <h3>Prioritise.</h3>
-            <p>Build a roadmap around technical issues, buyer questions and commercial goals.</p>
+            <h3>Tailored Blueprint.</h3>
+            <p>
+              We map out a clear growth blueprint: the questions your audience asks, high-intent keyword clusters, and the technical quick-wins to fix first.
+            </p>
           </article>
           <article className="process-step">
             <div className="process-kicker">
               03 / IMPLEMENT
-              <svg aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
                 <use href="#arrow-right" />
               </svg>
             </div>
-            <h3>Improve.</h3>
-            <p>Make agreed changes across website structure, content and search signals.</p>
+            <h3>Milestone Execution.</h3>
+            <p>
+              From clean code and SEO copy to FAQ sections and structured schema markup, our team executes with attention to detail and milestone updates.
+            </p>
           </article>
           <article className="process-step">
             <div className="process-kicker">
               04 / REFINE
-              <svg aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
                 <use href="#arrow-right" />
               </svg>
             </div>
-            <h3>Learn.</h3>
-            <p>Review performance, explain what changed and refine the next priorities.</p>
+            <h3>Measurable Impact.</h3>
+            <p>
+              We track every key metric (rankings, organic traffic, featured snippet wins and AI citations) with transparent weekly and monthly reporting, iterating continuously to maximise return.
+            </p>
           </article>
         </div>
         <div className="engagement">
           <div>
             <h3>
-              Know what we’re working on.
+              Total transparency.
               <br />
-              And why.
+              Zero technical debt.
             </h3>
             <p>
-              Your priorities determine the work. We agree the scope, responsibilities and reporting before we begin.
+              We care about the details most agencies skip: how a page loads on a slow connection, how a headline reads on a phone screen, and whether your content directly answers the questions people ask. That care is what keeps our clients with us long after the first project ends.
             </p>
           </div>
           <div className="checklist">
             <div className="checklist-item">
-              <svg aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
                 <use href="#check" />
               </svg>
-              Technical priorities
+              Technical SEO audit & Core Web Vitals fixes
             </div>
             <div className="checklist-item">
-              <svg aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
                 <use href="#check" />
               </svg>
-              Content recommendations
+              FAQ sections & FAQPage schema
             </div>
             <div className="checklist-item">
-              <svg aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
                 <use href="#check" />
               </svg>
-              Implementation plan
+              Question-led content & topic clusters
             </div>
             <div className="checklist-item">
-              <svg aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
                 <use href="#check" />
               </svg>
-              Performance reporting
+              Schema markup & rich snippets
             </div>
             <div className="checklist-item">
-              <svg aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
                 <use href="#check" />
               </svg>
-              Progress reviews
+              Dedicated account manager & weekly sprints
             </div>
             <div className="checklist-item">
-              <svg aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
                 <use href="#check" />
               </svg>
-              Clear next steps
+              Transparent weekly & monthly reporting
             </div>
           </div>
         </div>
@@ -115,4 +123,3 @@ export default function Approach() {
     </section>
   );
 }
-

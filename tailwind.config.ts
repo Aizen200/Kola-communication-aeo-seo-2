@@ -9,20 +9,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: 'var(--ink)',
+        // Hex values (mirroring :root in globals.css) so opacity modifiers like bg-sage/50 work
+        ink: '#202824',
         green: {
-          DEFAULT: 'var(--green)',
+          DEFAULT: '#203c32',
           hover: '#335345',
         },
-        muted: 'var(--muted)',
-        paper: 'var(--paper)',
-        wash: 'var(--wash)',
-        sage: 'var(--sage)',
-        line: 'var(--line)',
-        mint: 'var(--mint)',
+        muted: '#65706a',
+        paper: '#ffffff',
+        wash: '#f5f7f3',
+        sage: '#e8eee5',
+        line: {
+          DEFAULT: '#e6ede4',
+          subtle: '#edf3eb',
+        },
+        mint: '#dcebcf',
       },
       fontFamily: {
         sans: [
+          'var(--font-kola-sans)',
           'Kola Sans',
           '-apple-system',
           'BlinkMacSystemFont',

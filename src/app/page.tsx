@@ -1,8 +1,10 @@
 import React from 'react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import AudienceStrip from '@/components/AudienceStrip';
 import Expertise from '@/components/Expertise';
+import CaseStudies from '@/components/CaseStudies';
+import Packages from '@/components/Packages';
+import WebsiteAudit from '@/components/WebsiteAudit';
 import WhoWeHelp from '@/components/WhoWeHelp';
 import Approach from '@/components/Approach';
 import Faq from '@/components/Faq';
@@ -15,8 +17,10 @@ export default function Home() {
       <Header />
       <main id="main">
         <Hero />
-        <AudienceStrip />
         <Expertise />
+        <CaseStudies />
+        <Packages />
+        <WebsiteAudit />
         <WhoWeHelp />
         <Approach />
         <Faq />
@@ -26,4 +30,3 @@ export default function Home() {
     </>
   );
 }
-

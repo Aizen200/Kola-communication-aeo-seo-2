@@ -5,7 +5,7 @@ export default function Hero() {
     <section className="wrap hero" aria-labelledby="hero-title">
       <div className="hero-copy">
         <div className="eyebrow">
-          <i className="dot"></i> SEO · AEO · GEO FOR B2B
+          <i className="dot"></i> SEO · AEO · GEO SEARCH VISIBILITY
         </div>
         <h1 id="hero-title">
           Show up where
@@ -15,69 +15,72 @@ export default function Hero() {
           <span>searches.</span>
         </h1>
         <p>
-          Search visibility for B2B businesses and manufacturers. We connect technical SEO, useful content and AI discovery.
+          Dominate Google organic rankings and establish clear authority across AI search engines and generative platforms like ChatGPT, Google AI, Claude, Perplexity and more. SEO, AEO and GEO that get you found and get you chosen.
         </p>
         <div className="hero-actions">
-          <a className="button" href="#contact">
-            Request a website review{' '}
-            <svg aria-hidden="true">
+          <a className="button" href="#audit">
+            Request a website audit{' '}
+            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
               <use href="#arrow-up" />
             </svg>
           </a>
-          <a className="text-link" href="#expertise">
-            Explore our approach{' '}
-            <svg className="arrow" aria-hidden="true">
+          <a className="text-link" href="#case-studies">
+            Explore client case studies{' '}
+            <svg width="14" height="14" viewBox="0 0 24 24" className="arrow" aria-hidden="true">
               <use href="#arrow-right" />
             </svg>
           </a>
         </div>
         <div className="hero-footnote">
-          Clear priorities <span></span> Practical execution <span></span> Measurable progress
+          <span></span> 199+ brands scaled across 6 markets, including Kanodia Enterprises, Dhanuka Investments & Revent AI
         </div>
       </div>
 
       <div
         className="search-scene"
         role="img"
-        aria-label="Illustrative search journey showing a company discovered in search and referenced in an AI answer. This is a concept, not a result or performance claim."
+        aria-label="Illustrative search journey showing a company discovered in search and referenced in an AI answer."
       >
         <div className="scene-grid"></div>
         <div className="scene-orbit"></div>
         <div className="scene-caption">
-          <span>A connected search presence</span>
-          <span>Illustrative</span>
+          <span>Connected search presence</span>
+          <span>Google + AI Search</span>
         </div>
         <div className="search-card">
           <div className="query">
-            <svg aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
               <use href="#search" />
             </svg>
-            <span>industrial automation partner in India</span>
+            <span>ai tool to turn documents into slides</span>
           </div>
           <div className="result">
             <div className="result-site">
               <span className="small-mark">↗</span>
               <div className="site-name">
-                Your company
-                <small>yourcompany.com</small>
+                Revent AI
+                <small>revent.ai · Client Case Study</small>
               </div>
             </div>
-            <div className="result-title">The right expertise. Ready to be found.</div>
+            <div className="result-title">AI-Powered Document to Presentation Platform</div>
+            <p>
+              Convert documents into branded slides instantly with templates, brand sync and a one-click workflow.
+            </p>
           </div>
         </div>
         <div className="ai-card">
           <div className="answer-label">
-            <svg aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
               <use href="#spark" />
             </svg>{' '}
-            THE ANSWER EXPERIENCE
+            THE ANSWER ENGINE EXPERIENCE (AEO & GEO)
           </div>
-          <div className="answer-question">What should I look for in an automation partner?</div>
+          <div className="answer-question">Which AI tool turns a document into branded slides?</div>
           <p className="answer-snippet">
-            Industry credentials, proven integration capabilities, and transparent compliance standards.
+            Revent AI converts documents into branded slides instantly, with templates, brand sync and a one-click workflow, and is used in 63+ countries.
           </p>
           <div className="source-token">
-            <i></i>Your expertise, referenced <span>↗</span>
+            <i></i>Structured with SoftwareApplication + FAQPage schema <span>↗</span>
           </div>
         </div>
         <div className="scene-bottom">

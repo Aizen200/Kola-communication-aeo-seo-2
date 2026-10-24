@@ -6,62 +6,66 @@ export default function Expertise() {
       <div className="wrap">
         <div className="section-header">
           <div>
-            <div className="eyebrow">01 / CONNECTED SEARCH</div>
+            <div className="eyebrow">
+              <i className="dot"></i> 01 / CONNECTED SEARCH STRATEGY
+            </div>
             <h2>
-              One strategy.
+              Own search rankings across
               <br />
-              Three ways to be discovered.
+              Google and AI search engines.
             </h2>
           </div>
-          <p>A clear, credible presence across the places your customers look for answers.</p>
+          <p>
+            Search is evolving rapidly. We optimize your digital presence not only for traditional search engines like Google and Bing, but also for generative AI answer engines (ChatGPT, Perplexity, Google Gemini). We build enduring organic authority that turns searchers into qualified buyers.
+          </p>
         </div>
         <div className="service-columns">
           <article className="service">
             <div className="service-top">
               <div>
                 <div className="service-acronym">SEO</div>
-                <div className="service-name">Search engine optimisation</div>
+                <div className="service-name">Search Engine Optimisation</div>
               </div>
               <span className="service-no">01</span>
             </div>
-            <h3>Be discoverable.</h3>
+            <h3>Be discoverable on Google & Bing.</h3>
             <p>
-              Improve your website’s technical foundations, content and relevance so the right buyers can find you.
+              Technical SEO audits and Core Web Vitals remediation, high-intent keyword strategy and content topic clusters, and high-quality white-hat editorial link acquisition, so your pages rank in the results when people search on Google and Bing.
             </p>
             <div className="service-scope">
-              Technical SEO <span>·</span> On-page <span>·</span> Content
+              Technical SEO Audits <span>·</span> Keyword Topic Clusters <span>·</span> White-Hat Editorial Links
             </div>
           </article>
           <article className="service">
             <div className="service-top">
               <div>
                 <div className="service-acronym">AEO</div>
-                <div className="service-name">Answer engine optimisation</div>
+                <div className="service-name">Answer Engine Optimisation</div>
               </div>
               <span className="service-no">02</span>
             </div>
-            <h3>Be understood.</h3>
+            <h3>Be cited as the direct answer in AI.</h3>
             <p>
-              Turn your expertise into clear answers and useful page structures that address real buyer questions.
+              AEO structures your website content so AI-powered platforms (ChatGPT, Claude, Perplexity, Google AI Overviews, Bing Copilot) can find, understand, and quote it. Traditional SEO gets your page to rank in a list of results; AEO gets your content cited as the answer itself.
             </p>
             <div className="service-scope">
-              Buyer questions <span>·</span> Clarity <span>·</span> Structure
+              FAQ Sections <span>·</span> FAQPage Schema <span>·</span> Question-Led Content
             </div>
           </article>
           <article className="service">
             <div className="service-top">
               <div>
                 <div className="service-acronym">GEO</div>
-                <div className="service-name">Generative engine optimisation</div>
+                <div className="service-name">Generative Engine Optimisation</div>
               </div>
               <span className="service-no">03</span>
             </div>
-            <h3>Be part of the research.</h3>
+            <h3>Build authority in AI-generated answers.</h3>
             <p>
-              Prepare your content and brand information for discovery across AI-assisted search experiences.
+              Establish clear authority across generative platforms like ChatGPT, Google AI, Claude and Perplexity. Structured schema markup, rich snippets and consistent, question-focused content build the topical authority AI systems look for when choosing which sources to cite.
             </p>
             <div className="service-scope">
-              Brand information <span>·</span> AI discovery
+              Schema Markup <span>·</span> Rich Snippet Engineering <span>·</span> Topical Authority
             </div>
           </article>
         </div>
@@ -69,4 +73,3 @@ export default function Expertise() {
     </section>
   );
 }
-

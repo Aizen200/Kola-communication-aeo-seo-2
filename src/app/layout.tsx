@@ -1,10 +1,33 @@
 import type { Metadata, Viewport } from 'next';
+import localFont from 'next/font/local';
 import './globals.css';
+
+const kolaSans = localFont({
+  src: [
+    {
+      path: './fonts/KolaSans-Regular.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './fonts/KolaSans-Bold.otf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-kola-sans',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Kola Communications · Search & AI Visibility',
   description:
-    'SEO, AEO and GEO for B2B businesses and manufacturers. A clean website design concept for Kola Communications.',
+    'SEO, AEO & GEO by Kola Communications, Mumbai. Own search rankings across Google and AI search engines like ChatGPT, Perplexity and Google Gemini.',
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/favicon.ico',
+    apple: '/icon.svg',
+  },
 };
 
 export const viewport: Viewport = {
@@ -19,10 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </head>
+    <html lang="en" className={kolaSans.variable}>
       <body className="font-sans text-ink bg-paper antialiased">
         <a className="skip" href="#main">
           Skip to content
