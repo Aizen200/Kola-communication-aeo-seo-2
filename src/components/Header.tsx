@@ -46,7 +46,7 @@ export default function Header() {
             Packages
           </a>
           <a href="#audit" onClick={closeMenu}>
-            SEO Audits
+            Website Audit
           </a>
           <a href="#approach" onClick={closeMenu}>
             How we work

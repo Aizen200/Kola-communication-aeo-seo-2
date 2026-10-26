@@ -21,7 +21,7 @@ export default function Footer() {
             <a href="#expertise">SEO, AEO & GEO</a>
             <a href="#case-studies">Projects</a>
             <a href="#packages">Packages</a>
-            <a href="#audit">SEO Audits</a>
+            <a href="#audit">Website Audit</a>
             <a href="#approach">How we work</a>
             <a href="#faq">FAQs</a>
             <a href="#contact">Contact</a>
