@@ -1,79 +1,87 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+
+const links = [
+  { href: '#expertise', label: 'SEO, AEO & GEO' },
+  { href: '#case-studies', label: 'Projects' },
+  { href: '#packages', label: 'Packages' },
+  { href: '#audit', label: 'Website Audit' },
+  { href: '#approach', label: 'How we work' },
+  { href: '#faq', label: 'FAQs' },
+];
+
+export function Logo({ light = false }: { light?: boolean }) {
+  return (
+    <a href="#" aria-label="Kola Communications home" className="flex items-end gap-3">
+      <span className={`font-display text-[40px] leading-none ${light ? 'text-paper' : 'text-ink'}`}>
+        KOLA<span className="text-orange">.</span>
+      </span>
+      <span className={`pb-0.5 text-[11px] uppercase leading-[1.35] tracking-[0.14em] ${light ? 'text-paper/75' : 'text-muted'}`}>
+        Communications
+        <br />
+        SEO, AEO &amp; GEO
+      </span>
+    </a>
+  );
+}
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isMenuOpen) {
-        setIsMenuOpen(false);
-      }
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isMenuOpen]);
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, []);
 
   return (
-    <header className="topbar sticky top-0 z-40 backdrop-blur-md bg-white/95">
-      <div className="wrap nav">
-        <a className="brand" href="#" aria-label="Kola Communications home">
-          <span className="brand-main">Kola.</span>
-          <span className="brand-separator"></span>
-          <span className="brand-sub">
-            communications
-            <br />
-            SEO, AEO & GEO
-          </span>
-        </a>
-        <nav
-          className={`navlinks ${isMenuOpen ? 'open' : ''}`}
-          id="navigation"
-          aria-label="Main navigation"
-        >
-          <a href="#expertise" onClick={closeMenu}>
-            SEO, AEO & GEO
+    <>
+      <div className="bg-ink text-paper">
+        <div className="wrap flex items-center justify-between gap-4 py-2 text-[13px]">
+          <span>Free website audit: find out if ChatGPT knows your business.</span>
+          <a href="#audit" className="shrink-0 font-bold text-orange underline underline-offset-4">
+            Run it now
           </a>
-          <a href="#case-studies" onClick={closeMenu}>
-            Projects
-          </a>
-          <a href="#packages" onClick={closeMenu}>
-            Packages
-          </a>
-          <a href="#audit" onClick={closeMenu}>
-            Website Audit
-          </a>
-          <a href="#approach" onClick={closeMenu}>
-            How we work
-          </a>
-          <a href="#faq" onClick={closeMenu}>
-            FAQs
-          </a>
-          <a className="button" href="#contact" onClick={closeMenu}>
-            Contact{' '}
-            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
-              <use href="#arrow-up" />
-            </svg>
-          </a>
-        </nav>
-        <button
-          className="menu-toggle"
-          type="button"
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={isMenuOpen}
-          aria-controls="navigation"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M4 8h16M4 16h16" stroke="currentColor" strokeWidth="1.5" />
-          </svg>
-        </button>
+        </div>
       </div>
-    </header>
+      <header className="sticky top-0 z-40 bg-paper/95 backdrop-blur">
+        <div className="wrap flex items-center justify-between gap-6 py-5">
+          <Logo />
+          <nav
+            id="navigation"
+            aria-label="Main navigation"
+            className={`${
+              open ? 'flex' : 'hidden'
+            } absolute inset-x-0 top-full flex-col gap-1 border-y-2 border-ink bg-paper px-4 py-4 lg:static lg:flex lg:flex-row lg:items-center lg:gap-7 lg:border-0 lg:bg-transparent lg:p-0`}
+          >
+            {links.map((l) => (
+              <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="py-2 text-[15px] hover:text-orange lg:py-0">
+                {l.label}
+              </a>
+            ))}
+            <a href="#contact" onClick={() => setOpen(false)} className="btn-dark mt-2 lg:mt-0">
+              Contact <span aria-hidden="true">→</span>
+            </a>
+          </nav>
+          <button
+            type="button"
+            className="border-2 border-ink p-2 lg:hidden"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            aria-controls="navigation"
+            onClick={() => setOpen(!open)}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              {open ? (
+                <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="2" />
+              ) : (
+                <path d="M4 8h16M4 16h16" stroke="currentColor" strokeWidth="2" />
+              )}
+            </svg>
+          </button>
+        </div>
+      </header>
+    </>
   );
 }

@@ -9,37 +9,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Hex values (mirroring :root in globals.css) so opacity modifiers like bg-sage/50 work
-        ink: '#202824',
-        green: {
-          DEFAULT: '#203c32',
-          hover: '#335345',
-        },
-        muted: '#65706a',
-        paper: '#ffffff',
-        wash: '#f5f7f3',
-        sage: '#e8eee5',
-        line: {
-          DEFAULT: '#e6ede4',
-          subtle: '#edf3eb',
-        },
-        mint: '#dcebcf',
+        ink: '#121212',
+        paper: '#F3EFE4',
+        sand: '#E8E2D2',
+        orange: '#FF5A2C',
+        forest: '#0F3D2E',
+        muted: '#55524A',
       },
       fontFamily: {
-        sans: [
-          'var(--font-kola-sans)',
-          'Kola Sans',
-          '-apple-system',
-          'BlinkMacSystemFont',
-          '"Segoe UI"',
-          'Roboto',
-          'Helvetica',
-          'Arial',
-          'sans-serif',
-        ],
+        sans: ['var(--font-sans)', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Arial', 'sans-serif'],
+        display: ['var(--font-display)', 'Impact', '"Arial Narrow"', 'sans-serif'],
+        serif: ['var(--font-serif)', 'Georgia', 'serif'],
       },
-      maxWidth: {
-        maxWrap: 'var(--max)',
+      boxShadow: {
+        hard: '8px 8px 0 0 #121212',
+        'hard-sm': '5px 5px 0 0 #121212',
+        'hard-orange': '8px 8px 0 0 #FF5A2C',
+        'hard-paper': '8px 8px 0 0 #F3EFE4',
       },
     },
   },

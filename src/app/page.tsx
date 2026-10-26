@@ -8,6 +8,7 @@ import WebsiteAudit from '@/components/WebsiteAudit';
 import WhoWeHelp from '@/components/WhoWeHelp';
 import Approach from '@/components/Approach';
 import Faq from '@/components/Faq';
+import ClosingBanner from '@/components/ClosingBanner';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
@@ -24,6 +25,7 @@ export default function Home() {
         <WhoWeHelp />
         <Approach />
         <Faq />
+        <ClosingBanner />
         <Contact />
       </main>
       <Footer />

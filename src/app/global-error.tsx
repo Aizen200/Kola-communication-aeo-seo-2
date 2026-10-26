@@ -17,7 +17,7 @@ export default function GlobalError({
           <p className="text-muted mb-6 text-sm">
             {error.message || 'A critical error occurred.'}
           </p>
-          <button className="button" type="button" onClick={() => reset()}>
+          <button className="btn-dark" type="button" onClick={() => reset()}>
             Reload Application
           </button>
         </div>

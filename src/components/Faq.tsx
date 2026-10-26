@@ -51,36 +51,33 @@ const faqSchema = {
 
 export default function Faq() {
   return (
-    <section id="faq" className="section faq">
+    <section id="faq" className="section">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <div className="wrap faq-grid">
-        <div className="section-intro">
-          <div className="eyebrow">
-            <i className="dot"></i> 07 / FAQ
-          </div>
-          <h2>
-            Frequently Asked
-            <br />
-            Questions
-          </h2>
-          <a className="text-link" href="#contact">
-            Book a Free Strategy Call{' '}
-            <svg width="14" height="14" viewBox="0 0 24 24" className="arrow" aria-hidden="true">
-              <use href="#arrow-up" />
-            </svg>
+      <div className="wrap grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <span className="label">(07) FAQ</span>
+          <h2 className="h-section">Frequently Asked Questions</h2>
+          <a href="#contact" className="btn-orange mt-8">
+            Book a Free Strategy Call <span aria-hidden="true">→</span>
           </a>
         </div>
-        <div className="questions">
+        <div className="border-t-2 border-ink">
           {faqs.map((faq, idx) => (
-            <details key={idx} open={idx === 0}>
-              <summary>
+            <details key={faq.question} open={idx === 0} className="group border-b-2 border-ink">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-[19px] font-semibold leading-snug [&::-webkit-details-marker]:hidden">
                 {faq.question}
-                <i className="plus" aria-hidden="true"></i>
+                <span
+                  aria-hidden="true"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center border-2 border-ink text-[20px] font-bold group-open:bg-orange"
+                >
+                  <span className="group-open:hidden">+</span>
+                  <span className="hidden group-open:inline">−</span>
+                </span>
               </summary>
-              <p>{faq.answer}</p>
+              <p className="max-w-[640px] pb-7 text-[16px] leading-relaxed text-muted">{faq.answer}</p>
             </details>
           ))}
         </div>

@@ -19,7 +19,7 @@ export default function Error({
       <p className="text-muted mb-6 text-sm max-w-md">
         {error.message || 'An unexpected error occurred while rendering the page.'}
       </p>
-      <button className="button" type="button" onClick={() => reset()}>
+      <button className="btn-dark" type="button" onClick={() => reset()}>
         Try again
       </button>
     </div>

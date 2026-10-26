@@ -37,7 +37,8 @@ type Category = { id: CategoryId; score: number; items: Item[] };
 type SiteResult = { url: string; score: number; categories: Category[] };
 type AuditResponse = { site: SiteResult; competitor: SiteResult | null };
 
-const scoreColor = (n: number) => (n >= 80 ? '#2f6b4f' : n >= 50 ? '#b7791f' : '#c0392b');
+const GOOD = '#3FA06B';
+const scoreColor = (n: number) => (n >= 80 ? GOOD : n >= 50 ? '#F2C14E' : '#FF5A2C');
 const hostOf = (url: string) => {
   try {
     return new URL(url).hostname.replace(/^www\./, '');
@@ -46,33 +47,54 @@ const hostOf = (url: string) => {
   }
 };
 
-function ScoreRing({ value, label }: { value: number; label: string }) {
-  const r = 34;
+function ScoreRing({ value, label }: { value: number; label?: string }) {
+  const r = 38;
   const c = 2 * Math.PI * r;
   return (
-    <div className="flex flex-col items-center gap-1">
-      <svg width="88" height="88" viewBox="0 0 88 88" role="img" aria-label={`${label}: ${value} out of 100`}>
-        <circle cx="44" cy="44" r={r} fill="none" stroke="#e6ede4" strokeWidth="8" />
+    <div className="flex flex-col items-center gap-2">
+      <svg width="96" height="96" viewBox="0 0 96 96" role="img" aria-label={`${label ?? 'Score'}: ${value} out of 100`}>
+        <circle cx="48" cy="48" r={r} fill="none" stroke="#3a3a3a" strokeWidth="9" />
         <circle
-          cx="44"
-          cy="44"
+          cx="48"
+          cy="48"
           r={r}
           fill="none"
           stroke={scoreColor(value)}
-          strokeWidth="8"
-          strokeLinecap="round"
+          strokeWidth="9"
           strokeDasharray={c}
           strokeDashoffset={c * (1 - value / 100)}
-          transform="rotate(-90 44 44)"
+          transform="rotate(-90 48 48)"
         />
-        <text x="44" y="50" textAnchor="middle" fontSize="22" fontWeight="700" fill="#202824">
+        <text x="48" y="54" textAnchor="middle" fontSize="28" fill="#F3EFE4" style={{ fontFamily: 'var(--font-display)' }}>
           {value}
         </text>
+        <text x="48" y="70" textAnchor="middle" fontSize="10" fill="#F3EFE4" opacity="0.6">
+          /100
+        </text>
       </svg>
-      <span className="text-[11px] font-bold uppercase tracking-wider text-muted max-w-[120px] truncate">{label}</span>
+      {label && <span className="kicker max-w-[130px] truncate text-[10px] text-paper/70">{label}</span>}
     </div>
   );
 }
+
+function StatusIcon({ state }: { state: 'pass' | 'partial' | 'fail' }) {
+  const styles = {
+    pass: { bg: GOOD, mark: '✓' },
+    partial: { bg: '#F2C14E', mark: '!' },
+    fail: { bg: '#FF5A2C', mark: '✕' },
+  }[state];
+  return (
+    <span
+      aria-hidden="true"
+      className="flex h-5 w-5 shrink-0 items-center justify-center text-[12px] font-bold text-ink"
+      style={{ background: styles.bg }}
+    >
+      {styles.mark}
+    </span>
+  );
+}
+
+const categoryState = (score: number) => (score >= 80 ? 'pass' : score >= 40 ? 'partial' : 'fail');
 
 function whatsappLink(site: SiteResult, gaps: Item[], competitor: SiteResult | null) {
   const failing = gaps.length ? gaps : site.categories.flatMap((c) => c.items).filter((i) => !i.pass);
@@ -120,119 +142,86 @@ export default function WebsiteAudit() {
   const gaps = site ? site.categories.flatMap((c) => c.items).filter((i) => !i.pass && rivalItems.get(i.id)?.pass) : [];
 
   return (
-    <section id="audit" className="section audit bg-paper border-t border-line-subtle">
-      <div className="wrap">
-        <div className="section-header">
-          <div>
-            <div className="eyebrow">
-              <i className="dot"></i> 04 / WEBSITE AUDIT
-            </div>
-            <h2>
-              Does ChatGPT know
-              <br />
-              your business?
-            </h2>
-          </div>
-          <p>
+    <section id="audit" className="section border-y-2 border-ink bg-orange">
+      <div className="wrap grid items-start gap-12 lg:grid-cols-[1.1fr_1fr]">
+        <div>
+          <span className="label text-ink/70">(04) Website audit</span>
+          <h2 className="h-section">Does ChatGPT know your business?</h2>
+          <p className="mt-6 max-w-[520px] text-[19px] leading-relaxed">
             When ChatGPT answers a question and attributes the information to your website by name, that is a brand signal that is difficult to manufacture any other way.
           </p>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          <div className="lg:col-span-7 space-y-6">
-            <h3 className="text-[24px] font-bold text-ink tracking-tight mb-4">
-              Enter your website. Get a score for:
-            </h3>
+          <p className="mt-10 font-serif text-[28px] italic">Enter your website. Get a score for:</p>
+          <ol className="mt-4 border-t-2 border-ink">
+            {categories.map((cat) => {
+              const mine = site?.categories.find((c) => c.id === cat.id)?.score;
+              const theirs = rival?.categories.find((c) => c.id === cat.id)?.score;
+              return (
+                <li key={cat.id} className="flex gap-5 border-b-2 border-ink py-5">
+                  <span className="display text-[40px]">{cat.no}</span>
+                  <div className="flex-1">
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <h3 className="text-[19px] font-bold">{cat.title}</h3>
+                      {mine !== undefined && (
+                        <span className="text-[14px] font-bold">
+                          You {mine}/100{theirs !== undefined && <span className="font-normal"> · Competitor {theirs}/100</span>}
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-1 text-[15px] leading-relaxed">{cat.description}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          {site && (
+            <div className="mt-10 space-y-6">
               {categories.map((cat) => {
-                const mine = site?.categories.find((c) => c.id === cat.id)?.score;
-                const theirs = rival?.categories.find((c) => c.id === cat.id)?.score;
+                const mine = site.categories.find((c) => c.id === cat.id);
+                if (!mine) return null;
                 return (
-                  <div key={cat.id} className="p-6 rounded-lg bg-wash border border-line-subtle flex flex-col">
-                    <span className="text-[12px] font-bold text-green mb-2 block">{cat.no}</span>
-                    <h4 className="text-[17px] font-bold text-ink mb-2 leading-snug">{cat.title}</h4>
-                    <p className="text-[13px] text-muted leading-relaxed">{cat.description}</p>
-                    {mine !== undefined && (
-                      <div className="mt-4 pt-3 border-t border-line text-[12px] space-y-1">
-                        <div className="flex justify-between">
-                          <span className="text-muted">You</span>
-                          <b style={{ color: scoreColor(mine) }}>{mine}/100</b>
-                        </div>
-                        {theirs !== undefined && (
-                          <div className="flex justify-between">
-                            <span className="text-muted">Competitor</span>
-                            <b style={{ color: scoreColor(theirs) }}>{theirs}/100</b>
-                          </div>
-                        )}
-                      </div>
-                    )}
+                  <div key={cat.id}>
+                    <div className="kicker mb-2">{cat.title}</div>
+                    <ul className="space-y-2">
+                      {mine.items.map((item) => {
+                        const theirs = rivalItems.get(item.id);
+                        return (
+                          <li key={item.id} className="flex items-start gap-3 border-2 border-ink bg-paper px-4 py-3 text-[14px]">
+                            <StatusIcon state={item.pass ? 'pass' : 'fail'} />
+                            <span className="min-w-0 flex-1">
+                              <span className="font-bold">{item.label}</span>
+                              <span className="sr-only">{item.pass ? ' passed' : ' failed'}</span>
+                              <span className="block break-words text-[13px] text-muted">{item.detail}</span>
+                            </span>
+                            {theirs && (
+                              <span className="kicker shrink-0 text-[10px]" title={theirs.detail}>
+                                Competitor {theirs.pass ? '✓' : '✕'}
+                              </span>
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ul>
                   </div>
                 );
               })}
             </div>
+          )}
+        </div>
 
-            {site && (
-              <div className="space-y-4">
-                {categories.map((cat) => {
-                  const mine = site.categories.find((c) => c.id === cat.id);
-                  if (!mine) return null;
-                  return (
-                    <div key={cat.id}>
-                      <div className="text-[11px] font-bold uppercase tracking-wider text-ink mb-2">{cat.title}</div>
-                      <ul className="space-y-2">
-                        {mine.items.map((item) => {
-                          const theirs = rivalItems.get(item.id);
-                          return (
-                            <li
-                              key={item.id}
-                              className="flex items-start gap-3 bg-wash border border-line-subtle rounded px-3 py-2.5 text-[13px]"
-                            >
-                              <span
-                                aria-hidden="true"
-                                className="mt-0.5 shrink-0 font-bold"
-                                style={{ color: item.pass ? '#2f6b4f' : '#c0392b' }}
-                              >
-                                {item.pass ? '✓' : '✗'}
-                              </span>
-                              <span className="flex-1 min-w-0">
-                                <span className="text-ink">{item.label}</span>
-                                <span className="sr-only">{item.pass ? ' passed' : ' failed'}</span>
-                                <span className="block text-[12px] text-muted break-words">{item.detail}</span>
-                              </span>
-                              {theirs && (
-                                <span
-                                  className="shrink-0 text-[11px] font-bold uppercase tracking-wider"
-                                  style={{ color: theirs.pass ? '#2f6b4f' : '#c0392b' }}
-                                  title={theirs.detail}
-                                >
-                                  Competitor {theirs.pass ? '✓' : '✗'}
-                                </span>
-                              )}
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
-          <div className="lg:col-span-5 bg-wash p-8 sm:p-10 rounded-lg border border-line-subtle shadow-sm">
-            <div className="eyebrow text-green mb-3">
-              <i className="dot"></i> FREE WEBSITE AUDIT
-            </div>
-            <h3 className="text-[22px] font-bold text-ink mb-2">Does ChatGPT know your business?</h3>
-            <p className="text-[13px] text-muted mb-6">
+        <div className="space-y-8 lg:sticky lg:top-28">
+          <div className="border-2 border-ink bg-paper p-7 shadow-hard sm:p-9">
+            <div className="kicker text-muted">Free website audit</div>
+            <h3 className="display mt-3 text-[36px] sm:text-[44px]">Does ChatGPT know your business?</h3>
+            <p className="mt-4 text-[15px] leading-relaxed">
               Check your AI crawler access, schema and llms.txt, and see your gaps against a competitor.
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="mt-6 space-y-5">
               <div>
-                <label htmlFor="audit-url" className="block text-[12px] font-bold text-ink mb-1">
-                  Your website <span className="text-red-600">*</span>
+                <label htmlFor="audit-url" className="mb-2 block text-[14px] font-bold">
+                  Your website <span aria-hidden="true">*</span>
                 </label>
                 <input
                   id="audit-url"
@@ -242,12 +231,12 @@ export default function WebsiteAudit() {
                   placeholder="yourdomain.com"
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
-                  className="w-full bg-paper border border-line px-3.5 py-2.5 rounded text-[14px] text-ink focus:border-green focus:outline-none"
+                  className="field-box"
                 />
               </div>
               <div>
-                <label htmlFor="audit-competitor" className="block text-[12px] font-bold text-ink mb-1">
-                  Competitor website <span className="text-muted font-normal">(optional)</span>
+                <label htmlFor="audit-competitor" className="mb-2 block text-[14px] font-bold">
+                  Competitor website <span className="font-normal text-muted">(optional)</span>
                 </label>
                 <input
                   id="audit-competitor"
@@ -256,72 +245,96 @@ export default function WebsiteAudit() {
                   placeholder="competitor.com"
                   value={competitorUrl}
                   onChange={(e) => setCompetitorUrl(e.target.value)}
-                  className="w-full bg-paper border border-line px-3.5 py-2.5 rounded text-[14px] text-ink focus:border-green focus:outline-none"
+                  className="field-box"
                 />
               </div>
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full button justify-between bg-green text-white disabled:opacity-60 disabled:cursor-wait"
+                className="btn-dark w-full justify-between py-4 disabled:cursor-wait disabled:opacity-70"
               >
-                <span>{loading ? 'Running audit…' : 'Run Website Audit'}</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" className="w-4 h-4">
-                  <use href="#arrow-up" />
-                </svg>
+                {loading ? 'Running audit…' : 'Run Website Audit'} <span aria-hidden="true">→</span>
               </button>
               {loading && (
-                <p className="text-[12px] text-muted" aria-live="polite">
+                <p className="text-[13px] text-muted" aria-live="polite">
                   Checking robots.txt, AI crawler access, schema and llms.txt…
                 </p>
               )}
               {error && (
-                <p className="text-[13px] text-red-700 bg-red-50 border border-red-200 rounded px-3 py-2" role="alert">
+                <p className="border-2 border-ink bg-orange px-3 py-2 text-[14px] font-bold" role="alert">
                   {error}
                 </p>
               )}
             </form>
+          </div>
 
-            {site && (
-              <div className="mt-6 pt-6 border-t border-line" aria-live="polite">
-                <div className="flex items-start justify-around gap-4 mb-5">
+          <div className="border-2 border-ink bg-ink p-7 text-paper" aria-live="polite">
+            {!site ? (
+              <>
+                <div className="kicker text-[11px] text-paper/70">Sample report preview, not a real site</div>
+                <div className="mt-5 flex items-center gap-6">
+                  <ScoreRing value={72} />
+                  <ul className="space-y-3 text-[15px]">
+                    <li className="flex items-center gap-3">
+                      <StatusIcon state="pass" /> AI crawler access: allowed
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <StatusIcon state="partial" /> Schema: partly missing
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <StatusIcon state="fail" /> llms.txt: not found
+                    </li>
+                  </ul>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="kicker text-[11px] text-paper/70">Your report</div>
+                <div className="mt-5 flex flex-wrap items-start justify-around gap-6">
                   <ScoreRing value={site.score} label={hostOf(site.url)} />
                   {rival && <ScoreRing value={rival.score} label={hostOf(rival.url)} />}
                 </div>
+                <ul className="mt-6 space-y-3 text-[15px]">
+                  {categories.map((cat) => {
+                    const score = site.categories.find((c) => c.id === cat.id)?.score ?? 0;
+                    return (
+                      <li key={cat.id} className="flex items-center gap-3">
+                        <StatusIcon state={categoryState(score)} /> {cat.title}: {score}/100
+                      </li>
+                    );
+                  })}
+                </ul>
 
                 {rival && (
-                  <div className="mb-5">
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-ink mb-2">
-                      Your gaps vs {hostOf(rival.url)}
-                    </div>
+                  <div className="mt-6 border-t border-paper/25 pt-5">
+                    <div className="kicker text-[11px] text-orange">Your gaps vs {hostOf(rival.url)}</div>
                     {gaps.length ? (
-                      <ul className="space-y-1.5">
+                      <ul className="mt-3 space-y-2 text-[14px]">
                         {gaps.map((g) => (
-                          <li key={g.id} className="flex items-start gap-2 text-[13px] text-ink">
-                            <span aria-hidden="true" className="font-bold text-[#c0392b]">✗</span>
-                            {g.label}
+                          <li key={g.id} className="flex items-start gap-3">
+                            <StatusIcon state="fail" /> {g.label}
                           </li>
                         ))}
                       </ul>
                     ) : (
-                      <p className="text-[13px] text-muted">Your competitor passes nothing that you fail.</p>
+                      <p className="mt-3 text-[14px] text-paper/75">Your competitor passes nothing that you fail.</p>
                     )}
                   </div>
                 )}
 
                 <a
-                  className="w-full button justify-between text-white"
-                  style={{ background: '#1f8f4e', borderColor: '#1f8f4e' }}
+                  className="btn mt-7 w-full justify-between border-[#25D366] bg-[#25D366] text-ink"
                   href={whatsappLink(site, gaps, rival)}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span>Fix this for me</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" className="w-[18px] h-[18px]" fill="currentColor">
+                  Fix this for me
+                  <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
                     <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z" />
                   </svg>
                 </a>
-                <p className="text-[11px] text-muted text-center mt-2">Opens WhatsApp with your report summary.</p>
-              </div>
+                <p className="mt-2 text-center text-[12px] text-paper/60">Opens WhatsApp with your report summary.</p>
+              </>
             )}
           </div>
         </div>
