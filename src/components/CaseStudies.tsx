@@ -98,7 +98,7 @@ export default function CaseStudies() {
 
         <div className="mt-14 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
           <p className="text-[17px] text-paper/80">
-            +218% Organic traffic, average client growth <span className="mx-2">/</span> 199+ Brands Scaled Across 6 Markets
+            +218% Organic traffic, average client growth <span className="mx-2">/</span> 1999 Brands Scaled Across 6 Markets
           </p>
           <a
             href="https://kolacommunications.com/projects"

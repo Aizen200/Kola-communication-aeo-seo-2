@@ -3,7 +3,7 @@ import React from 'react';
 // All copy on this site is taken verbatim from kolacommunications.com
 // (pages, project CMS and the SEO/AEO blog posts). Do not add new claims here.
 const stats = [
-  { value: '199+', label: 'Brands Scaled Across 6 Markets', accent: false },
+  { value: '1999', label: 'Brands Scaled Across 6 Markets', accent: false },
   { value: '+218%', label: 'Organic traffic, average client growth', accent: true },
   { value: '3–4 hrs', label: 'Response within 3–4 hours', accent: false },
 ];
@@ -12,17 +12,16 @@ export default function Hero() {
   return (
     <>
       <section className="wrap pb-16 pt-10 sm:pt-14 lg:pb-20" aria-labelledby="hero-title">
-        <h1 id="hero-title" className="display text-[56px] sm:text-[96px] lg:text-[150px]">
-          Own search rankings across Google and{' '}
-          <span className="serif-accent text-orange">AI search engines.</span>
-        </h1>
-
-        <div className="mt-10 grid items-start gap-12 lg:mt-14 lg:grid-cols-[1fr_1.15fr]">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-12 xl:gap-16">
           <div>
-            <p className="max-w-[540px] text-[19px] leading-relaxed sm:text-[21px]">
+            <h1 id="hero-title" className="display text-[42px] leading-[0.93] sm:text-[60px] lg:text-[72px] xl:text-[80px]">
+              Own search rankings across Google and{' '}
+              <span className="serif-accent text-orange">AI search engines.</span>
+            </h1>
+            <p className="mt-6 max-w-[540px] text-[18px] leading-relaxed text-muted sm:text-[20px]">
               Dominate Google organic rankings and establish clear authority across AI search engines and generative platforms like ChatGPT, Google AI, Claude, Perplexity and more.
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-6">
+            <div className="mt-8 flex flex-wrap items-center gap-5 sm:gap-6">
               <a href="#contact" className="btn-orange">
                 Book a Free Strategy Call <span aria-hidden="true">→</span>
               </a>
@@ -33,12 +32,12 @@ export default function Hero() {
           </div>
 
           <div
-            className="relative pt-6"
+            className="relative pt-6 pr-2"
             role="img"
             aria-label="Illustration of a search result and an AI answer, using an example question from Kola Communications' AEO article."
           >
-            <div className="absolute -top-2 right-0 z-20 flex h-[120px] w-[120px] flex-col items-center justify-center rounded-full bg-ink text-center text-paper sm:h-[136px] sm:w-[136px]">
-              <span className="display text-[38px] text-orange sm:text-[44px]">199+</span>
+            <div className="absolute -top-2 right-0 z-20 flex h-[116px] w-[116px] flex-col items-center justify-center rounded-full bg-ink text-center text-paper sm:h-[132px] sm:w-[132px]">
+              <span className="display text-[32px] text-orange sm:text-[38px]">1999</span>
               <span className="text-[10px] uppercase leading-tight tracking-[0.14em]">
                 Brands scaled
                 <br />6 markets

@@ -80,7 +80,7 @@ export default function Contact() {
             <input
               id="name"
               name="name"
-              placeholder="Jane Smith"
+              placeholder="Your full name"
               autoComplete="name"
               required
               maxLength={120}
@@ -96,7 +96,7 @@ export default function Contact() {
               id="email"
               name="email"
               type="email"
-              placeholder="jane@company.com"
+              placeholder="you@yourcompany.com"
               autoComplete="email"
               required
               maxLength={160}
@@ -112,7 +112,7 @@ export default function Contact() {
               id="website"
               name="website"
               type="text"
-              placeholder="Acme Inc."
+              placeholder="Your company name"
               required
               maxLength={300}
               value={formData.website}
