@@ -3,24 +3,39 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint --max-warnings 0",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "check": "npm run lint && npm run typecheck && npm test",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
+    "cheerio": "1.0.0",
+    "fast-xml-parser": "5.11.2",
+    "ipaddr.js": "2.2.0",
     "next": "^14.2.15",
+    "pdfkit": "0.20.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "robots-parser": "3.0.1"
   },
   "devDependencies": {
+    "@playwright/test": "1.64.1",
     "@types/node": "^20",
+    "@types/pdfkit": "0.17.7",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "8.46.0",
+    "@typescript-eslint/parser": "8.46.0",
     "autoprefixer": "^10.4.20",
+    "eslint": "8.57.1",
+    "eslint-config-next": "14.2.35",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",
+    "tsx": "4.23.15",
     "typescript": "^5"
   }
 }
-

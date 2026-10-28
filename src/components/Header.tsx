@@ -1,12 +1,13 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 const links = [
   { href: '#expertise', label: 'SEO, AEO & GEO' },
   { href: '#case-studies', label: 'Projects' },
   { href: '#packages', label: 'Packages' },
-  { href: '#audit', label: 'Website Audit' },
+  { href: '/audit', label: 'Website Audit' },
   { href: '#approach', label: 'How we work' },
   { href: '#faq', label: 'FAQs' },
 ];
@@ -39,10 +40,10 @@ export default function Header() {
     <>
       <div className="bg-ink text-paper">
         <div className="wrap flex items-center justify-between gap-4 py-2 text-[13px]">
-          <span>Free website audit: find out if ChatGPT knows your business.</span>
-          <a href="#audit" className="shrink-0 font-bold text-orange underline underline-offset-4">
-            Run it now
-          </a>
+          <span>Website audit: check your technical and on-page SEO.</span>
+          <Link href="/audit" className="shrink-0 font-bold text-orange underline underline-offset-4">
+            View workspace
+          </Link>
         </div>
       </div>
       <header className="sticky top-0 z-40 bg-paper/95 backdrop-blur">
@@ -56,9 +57,9 @@ export default function Header() {
             } absolute inset-x-0 top-full flex-col gap-1 border-y-2 border-ink bg-paper px-4 py-4 lg:static lg:flex lg:flex-row lg:items-center lg:gap-7 lg:border-0 lg:bg-transparent lg:p-0`}
           >
             {links.map((l) => (
-              <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="py-2 text-[15px] hover:text-orange lg:py-0">
+              <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="py-2 text-[15px] hover:text-orange lg:py-0">
                 {l.label}
-              </a>
+              </Link>
             ))}
             <a href="#contact" onClick={() => setOpen(false)} className="btn-dark mt-2 lg:mt-0">
               Contact <span aria-hidden="true">→</span>
