@@ -29,9 +29,9 @@ const columns = [
 
 export default function Expertise() {
   return (
-    <section id="expertise" className="section">
+    <section id="expertise" className="section border-t border-line bg-white">
       <div className="wrap">
-        <div className="mb-12 grid items-end gap-8 lg:grid-cols-[1.4fr_1fr]">
+        <div className="mb-14 grid items-end gap-8 lg:grid-cols-[1.4fr_1fr]">
           <div>
             <span className="label">(01) SEO, AEO &amp; GEO</span>
             <h2 className="h-section">How is AEO different from SEO?</h2>
@@ -41,20 +41,18 @@ export default function Expertise() {
           </p>
         </div>
 
-        <div className="grid border-2 border-ink md:grid-cols-3">
-          {columns.map((c, i) => (
+        <div className="grid gap-5 md:grid-cols-3">
+          {columns.map((c) => (
             <article
               key={c.acronym}
-              className={`flex flex-col p-8 lg:p-9 ${c.accent ? 'bg-orange' : 'bg-white'} ${
-                i > 0 ? 'border-t-2 border-ink md:border-l-2 md:border-t-0' : ''
-              }`}
+              className={`flex flex-col rounded-2xl p-8 lg:p-10 ${c.accent ? 'bg-ink text-white shadow-float' : 'border border-line bg-paper'}`}
             >
-              <div className="display text-[88px] lg:text-[104px]">{c.acronym}</div>
-              <div className={`kicker mt-3 ${c.accent ? 'text-ink' : 'text-muted'}`}>{c.name}</div>
-              <h3 className="mt-6 text-[22px] font-bold leading-snug">{c.title}</h3>
-              <p className="mt-4 text-[16px] leading-relaxed">{c.text}</p>
+              <div className={`display text-[72px] lg:text-[88px] ${c.accent ? 'text-orange' : ''}`}>{c.acronym}</div>
+              <div className={`kicker mt-3 ${c.accent ? 'text-white/60' : 'text-muted'}`}>{c.name}</div>
+              <h3 className="mt-8 text-[22px] font-bold leading-snug tracking-[-0.02em]">{c.title}</h3>
+              <p className={`mt-4 text-[16px] leading-relaxed ${c.accent ? 'text-white/75' : 'text-muted'}`}>{c.text}</p>
               <div className="mt-auto pt-8">
-                <div className="border-t-2 border-ink pt-5 text-[14px] font-bold">{c.scope}</div>
+                <div className={`border-t pt-5 text-[14px] font-bold ${c.accent ? 'border-white/15' : 'border-line'}`}>{c.scope}</div>
               </div>
             </article>
           ))}

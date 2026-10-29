@@ -9,23 +9,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: '#121212',
-        paper: '#F3EFE4',
-        sand: '#E8E2D2',
-        orange: '#FF5A2C',
-        forest: '#0F3D2E',
-        muted: '#55524A',
+        ink: '#0E0E0E',
+        paper: '#F6F5F3',
+        sand: '#EEECE8',
+        line: '#E2E0DC',
+        orange: '#FF5A1F',
+        muted: '#62605C',
       },
       fontFamily: {
-        sans: ['var(--font-sans)', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Arial', 'sans-serif'],
-        display: ['var(--font-display)', 'Impact', '"Arial Narrow"', 'sans-serif'],
-        serif: ['var(--font-serif)', 'Georgia', 'serif'],
+        sans: ['var(--font-kola)', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Arial', 'sans-serif'],
+        display: ['var(--font-kola)', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Arial', 'sans-serif'],
       },
       boxShadow: {
-        hard: '8px 8px 0 0 #121212',
-        'hard-sm': '5px 5px 0 0 #121212',
-        'hard-orange': '8px 8px 0 0 #FF5A2C',
-        'hard-paper': '8px 8px 0 0 #F3EFE4',
+        soft: '0 1px 2px rgba(14,14,14,0.04), 0 12px 32px -12px rgba(14,14,14,0.12)',
+        float: '0 2px 4px rgba(14,14,14,0.04), 0 40px 80px -24px rgba(14,14,14,0.28)',
       },
     },
   },

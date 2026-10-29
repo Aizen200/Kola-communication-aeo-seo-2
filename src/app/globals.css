@@ -15,11 +15,11 @@
   }
 
   ::selection {
-    @apply bg-orange text-ink;
+    @apply bg-orange text-white;
   }
 
   :focus-visible {
-    outline: 2px solid #ff5a2c;
+    outline: 2px solid #ff5a1f;
     outline-offset: 3px;
   }
 
@@ -38,65 +38,78 @@
 
 @layer components {
   .wrap {
-    @apply mx-auto w-full max-w-[1280px] px-4 sm:px-8 lg:px-10;
+    @apply mx-auto w-full max-w-[1540px] px-4 sm:px-8 lg:px-10;
   }
 
   .section {
-    @apply py-16 sm:py-20 lg:py-28;
+    @apply py-16 sm:py-24 lg:py-32;
   }
 
-  /* Heavy condensed uppercase headline */
+  /* Tight bold geometric headline */
   .display {
-    @apply font-display uppercase leading-[0.92] tracking-[-0.005em];
+    @apply font-display font-extrabold leading-[0.98] tracking-[-0.05em];
   }
 
   .h-section {
-    @apply display text-[44px] sm:text-[64px] lg:text-[84px];
+    @apply display text-[40px] sm:text-[56px] lg:text-[68px];
   }
 
-  /* "(01) Section name" label in italic serif */
+  /* Small letter-spaced eyebrow, e.g. "TRUSTED BY GROWING BUSINESSES" */
   .label {
-    @apply font-serif italic text-[20px] sm:text-[22px] leading-none text-muted mb-3 block;
+    @apply mb-5 block text-[12px] font-bold uppercase leading-none tracking-[0.22em] text-muted;
   }
 
   .kicker {
-    @apply text-[12px] font-bold uppercase tracking-[0.12em];
+    @apply text-[12px] font-bold uppercase tracking-[0.16em];
   }
 
-  .serif-accent {
-    @apply font-serif italic normal-case tracking-normal;
+  .card {
+    @apply rounded-2xl border border-line bg-white shadow-soft;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 border-2 border-ink px-5 py-3 text-[15px] font-bold leading-tight transition-transform duration-150;
-  }
-
-  .btn:hover {
-    transform: translate(-2px, -2px);
+    @apply inline-flex items-center justify-center gap-3 rounded-[3px] px-6 py-4 text-[16px] font-bold leading-tight tracking-[-0.01em] transition-colors duration-150;
   }
 
   .btn-orange {
-    @apply btn bg-orange text-ink shadow-hard-sm;
+    @apply btn bg-orange text-ink hover:bg-ink hover:text-white;
   }
 
   .btn-dark {
-    @apply btn bg-ink text-paper;
+    @apply btn bg-ink text-white hover:bg-orange hover:text-ink;
   }
 
   .btn-outline {
-    @apply btn bg-transparent text-ink;
+    @apply btn border border-ink bg-transparent text-ink hover:bg-ink hover:text-white;
   }
 
-  .text-outline {
-    color: transparent;
-    -webkit-text-stroke: 2px currentColor;
+  .btn-link {
+    @apply inline-flex items-center gap-3 border-b border-ink pb-1.5 text-[17px] font-bold tracking-[-0.01em] transition-colors hover:border-orange hover:text-orange;
   }
 
   .field-line {
-    @apply w-full border-0 border-b-2 border-paper/60 bg-transparent px-0 py-2.5 text-[17px] text-paper placeholder:text-paper/45 focus:border-orange focus:outline-none focus:ring-0;
+    @apply w-full rounded-none border-0 border-b border-white/30 bg-transparent px-0 py-2.5 text-[17px] text-white placeholder:text-white/40 focus:border-orange focus:outline-none focus:ring-0;
   }
 
   .field-box {
-    @apply w-full border-2 border-ink bg-white px-4 py-3 text-[15px] text-ink placeholder:text-muted/70 focus:outline-none focus:ring-2 focus:ring-orange;
+    @apply w-full rounded-[3px] border border-line bg-paper px-4 py-3.5 text-[15px] text-ink placeholder:text-muted/70 focus:border-ink focus:outline-none focus:ring-0;
+  }
+
+  /* Vertical fluted panel used in the hero backdrop */
+  .fluted {
+    background-image: repeating-linear-gradient(
+      90deg,
+      #fbfaf8 0px,
+      #e6e3de 7px,
+      #d7d4cf 12px,
+      #f3f1ee 16px
+    );
+  }
+
+  .stone {
+    background:
+      radial-gradient(120% 80% at 20% 10%, rgba(255, 255, 255, 0.9), transparent 60%),
+      radial-gradient(60% 50% at 80% 70%, rgba(190, 186, 180, 0.35), transparent 70%),
+      linear-gradient(160deg, #eceae6 0%, #d6d2cb 55%, #c6c1b9 100%);
   }
 }

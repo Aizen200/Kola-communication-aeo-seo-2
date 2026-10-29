@@ -1,4 +1,5 @@
 import React from 'react';
+import Arrow from './Arrow';
 
 // Verbatim from Kola's blog articles on AEO vs SEO and on Google indexing, and the services page.
 const faqs = [
@@ -57,27 +58,27 @@ export default function Faq() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <div className="wrap grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-        <div>
+        <div className="lg:sticky lg:top-32 lg:self-start">
           <span className="label">(07) FAQ</span>
           <h2 className="h-section">Frequently Asked Questions</h2>
-          <a href="#contact" className="btn-orange mt-8">
-            Book a Free Strategy Call <span aria-hidden="true">→</span>
+          <a href="#contact" className="btn-orange mt-10">
+            Book a Free Strategy Call <Arrow />
           </a>
         </div>
-        <div className="border-t-2 border-ink">
+        <div className="border-t border-line">
           {faqs.map((faq, idx) => (
-            <details key={faq.question} open={idx === 0} className="group border-b-2 border-ink">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-[19px] font-semibold leading-snug [&::-webkit-details-marker]:hidden">
+            <details key={faq.question} open={idx === 0} className="group border-b border-line">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-7 text-[19px] font-bold leading-snug tracking-[-0.015em] transition-colors hover:text-orange [&::-webkit-details-marker]:hidden">
                 {faq.question}
                 <span
                   aria-hidden="true"
-                  className="flex h-10 w-10 shrink-0 items-center justify-center border-2 border-ink text-[20px] font-bold group-open:bg-orange"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line text-[18px] text-ink transition-colors group-open:border-orange group-open:bg-orange"
                 >
                   <span className="group-open:hidden">+</span>
                   <span className="hidden group-open:inline">−</span>
                 </span>
               </summary>
-              <p className="max-w-[640px] pb-7 text-[16px] leading-relaxed text-muted">{faq.answer}</p>
+              <p className="max-w-[640px] pb-8 text-[16px] leading-relaxed text-muted">{faq.answer}</p>
             </details>
           ))}
         </div>

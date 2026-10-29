@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Arrow from './Arrow';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -39,44 +40,45 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="section border-t-2 border-ink bg-ink text-paper">
-      <div className="wrap grid gap-14 lg:grid-cols-2">
+    <section id="contact" className="section relative overflow-hidden bg-ink text-white">
+      <div aria-hidden="true" className="absolute -right-32 top-0 h-96 w-96 rounded-full bg-orange/25 blur-[120px]" />
+      <div className="wrap relative grid gap-14 lg:grid-cols-2">
         <div>
-          <span className="label text-paper/70">(08) Contact</span>
-          <h2 className="h-section text-paper">
+          <span className="label text-white/50">(08) Contact</span>
+          <h2 className="h-section text-white">
             Let&apos;s build something{" "}
-            <span className="serif-accent block text-orange">extraordinary together.</span>
+            <span className="block text-orange">extraordinary together.</span>
           </h2>
-          <p className="mt-6 max-w-[420px] text-[18px] leading-relaxed text-paper/80">
+          <p className="mt-7 max-w-[420px] text-[18px] leading-relaxed text-white/80">
             Tell us about your timeline, goals, and project scope.
           </p>
 
           <a
-            className="mt-8 inline-block break-all text-[20px] font-bold text-orange hover:underline sm:text-[22px]"
+            className="mt-10 inline-flex items-center gap-3 break-all border-b border-orange pb-1.5 text-[20px] font-bold text-orange sm:text-[22px]"
             href="mailto:business@kolacommunications.com"
           >
-            business@kolacommunications.com <span aria-hidden="true">→</span>
+            business@kolacommunications.com <Arrow />
           </a>
 
-          <div className="mt-8 space-y-4 text-[15px] leading-relaxed text-paper/80">
+          <div className="mt-8 space-y-4 text-[15px] leading-relaxed text-white/80">
             <p>
-              <strong className="text-paper">Phone:</strong>{" "}
+              <strong className="text-white">Phone:</strong>{" "}
               <a href="tel:+918928984774" className="underline hover:text-orange">
                 +91-8928984774
               </a>
             </p>
             <p>
-              <strong className="text-paper">Address:</strong> 23, 2nd Floor, Sharda Bhavan, Opposite Gala Provision Store, Fatak Road / Narayan Joshi Road, Kandivali West, Mumbai – 400067, Maharashtra, India
+              <strong className="text-white">Address:</strong> 23, 2nd Floor, Sharda Bhavan, Opposite Gala Provision Store, Fatak Road / Narayan Joshi Road, Kandivali West, Mumbai – 400067, Maharashtra, India
             </p>
             <p>
-              <strong className="text-paper">Business Hours:</strong> Mon – Fri: 9:30 AM – 9:00 PM IST (Flexible timezone coverage for US, UK, Australia &amp; UAE)
+              <strong className="text-white">Business Hours:</strong> Mon – Fri: 9:30 AM – 9:00 PM IST (Flexible timezone coverage for US, UK, Australia &amp; UAE)
             </p>
           </div>
         </div>
 
         <form id="review-form" onSubmit={handleSubmit} className="grid content-start gap-x-8 gap-y-7 sm:grid-cols-2">
           <div>
-            <label htmlFor="name" className="block text-[12px] font-bold uppercase tracking-[0.12em] text-paper/80">Your Name</label>
+            <label htmlFor="name" className="block text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">Your Name</label>
             <input
               id="name"
               name="name"
@@ -91,7 +93,7 @@ export default function Contact() {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-[12px] font-bold uppercase tracking-[0.12em] text-paper/80">Email Address</label>
+            <label htmlFor="email" className="block text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">Email Address</label>
             <input
               id="email"
               name="email"
@@ -107,7 +109,7 @@ export default function Contact() {
           </div>
 
           <div>
-            <label htmlFor="website" className="block text-[12px] font-bold uppercase tracking-[0.12em] text-paper/80">Company / Brand</label>
+            <label htmlFor="website" className="block text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">Company / Brand</label>
             <input
               id="website"
               name="website"
@@ -122,7 +124,7 @@ export default function Contact() {
           </div>
 
           <div>
-            <label htmlFor="service" className="block text-[12px] font-bold uppercase tracking-[0.12em] text-paper/80">Engagement</label>
+            <label htmlFor="service" className="block text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">Engagement</label>
             <select
               id="service"
               name="service"
@@ -130,17 +132,17 @@ export default function Contact() {
               onChange={(e) => setFormData({ ...formData, service: e.target.value })}
               className="field-line"
             >
-              <option value="Monthly Growth Retainer" className="bg-ink text-paper">
+              <option value="Monthly Growth Retainer" className="bg-ink text-white">
                 Monthly Growth Retainer
               </option>
-              <option value="One-Time Project" className="bg-ink text-paper">
+              <option value="One-Time Project" className="bg-ink text-white">
                 One-Time Project
               </option>
             </select>
           </div>
 
           <div className="sm:col-span-2">
-            <label htmlFor="goal" className="block text-[12px] font-bold uppercase tracking-[0.12em] text-paper/80">Tell us about your project</label>
+            <label htmlFor="goal" className="block text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">Tell us about your project</label>
             <textarea
               id="goal"
               name="goal"
@@ -154,10 +156,10 @@ export default function Contact() {
           </div>
 
           <div className="sm:col-span-2">
-            <button type="submit" className="btn w-full justify-between border-orange bg-orange py-4 text-ink">
-              Send Message <span aria-hidden="true">→</span>
+            <button type="submit" className="btn-orange w-full justify-between py-5 hover:bg-white hover:text-ink">
+              Send Message <Arrow />
             </button>
-            <p className="mt-4 text-[14px] text-paper/70">Response within 3–4 hours</p>
+            <p className="mt-4 text-[14px] text-white/70">Response within 3–4 hours</p>
             <div aria-live="polite" id="form-status" className="mt-3 text-[15px]">
               {status?.submitted && (
                 <>
