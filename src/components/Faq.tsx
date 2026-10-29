@@ -52,7 +52,7 @@ const faqSchema = {
 
 export default function Faq() {
   return (
-    <section id="faq" className="section">
+    <section id="faq" className="pb-10 pt-14 sm:pb-12 sm:pt-20 lg:pb-14 lg:pt-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

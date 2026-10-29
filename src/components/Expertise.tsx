@@ -71,12 +71,30 @@ function GeoVisual() {
   );
 }
 
-// Verbatim from kolacommunications.com and the AEO article.
-const columns = [
+// Verbatim from kolacommunications.com and the AEO vs SEO article (comparison table).
+type Column = {
+  acronym: string;
+  name: string;
+  title: string;
+  rows: [string, string][];
+  text: string;
+  scope: string[];
+  visual: React.ReactNode;
+  accent: boolean;
+};
+
+const columns: Column[] = [
   {
     acronym: 'SEO',
     name: 'Search Engine Optimisation',
     title: 'Goal: rank in a list of search results',
+    rows: [
+      ['Optimises for', 'keywords, backlinks, page authority'],
+      ['Output', 'a link the user clicks'],
+      ['Measures', 'rankings, organic traffic, click-through rate'],
+      ['Platform', 'Google, Bing search results pages'],
+    ],
+    text: '',
     scope: ['Keyword research', 'Link building', 'Technical SEO'],
     visual: <SeoVisual />,
     accent: false,
@@ -85,6 +103,13 @@ const columns = [
     acronym: 'AEO',
     name: 'Answer Engine Optimisation',
     title: 'Goal: be cited as the direct answer',
+    rows: [
+      ['Optimises for', 'question clarity, structured content, schema'],
+      ['Output', 'an answer the user reads without clicking'],
+      ['Measures', 'featured snippet wins, AI citations, zero-click visibility'],
+      ['Platform', 'ChatGPT, Perplexity, Google AI Overview, voice search'],
+    ],
+    text: '',
     scope: ['FAQ schema', 'Structured data', 'Clear Q&A formatting'],
     visual: <AeoVisual />,
     accent: true,
@@ -93,6 +118,8 @@ const columns = [
     acronym: 'GEO',
     name: 'Generative Engine Optimization',
     title: 'Build topical authority, not just keyword density',
+    rows: [],
+    text: 'AI systems evaluate sources not just by individual page quality but by whether a website is a genuine authority on a topic. A website that has ten well-researched articles about SEO and AEO will be cited more reliably than a website with one keyword-stuffed page on the same topic.',
     scope: ['LLMs & AI Search'],
     visual: <GeoVisual />,
     accent: false,
@@ -101,20 +128,23 @@ const columns = [
 
 export default function Expertise() {
   return (
-    <section id="expertise" className="section bg-white">
+    <section id="expertise" className="section">
       <div className="wrap">
         <span className="label">(01) SEO, AEO &amp; GEO</span>
-        <h2 className="h-section mb-14 max-w-[820px]">How is AEO different from SEO?</h2>
+        <h2 className="h-section max-w-[820px]">How is AEO different from SEO?</h2>
+        <p className="mb-14 mt-6 max-w-[680px] text-[18px] leading-relaxed text-muted">
+          SEO and AEO are not opposites, good SEO practice is a foundation for AEO. But they have different goals, different signals, and different outputs.
+        </p>
 
         <div className="grid gap-5 md:grid-cols-3">
           {columns.map((c) => (
             <article
               key={c.acronym}
-              className={`flex flex-col overflow-hidden rounded-2xl ${c.accent ? 'bg-ink text-white shadow-float' : 'border border-line bg-paper'}`}
+              className={`flex flex-col overflow-hidden rounded-2xl ${c.accent ? 'bg-ink text-white shadow-float' : 'border border-line bg-white'}`}
             >
               <div
                 aria-hidden="true"
-                className={`relative flex h-[210px] items-center justify-center ${c.accent ? 'bg-[#1a1a1a]' : 'bg-sand/60'}`}
+                className={`relative flex h-[210px] items-center justify-center ${c.accent ? 'bg-[#1a1a1a]' : 'bg-sand'}`}
               >
                 {c.accent && <div className="absolute h-32 w-32 rounded-full bg-orange/40 blur-[50px]" />}
                 <div className="relative flex w-full justify-center">{c.visual}</div>
@@ -125,11 +155,22 @@ export default function Expertise() {
                   <div className={`kicker text-right text-[10px] ${c.accent ? 'text-white/50' : 'text-muted'}`}>{c.name}</div>
                 </div>
                 <h3 className="mt-4 text-[20px] font-bold leading-snug tracking-[-0.02em]">{c.title}</h3>
-                <ul className="mt-auto flex flex-wrap gap-2 pt-7">
+                {c.rows.length > 0 && (
+                  <dl className={`mt-5 border-t text-[14px] ${c.accent ? 'border-white/15' : 'border-line'}`}>
+                    {c.rows.map(([term, value]) => (
+                      <div key={term} className={`grid grid-cols-[110px_1fr] gap-3 border-b py-3 ${c.accent ? 'border-white/15' : 'border-line'}`}>
+                        <dt className={`font-bold ${c.accent ? 'text-white/50' : 'text-muted'}`}>{term}</dt>
+                        <dd className="leading-snug">{value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
+                {c.text && <p className="mt-4 text-[15px] leading-relaxed text-muted">{c.text}</p>}
+                <ul className="mt-auto flex flex-wrap gap-2 pt-6">
                   {c.scope.map((s) => (
                     <li
                       key={s}
-                      className={`rounded-full px-3 py-1.5 text-[12px] font-bold ${c.accent ? 'bg-white/10' : 'border border-line bg-white'}`}
+                      className={`rounded-full px-3 py-1.5 text-[12px] font-bold ${c.accent ? 'bg-white/10' : 'border border-line bg-paper'}`}
                     >
                       {s}
                     </li>

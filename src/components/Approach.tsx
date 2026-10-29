@@ -27,14 +27,14 @@ const values = ['Results-Driven', 'Innovation First', 'Client-Centric', 'Quality
 
 export default function Approach() {
   return (
-    <section id="approach" className="section border-y border-line bg-white">
+    <section id="approach" className="section">
       <div className="wrap">
         <span className="label">(06) How we work</span>
         <h2 className="h-section max-w-[980px]">Every project starts with a clear goal and ends with a result we can point to.</h2>
 
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {steps.map((s, i) => (
-            <article key={s.no} className={`relative overflow-hidden rounded-2xl p-8 ${i === 2 ? 'bg-ink text-white shadow-float' : 'border border-line bg-paper'}`}>
+            <article key={s.no} className={`relative overflow-hidden rounded-2xl p-8 ${i === 2 ? 'bg-ink text-white shadow-float' : 'border border-line bg-white'}`}>
               {i === 2 && <div aria-hidden="true" className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-orange/40 blur-[60px]" />}
               <div className="relative flex items-center justify-between">
                 <span className={`kicker text-[11px] ${i === 2 ? 'text-white/60' : 'text-muted'}`}>{s.kicker}</span>

@@ -1,11 +1,19 @@
 import type { Metadata, Viewport } from 'next';
-import { Plus_Jakarta_Sans } from 'next/font/google';
+import { Inter_Tight, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 
 const sans = Plus_Jakarta_Sans({
   weight: ['400', '500', '700', '800'],
   subsets: ['latin'],
   variable: '--font-kola',
+  display: 'swap',
+});
+
+// Display face for the hero headline and closing banner
+const tight = Inter_Tight({
+  weight: ['600', '700'],
+  subsets: ['latin'],
+  variable: '--font-tight',
   display: 'swap',
 });
 
@@ -32,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={sans.variable}>
+    <html lang="en" className={`${sans.variable} ${tight.variable}`}>
       <body>
         <a
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-ink focus:px-4 focus:py-2 focus:text-white"

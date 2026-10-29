@@ -1,88 +1,124 @@
 import React from 'react';
 import Arrow from './Arrow';
 
-// Verbatim from kolacommunications.com/services ("Transparent ways to collaborate."),
+// Feature names are verbatim from kolacommunications.com/services ("Transparent ways to collaborate."),
 // limited to the SEO, AEO & GEO deliverables.
-const retainer = {
-  tag: 'Continuous Scaling',
-  badge: 'Most Popular',
-  name: 'Monthly Growth Retainer',
-  description:
-    'A fully managed monthly engagement covering strategy, execution and reporting, so you can focus on running your business.',
-  features: [
-    'Dedicated account manager & weekly sprints',
-    'SEO, AEO & GEO for Google and AI search engines',
-    'High-Intent Keyword Strategy & Content Topic Clusters',
-    'High-Quality White-Hat Editorial Link Acquisition',
-    'Monthly executive analytics reports',
-  ],
-  ctaText: 'Inquire for Retainer',
-};
+// PLACEHOLDER: prices, the third plan and which features each plan includes are layout
+// stand-ins until the final pricing and feature content is provided.
+const features = [
+  'SEO, AEO & GEO for Google and AI search engines',
+  'Technical SEO Audits & Core Web Vitals Remediation',
+  'Structured Schema Markup & Rich Snippet Engineering',
+  'Answer & Generative Engine Optimization (AEO & GEO) for LLMs & AI Search',
+  'High-Intent Keyword Strategy & Content Topic Clusters',
+  'High-Quality White-Hat Editorial Link Acquisition',
+  'Monthly executive analytics reports',
+  'Dedicated account manager & weekly sprints',
+];
 
-const project = {
-  tag: 'Milestone Based',
-  name: 'One-Time Project',
-  description: 'Clearly defined scope & fixed timeline',
-  features: [
-    'Technical SEO Audits & Core Web Vitals Remediation',
-    'Answer & Generative Engine Optimization (AEO & GEO) for LLMs & AI Search',
-    'Structured Schema Markup & Rich Snippet Engineering',
-    'Dedicated project manager & milestone reviews',
-    'Strict adherence to budgets & deliverables',
-  ],
-  ctaText: 'Request Project Proposal',
-};
+const plans = [
+  {
+    tag: 'Milestone Based',
+    name: 'One-Time Project',
+    description: 'Clearly defined scope & fixed timeline',
+    price: '₹XX,XXX',
+    period: '/project',
+    included: 4,
+    ctaText: 'Request Project Proposal',
+  },
+  {
+    tag: 'Continuous Scaling',
+    badge: 'Most Popular',
+    name: 'Monthly Growth Retainer',
+    description:
+      'A fully managed monthly engagement covering strategy, execution and reporting, so you can focus on running your business.',
+    price: '₹XX,XXX',
+    period: '/month',
+    included: 7,
+    ctaText: 'Inquire for Retainer',
+  },
+  {
+    tag: 'Plan tag',
+    name: 'Plan name',
+    description: 'Plan description',
+    price: '₹XX,XXX',
+    period: '/month',
+    included: 8,
+    ctaText: 'Get Started',
+  },
+];
 
-function Deliverables({ items, dark = false }: { items: string[]; dark?: boolean }) {
+function Check() {
   return (
-    <ul className={`mt-4 border-t ${dark ? 'border-white/15' : 'border-line'}`}>
-      {items.map((f) => (
-        <li key={f} className={`flex gap-3 border-b py-3.5 text-[15px] ${dark ? 'border-white/15 text-white/85' : 'border-line'}`}>
-          <span aria-hidden="true" className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" />
-          {f}
-        </li>
-      ))}
-    </ul>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="mt-[3px] shrink-0 text-orange">
+      <path d="m5 12.5 4.2 4.2L19 7" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function Cross() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="mt-[3px] shrink-0 text-muted/40">
+      <path d="M7 7l10 10M17 7 7 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
   );
 }
 
 export default function Packages() {
   return (
-    <section id="packages" className="section border-y border-line bg-white">
+    <section id="packages" className="section">
       <div className="wrap">
         <span className="label">(03) Packages</span>
         <h2 className="h-section mb-14 max-w-[900px]">Transparent ways to collaborate.</h2>
 
-        <div className="grid items-stretch gap-6 lg:grid-cols-2">
-          <article className="relative flex flex-col overflow-hidden rounded-2xl bg-ink p-8 text-white shadow-float sm:p-11">
-            <div aria-hidden="true" className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-orange/40 blur-[80px]" />
-            <div className="relative flex flex-wrap items-center gap-3">
-              <span className="rounded-full bg-orange px-3 py-1 text-[12px] font-bold text-ink">{retainer.badge}</span>
-              <span className="kicker text-[11px] text-white/60">{retainer.tag}</span>
-            </div>
-            <h3 className="display relative mt-8 text-[40px] sm:text-[52px]">{retainer.name}</h3>
-            <p className="relative mt-5 text-[17px] leading-relaxed text-white/75">{retainer.description}</p>
-            <div className="kicker relative mt-10 text-[11px] text-orange">Key Deliverables:</div>
-            <Deliverables items={retainer.features} dark />
-            <div className="relative mt-auto pt-10">
-              <a href="#contact" className="btn-orange w-full justify-between">
-                {retainer.ctaText} <Arrow />
-              </a>
-            </div>
-          </article>
+        <div className="grid items-stretch gap-x-5 gap-y-14 pt-8 md:grid-cols-2 lg:grid-cols-3">
+          {plans.map((plan) => {
+            const popular = Boolean(plan.badge);
+            return (
+              <article
+                key={plan.name}
+                className={`relative flex flex-col rounded-2xl bg-white p-7 sm:p-8 ${
+                  popular ? 'border-2 border-orange shadow-float' : 'border border-line'
+                }`}
+              >
+                {popular && (
+                  <div className="absolute inset-x-[-2px] -top-9 flex h-10 items-center justify-center rounded-t-2xl bg-orange text-[13px] font-bold uppercase tracking-[0.14em] text-ink">
+                    {plan.badge}
+                  </div>
+                )}
+                <span className="kicker text-[11px] text-muted">{plan.tag}</span>
+                <h3 className="mt-3 text-[26px] font-bold leading-tight tracking-[-0.03em]">{plan.name}</h3>
+                <p className="mt-2 text-[15px] lg:min-h-[66px] leading-snug text-muted">{plan.description}</p>
 
-          <article className="flex flex-col rounded-2xl border border-line bg-paper p-8 sm:p-11">
-            <span className="kicker self-start text-[11px] text-muted">{project.tag}</span>
-            <h3 className="display mt-8 text-[40px] sm:text-[52px]">{project.name}</h3>
-            <p className="mt-5 text-[17px] leading-relaxed text-muted">{project.description}</p>
-            <div className="kicker mt-10 text-[11px] text-muted">Key Deliverables:</div>
-            <Deliverables items={project.features} />
-            <div className="mt-auto pt-10">
-              <a href="#contact" className="btn-dark w-full justify-between">
-                {project.ctaText} <Arrow />
-              </a>
-            </div>
-          </article>
+                <div className="mt-6 flex items-baseline gap-1.5">
+                  <span className="display text-[46px] leading-none">{plan.price}</span>
+                  <span className="text-[15px] font-bold text-muted">{plan.period}</span>
+                </div>
+
+                <a href="#contact" className={`${popular ? 'btn-orange' : 'btn-outline'} mt-7 w-full justify-between`}>
+                  {plan.ctaText} <Arrow />
+                </a>
+
+                <div className="mt-8 border-t border-line pt-6">
+                  <div className="kicker text-[11px] text-muted">Key Deliverables:</div>
+                  <ul className="mt-4 space-y-3.5">
+                    {features.map((f, i) => {
+                      const on = i < plan.included;
+                      return (
+                        <li key={f} className={`flex gap-3 text-[15px] leading-snug ${on ? 'font-bold text-ink' : 'text-muted/50 line-through decoration-muted/30'}`}>
+                          {on ? <Check /> : <Cross />}
+                          <span>
+                            {f}
+                            <span className="sr-only">{on ? ' (included)' : ' (not included)'}</span>
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

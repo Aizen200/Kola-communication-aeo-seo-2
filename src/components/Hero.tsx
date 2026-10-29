@@ -1,7 +1,8 @@
 import React from 'react';
 import Arrow from './Arrow';
+import { HeroAuditForm } from './AuditForm';
 
-// Hero copy and "Trusted by" brands follow the approved hero design.
+// Hero copy follows the approved hero design.
 const googleColors = ['#4285F4', '#EA4335', '#FBBC05', '#4285F4', '#34A853', '#EA4335'];
 
 function KTile({ size = 36 }: { size?: number }) {
@@ -31,7 +32,7 @@ const tilt = '[transform:perspective(1800px)_rotateY(-12deg)_rotateX(4deg)_rotat
 function HeroVisual() {
   return (
     <div
-      className="relative mx-auto mb-6 h-[460px] w-full max-w-[740px] sm:h-[560px] lg:mb-0 lg:absolute lg:right-0 lg:top-0 lg:h-[600px] lg:w-[51%] lg:max-w-none"
+      className="relative mx-auto mb-6 h-[460px] w-full max-w-[740px] sm:h-[560px] lg:mb-0 lg:absolute lg:right-0 lg:top-[40px] lg:h-[600px] lg:w-[51%] lg:max-w-none"
       role="img"
       aria-label="Illustration: Kola Communications shown in a Google search result and in a ChatGPT answer."
     >
@@ -123,88 +124,80 @@ function HeroVisual() {
   );
 }
 
-const brands = [
-  {
-    name: 'sortafamous',
-    mark: (
-      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
-        <circle cx="15" cy="15" r="12" stroke="currentColor" strokeWidth="2.4" />
-        <path d="M8 19c3-8 11-12 14-8M9 20c5 1 10-1 13-6M7 15c4-6 13-6 16 0" stroke="currentColor" strokeWidth="2" />
-      </svg>
-    ),
-    className: 'text-[21px] font-bold tracking-[-0.03em]',
-  },
-  {
-    name: 'AIRKOM',
-    mark: (
-      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
-        <path d="M15 2 28 27h-8l-5-10-5 10H2z" fill="currentColor" />
-        <path d="M15 17l-3 6h6z" fill="#F6F5F3" />
-      </svg>
-    ),
-    className: 'text-[19px] font-bold tracking-[0.12em]',
-  },
-  {
-    name: 'CASA BRIO',
-    mark: (
-      <svg width="40" height="30" viewBox="0 0 40 30" fill="none" aria-hidden="true">
-        <path d="M20 8c-3-6-14-8-15-3s4 9 10 10c-6 1-9 6-6 9s9-2 11-9c2 7 8 12 11 9s0-8-6-9c6-1 11-5 10-10S23 2 20 8Z" stroke="currentColor" strokeWidth="1.6" />
-        <path d="M20 8v14" stroke="currentColor" strokeWidth="1.6" />
-      </svg>
-    ),
-    className: 'text-[17px] font-bold tracking-[0.14em]',
-    stacked: true,
-  },
-  {
-    name: 'MIYA ROBOTICS',
-    mark: (
-      <svg width="70" height="34" viewBox="0 0 70 34" fill="none" aria-hidden="true">
-        <ellipse cx="22" cy="17" rx="20" ry="11" stroke="currentColor" strokeWidth="2" />
-        <ellipse cx="40" cy="17" rx="20" ry="11" stroke="currentColor" strokeWidth="2" transform="rotate(-12 40 17)" />
-        <ellipse cx="31" cy="17" rx="8" ry="13" stroke="currentColor" strokeWidth="2" />
-      </svg>
-    ),
-    className: 'text-[13px] font-bold tracking-[0.06em]',
-  },
-  {
-    name: 'FAMER',
-    mark: (
-      <svg width="30" height="32" viewBox="0 0 30 32" fill="none" aria-hidden="true">
-        <path d="M4 28V8l11-6 11 6v12c0 5-5 9-11 10" stroke="currentColor" strokeWidth="2.2" />
-        <path d="M4 28c6-2 13-9 15-18M10 20c3 0 7 1 10 4" stroke="currentColor" strokeWidth="2" />
-      </svg>
-    ),
-    className: 'text-[26px] font-extrabold tracking-[-0.02em]',
-  },
-  {
-    name: 'CANCURE',
-    mark: null,
-    className: 'font-[Georgia,serif] text-[28px] font-normal tracking-[0.02em]',
-  },
+// Replicates the client strip under the hero on kolacommunications.com: avatars, rating and
+// "199+ Global Founders & Clients" on the left, a scrolling row of client logos on the right.
+const avatars = [
+  'photo-1534528741775-53994a69daeb',
+  'photo-1507003211169-0a1dd7228f2d',
+  'photo-1494790108377-be9c29b29330',
+  'photo-1500648767791-00dcc994a43e',
+  'photo-1573496359142-b8d87734a5a2',
 ];
+
+const clientLogos = [
+  { file: 'veena-developers', name: 'Veena Developers' },
+  { file: 'vayu-valves', name: 'Vayu Valves' },
+  { file: 'tazaari', name: 'Tazaari' },
+  { file: 'roy-infra', name: 'Roy Infra' },
+  { file: 'purva-desai', name: 'Purva Desai Company' },
+  { file: 'premier-league-news-now', name: 'Premier League News Now' },
+];
+
+function Star() {
+  return (
+    <svg className="h-3.5 w-3.5 fill-current" viewBox="0 0 20 20" aria-hidden="true">
+      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+    </svg>
+  );
+}
 
 function TrustedBy() {
   return (
-    <section aria-label="Trusted by growing businesses" className="border-y border-line bg-white py-5">
-      <div className="wrap text-[11px] font-bold uppercase tracking-[0.26em] text-muted">Trusted by growing businesses</div>
-      {/* Marquee: the list is rendered twice and shifted by -50% for a seamless loop */}
-      <div className="group mt-2 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
-        <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
-          {[0, 1].map((copy) => (
-            <ul key={copy} aria-hidden={copy === 1 ? true : undefined} className="flex items-center text-[#5A5A5A]">
-              {brands.map((b) => (
-                <li
-                  key={b.name}
-                  className={`flex h-[60px] w-[220px] shrink-0 items-center justify-center border-l border-line sm:w-[260px] ${
-                    b.stacked ? 'flex-col gap-0.5' : 'gap-3'
-                  }`}
-                >
-                  {b.mark}
-                  <span className={`leading-none ${b.className}`}>{b.name}</span>
-                </li>
+    <section aria-label="199+ Global Founders & Clients" className="overflow-hidden border-y border-line py-12">
+      <div className="wrap">
+        <div className="flex flex-col items-center gap-8 md:flex-row md:gap-12">
+          <div className="flex shrink-0 items-center gap-3">
+            <div className="flex -space-x-2">
+              {avatars.map((id, i) => (
+                <img
+                  key={id}
+                  src={`https://images.unsplash.com/${id}?w=120&auto=format&fit=crop&q=80`}
+                  alt={`Happy client ${i + 1}`}
+                  loading="lazy"
+                  className="h-8 w-8 rounded-full border-2 border-paper object-cover"
+                />
               ))}
-            </ul>
-          ))}
+            </div>
+            <div className="flex flex-col gap-2.5">
+              <div className="flex gap-0.5 text-ink" role="img" aria-label="Rated 5 out of 5">
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <Star key={i} />
+                ))}
+              </div>
+              <span className="text-xs font-medium text-muted">199+ Global Founders &amp; Clients</span>
+            </div>
+          </div>
+
+          {/* Marquee: the logos are rendered twice and shifted by -50% for a seamless loop */}
+          <div className="group relative w-full flex-1 overflow-hidden">
+            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-paper to-transparent" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-paper to-transparent" />
+            <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
+              {[0, 1].map((copy) => (
+                <ul key={copy} aria-hidden={copy === 1 ? true : undefined} className="flex items-center gap-12 pr-12">
+                  {clientLogos.map((logo) => (
+                    <li key={logo.file} className="flex shrink-0 items-center">
+                      <img
+                        src={`/logos/${logo.file}.svg`}
+                        alt={copy === 1 ? '' : logo.name}
+                        className="h-16 w-auto object-contain opacity-70 grayscale md:h-20"
+                      />
+                    </li>
+                  ))}
+                </ul>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -216,8 +209,8 @@ export default function Hero() {
     <>
     <section id="top" aria-labelledby="hero-title" className="relative overflow-hidden">
       <div className="wrap relative z-10">
-        <div className="pb-8 pt-12 sm:pt-16 lg:flex lg:min-h-[600px] lg:max-w-[50%] lg:flex-col lg:justify-center lg:py-10">
-          <h1 id="hero-title" className="text-[54px] font-bold leading-[0.93] tracking-[-0.055em] sm:text-[84px] lg:text-[78px] xl:text-[92px]">
+        <div className="pb-8 pt-12 sm:pt-16 lg:flex lg:min-h-[680px] lg:max-w-[50%] lg:flex-col lg:justify-center lg:py-14">
+          <h1 id="hero-title" className="font-tight text-[50px] font-bold leading-[1.04] tracking-[-0.025em] sm:text-[78px] lg:text-[72px] xl:text-[84px]">
             Own your
             <br />
             visibility across
@@ -226,13 +219,8 @@ export default function Hero() {
             <br />
             <span className="text-orange">AI search.</span>
           </h1>
-          <div className="mt-12 flex flex-wrap items-center gap-10">
-            <a href="#contact" className="btn-orange px-8 py-[18px] text-[18px]">
-              Book a free strategy call <Arrow />
-            </a>
-            <a href="#case-studies" className="btn-link text-[18px]">
-              View projects <Arrow />
-            </a>
+          <div className="mt-10">
+            <HeroAuditForm />
           </div>
         </div>
       </div>

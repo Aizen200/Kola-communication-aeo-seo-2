@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
-import Arrow from './Arrow';
+import React, { useEffect, useRef, useState } from 'react';
+import AuditForm, { AUDIT_EVENT } from './AuditForm';
 
 // Website audit: "Does ChatGPT know your business?" Scores a website on AI crawler
-// access, schema and llms.txt, shows gaps against a competitor, and hands off to WhatsApp.
+// access, schema and llms.txt, and hands off to WhatsApp.
 
 const WHATSAPP_NUMBER = '918928984774'; // +91-8928984774, from kolacommunications.com
 
@@ -36,7 +36,7 @@ type CategoryId = (typeof categories)[number]['id'];
 type Item = { id: string; label: string; pass: boolean; detail: string };
 type Category = { id: CategoryId; score: number; items: Item[] };
 type SiteResult = { url: string; score: number; categories: Category[] };
-type AuditResponse = { site: SiteResult; competitor: SiteResult | null };
+type AuditResponse = { site: SiteResult };
 
 const GOOD = '#3FA06B';
 const scoreColor = (n: number) => (n >= 80 ? GOOD : n >= 50 ? '#F2C14E' : '#FF5A2C');
@@ -97,11 +97,10 @@ function StatusIcon({ state }: { state: 'pass' | 'partial' | 'fail' }) {
 
 const categoryState = (score: number) => (score >= 80 ? 'pass' : score >= 40 ? 'partial' : 'fail');
 
-function whatsappLink(site: SiteResult, gaps: Item[], competitor: SiteResult | null) {
-  const failing = gaps.length ? gaps : site.categories.flatMap((c) => c.items).filter((i) => !i.pass);
+function whatsappLink(site: SiteResult) {
+  const failing = site.categories.flatMap((c) => c.items).filter((i) => !i.pass);
   const lines = [
     `Hi Kola Communications, I checked ${hostOf(site.url)} on "Does ChatGPT know your business?" and scored ${site.score}/100.`,
-    competitor ? `My competitor ${hostOf(competitor.url)} scored ${competitor.score}/100.` : '',
     failing.length ? `Gaps: ${failing.slice(0, 6).map((i) => i.label).join('; ')}.` : '',
     'Please fix this for me.',
   ].filter(Boolean);
@@ -110,13 +109,11 @@ function whatsappLink(site: SiteResult, gaps: Item[], competitor: SiteResult | n
 
 export default function WebsiteAudit() {
   const [url, setUrl] = useState('');
-  const [competitorUrl, setCompetitorUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<AuditResponse | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const runAudit = async (target: string) => {
     setLoading(true);
     setError(null);
     setResult(null);
@@ -124,7 +121,7 @@ export default function WebsiteAudit() {
       const res = await fetch('/api/audit', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ url, competitor: competitorUrl }),
+        body: JSON.stringify({ url: target }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Something went wrong. Please try again.');
@@ -136,14 +133,23 @@ export default function WebsiteAudit() {
     }
   };
 
+  // The hero form sends its URL here so the report renders in this section
+  const runRef = useRef(runAudit);
+  runRef.current = runAudit;
+  useEffect(() => {
+    const onAudit = (e: Event) => {
+      const target = String((e as CustomEvent<string>).detail || '');
+      setUrl(target);
+      if (target) runRef.current(target);
+    };
+    window.addEventListener(AUDIT_EVENT, onAudit);
+    return () => window.removeEventListener(AUDIT_EVENT, onAudit);
+  }, []);
+
   const site = result?.site;
-  const rival = result?.competitor ?? null;
-  const rivalItems = new Map((rival?.categories.flatMap((c) => c.items) ?? []).map((i) => [i.id, i]));
-  // Gaps: checks your competitor passes and you fail
-  const gaps = site ? site.categories.flatMap((c) => c.items).filter((i) => !i.pass && rivalItems.get(i.id)?.pass) : [];
 
   return (
-    <section id="audit" className="section relative overflow-hidden border-y border-line bg-sand">
+    <section id="audit" className="section relative overflow-hidden">
       <div aria-hidden="true" className="absolute -left-24 top-24 h-80 w-80 rounded-full bg-orange/30 blur-[110px]" />
       <div className="wrap relative grid items-start gap-12 lg:grid-cols-[1.1fr_1fr]">
         <div>
@@ -157,7 +163,6 @@ export default function WebsiteAudit() {
           <ol className="mt-5 border-t border-line">
             {categories.map((cat) => {
               const mine = site?.categories.find((c) => c.id === cat.id)?.score;
-              const theirs = rival?.categories.find((c) => c.id === cat.id)?.score;
               return (
                 <li key={cat.id} className="flex items-center gap-5 border-b border-line py-4">
                   <span className="display w-8 shrink-0 text-[15px] tracking-normal text-orange">{cat.no}</span>
@@ -165,9 +170,7 @@ export default function WebsiteAudit() {
                     <div className="flex flex-wrap items-baseline justify-between gap-2">
                       <h3 className="text-[19px] font-bold tracking-[-0.015em]">{cat.title}</h3>
                       {mine !== undefined && (
-                        <span className="text-[14px] font-bold">
-                          You {mine}/100{theirs !== undefined && <span className="font-normal"> · Competitor {theirs}/100</span>}
-                        </span>
+<span className="text-[14px] font-bold">{mine}/100</span>
                       )}
                     </div>
                                       </div>
@@ -185,9 +188,7 @@ export default function WebsiteAudit() {
                   <div key={cat.id}>
                     <div className="kicker mb-3 text-[11px] text-muted">{cat.title}</div>
                     <ul className="space-y-2">
-                      {mine.items.map((item) => {
-                        const theirs = rivalItems.get(item.id);
-                        return (
+                      {mine.items.map((item) => (
                           <li key={item.id} className="flex items-start gap-3 rounded-xl border border-line bg-white px-4 py-3 text-[14px]">
                             <StatusIcon state={item.pass ? 'pass' : 'fail'} />
                             <span className="min-w-0 flex-1">
@@ -195,14 +196,8 @@ export default function WebsiteAudit() {
                               <span className="sr-only">{item.pass ? ' passed' : ' failed'}</span>
                               <span className="block break-words text-[13px] text-muted">{item.detail}</span>
                             </span>
-                            {theirs && (
-                              <span className="kicker shrink-0 text-[10px]" title={theirs.detail}>
-                                Competitor {theirs.pass ? '✓' : '✕'}
-                              </span>
-                            )}
                           </li>
-                        );
-                      })}
+                      ))}
                     </ul>
                   </div>
                 );
@@ -216,57 +211,22 @@ export default function WebsiteAudit() {
             <div className="kicker text-[11px] text-muted">Free website audit</div>
             <h3 className="display mt-4 text-[32px] sm:text-[40px]">Does ChatGPT know your business?</h3>
             <p className="mt-4 text-[15px] leading-relaxed text-muted">
-              Check your AI crawler access, schema and llms.txt, and see your gaps against a competitor.
+              Check your AI crawler access, schema and llms.txt.
             </p>
 
-            <form onSubmit={handleSubmit} className="mt-6 space-y-5">
-              <div>
-                <label htmlFor="audit-url" className="mb-2 block text-[14px] font-bold">
-                  Your website <span aria-hidden="true">*</span>
-                </label>
-                <input
-                  id="audit-url"
-                  type="text"
-                  inputMode="url"
-                  required
-                  placeholder="yourdomain.com"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                  className="field-box"
-                />
-              </div>
-              <div>
-                <label htmlFor="audit-competitor" className="mb-2 block text-[14px] font-bold">
-                  Competitor website <span className="font-normal text-muted">(optional)</span>
-                </label>
-                <input
-                  id="audit-competitor"
-                  type="text"
-                  inputMode="url"
-                  placeholder="competitor.com"
-                  value={competitorUrl}
-                  onChange={(e) => setCompetitorUrl(e.target.value)}
-                  className="field-box"
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={loading}
-                className="btn-dark w-full justify-between py-4 disabled:cursor-wait disabled:opacity-70"
-              >
-                {loading ? 'Running audit…' : 'Run Website Audit'} <Arrow />
-              </button>
+            <div className="mt-6">
+              <AuditForm id="audit-url" value={url} onChange={setUrl} onSubmit={() => runAudit(url)} loading={loading} />
               {loading && (
-                <p className="text-[13px] text-muted" aria-live="polite">
+                <p className="mt-3 text-[13px] text-muted" aria-live="polite">
                   Checking robots.txt, AI crawler access, schema and llms.txt…
                 </p>
               )}
               {error && (
-                <p className="rounded-[3px] bg-orange px-3 py-2 text-[14px] font-bold" role="alert">
+                <p className="mt-3 rounded-[3px] bg-orange px-3 py-2 text-[14px] font-bold" role="alert">
                   {error}
                 </p>
               )}
-            </form>
+            </div>
           </div>
 
           <div className="rounded-2xl bg-ink p-7 text-white shadow-float sm:p-8" aria-live="polite">
@@ -293,7 +253,6 @@ export default function WebsiteAudit() {
                 <div className="kicker text-[11px] text-white/70">Your report</div>
                 <div className="mt-5 flex flex-wrap items-start justify-around gap-6">
                   <ScoreRing value={site.score} label={hostOf(site.url)} />
-                  {rival && <ScoreRing value={rival.score} label={hostOf(rival.url)} />}
                 </div>
                 <ul className="mt-6 space-y-3 text-[15px]">
                   {categories.map((cat) => {
@@ -306,26 +265,9 @@ export default function WebsiteAudit() {
                   })}
                 </ul>
 
-                {rival && (
-                  <div className="mt-6 border-t border-white/25 pt-5">
-                    <div className="kicker text-[11px] text-orange">Your gaps vs {hostOf(rival.url)}</div>
-                    {gaps.length ? (
-                      <ul className="mt-3 space-y-2 text-[14px]">
-                        {gaps.map((g) => (
-                          <li key={g.id} className="flex items-start gap-3">
-                            <StatusIcon state="fail" /> {g.label}
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="mt-3 text-[14px] text-white/75">Your competitor passes nothing that you fail.</p>
-                    )}
-                  </div>
-                )}
-
                 <a
                   className="btn mt-7 w-full justify-between bg-[#25D366] text-ink hover:bg-white"
-                  href={whatsappLink(site, gaps, rival)}
+                  href={whatsappLink(site)}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
