@@ -5,12 +5,11 @@ import Arrow from './Arrow';
 
 const links = [
   { href: '#top', label: 'Home' },
-  { href: '#expertise', label: 'SEO' },
-  { href: '#who-we-help', label: 'AEO' },
-  { href: '#audit', label: 'GEO' },
+  { href: '#expertise', label: 'SEO, AEO & GEO' },
   { href: '#case-studies', label: 'Projects' },
   { href: '#packages', label: 'Packages' },
-  { href: '#approach', label: 'About' },
+  { href: '#audit', label: 'Website Audit' },
+  { href: '#approach', label: 'How we work' },
   { href: '#faq', label: 'FAQs' },
 ];
 
@@ -61,7 +60,7 @@ export default function Header() {
           aria-label="Main navigation"
           className={`${
             open ? 'flex' : 'hidden'
-          } absolute inset-x-0 top-full flex-col gap-1 border-b border-line bg-paper px-4 py-4 lg:static lg:flex lg:flex-row lg:items-center lg:gap-9 lg:border-0 lg:bg-transparent lg:p-0`}
+          } absolute inset-x-0 top-full flex-col gap-1 border-b border-line bg-paper px-4 py-4 lg:static lg:flex lg:flex-row lg:items-center lg:gap-8 lg:border-0 lg:bg-transparent lg:p-0`}
         >
           {links.map((l) => {
             const isActive = active === l.href;

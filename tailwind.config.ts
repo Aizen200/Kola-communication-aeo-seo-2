@@ -20,6 +20,15 @@ const config: Config = {
         sans: ['var(--font-kola)', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Arial', 'sans-serif'],
         display: ['var(--font-kola)', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Arial', 'sans-serif'],
       },
+      keyframes: {
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
+        },
+      },
+      animation: {
+        marquee: 'marquee 32s linear infinite',
+      },
       boxShadow: {
         soft: '0 1px 2px rgba(14,14,14,0.04), 0 12px 32px -12px rgba(14,14,14,0.12)',
         float: '0 2px 4px rgba(14,14,14,0.04), 0 40px 80px -24px rgba(14,14,14,0.28)',

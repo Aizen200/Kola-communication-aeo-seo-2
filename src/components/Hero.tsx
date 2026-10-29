@@ -187,19 +187,26 @@ function TrustedBy() {
   return (
     <div className="border-t border-line pb-6 pt-4">
       <div className="text-[11px] font-bold uppercase tracking-[0.26em] text-muted">Trusted by growing businesses</div>
-      <ul className="mt-3 grid grid-cols-2 items-center text-[#5A5A5A] sm:grid-cols-3 lg:grid-cols-6">
-        {brands.map((b, i) => (
-          <li
-            key={b.name}
-            className={`flex h-[72px] items-center justify-center ${i === 0 ? 'lg:justify-start' : ''} ${
-              i > 0 ? 'lg:border-l lg:border-line' : ''
-            } ${b.stacked ? 'flex-col gap-0.5' : 'gap-3'}`}
-          >
-            {b.mark}
-            <span className={`leading-none ${b.className}`}>{b.name}</span>
-          </li>
-        ))}
-      </ul>
+      {/* Marquee: the list is rendered twice and shifted by -50% for a seamless loop */}
+      <div className="group mt-3 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
+        <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
+          {[0, 1].map((copy) => (
+            <ul key={copy} aria-hidden={copy === 1 ? true : undefined} className="flex items-center text-[#5A5A5A]">
+              {brands.map((b) => (
+                <li
+                  key={b.name}
+                  className={`flex h-[72px] w-[220px] shrink-0 items-center justify-center border-l border-line sm:w-[260px] ${
+                    b.stacked ? 'flex-col gap-0.5' : 'gap-3'
+                  }`}
+                >
+                  {b.mark}
+                  <span className={`leading-none ${b.className}`}>{b.name}</span>
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
