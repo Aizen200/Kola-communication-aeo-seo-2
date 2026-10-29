@@ -20,34 +20,39 @@ const practices = [
 export default function WhoWeHelp() {
   return (
     <section id="who-we-help" className="section">
-      <div className="wrap grid gap-14 lg:grid-cols-[1fr_1.1fr]">
-        <div>
+      <div className="wrap grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="relative">
+          <img
+            src="/images/aeo-chatgpt.jpg"
+            alt="Person typing a question into ChatGPT on a laptop"
+            width={1400}
+            height={787}
+            loading="lazy"
+            className="aspect-[4/3.4] w-full rounded-2xl object-cover object-[60%_center]"
+          />
+          <blockquote className="absolute -bottom-6 left-4 right-4 rounded-2xl bg-white p-6 shadow-float sm:left-auto sm:right-[-24px] sm:max-w-[380px]">
+            <p className="text-[17px] font-bold leading-snug tracking-[-0.02em]">
+              SEO is about getting someone to your page.{' '}
+              <span className="text-orange">AEO is about getting your page to answer the question before someone even visits it.</span>
+            </p>
+          </blockquote>
+        </div>
+        <div className="pt-10 lg:pt-0">
           <span className="label">(05) What is AEO</span>
           <h2 className="h-section">Why does AEO matter more than ever in 2026?</h2>
-          <p className="mt-7 max-w-[480px] text-[18px] leading-relaxed text-muted">
-            SEO and AEO are not opposites, good SEO practice is a foundation for AEO. But they have different goals, different signals, and different outputs.
-          </p>
-          <a href="#contact" className="btn-orange mt-10">
-            Book a Free Strategy Call <Arrow />
-          </a>
-        </div>
-        <div>
-          <ol className="border-t border-line">
+          <ol className="mt-10 space-y-3">
             {practices.map((p, i) => (
-              <li key={p.title} className="flex gap-6 border-b border-line py-8">
-                <span className="display w-10 shrink-0 text-[15px] tracking-normal text-orange">0{i + 1}</span>
-                <div>
-                  <h3 className="display text-[26px] sm:text-[30px]">{p.title}</h3>
-                  <p className="mt-3 text-[16px] leading-relaxed text-muted">{p.text}</p>
-                </div>
+              <li key={p.title} className="flex items-center gap-5 rounded-xl border border-line bg-white px-5 py-4">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange/10 text-[14px] font-bold text-orange">
+                  0{i + 1}
+                </span>
+                <h3 className="text-[17px] font-bold leading-snug tracking-[-0.015em]">{p.title}</h3>
               </li>
             ))}
           </ol>
-          <blockquote className="mt-10 rounded-2xl bg-ink p-8 text-white sm:p-10">
-            <p className="display text-[24px] leading-snug sm:text-[28px]">
-              SEO is about getting someone to your page. <span className="text-orange">AEO is about getting your page to answer the question before someone even visits it.</span>
-            </p>
-          </blockquote>
+          <a href="#contact" className="btn-orange mt-10">
+            Book a Free Strategy Call <Arrow />
+          </a>
         </div>
       </div>
     </section>

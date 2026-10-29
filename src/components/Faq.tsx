@@ -66,8 +66,8 @@ export default function Faq() {
           </a>
         </div>
         <div className="border-t border-line">
-          {faqs.map((faq, idx) => (
-            <details key={faq.question} open={idx === 0} className="group border-b border-line">
+          {faqs.map((faq) => (
+            <details key={faq.question} className="group border-b border-line">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-7 text-[19px] font-bold leading-snug tracking-[-0.015em] transition-colors hover:text-orange [&::-webkit-details-marker]:hidden">
                 {faq.question}
                 <span

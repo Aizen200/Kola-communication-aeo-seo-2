@@ -60,20 +60,24 @@ export default function Contact() {
             business@kolacommunications.com <Arrow />
           </a>
 
-          <div className="mt-8 space-y-4 text-[15px] leading-relaxed text-white/80">
-            <p>
-              <strong className="text-white">Phone:</strong>{" "}
-              <a href="tel:+918928984774" className="underline hover:text-orange">
-                +91-8928984774
-              </a>
-            </p>
-            <p>
-              <strong className="text-white">Address:</strong> 23, 2nd Floor, Sharda Bhavan, Opposite Gala Provision Store, Fatak Road / Narayan Joshi Road, Kandivali West, Mumbai – 400067, Maharashtra, India
-            </p>
-            <p>
-              <strong className="text-white">Business Hours:</strong> Mon – Fri: 9:30 AM – 9:00 PM IST (Flexible timezone coverage for US, UK, Australia &amp; UAE)
-            </p>
-          </div>
+          <dl className="mt-10 grid gap-px overflow-hidden rounded-2xl bg-white/10 text-[14px] sm:grid-cols-2">
+            <div className="bg-ink p-5">
+              <dt className="kicker text-[10px] text-white/50">Phone</dt>
+              <dd className="mt-2">
+                <a href="tel:+918928984774" className="font-bold hover:text-orange">
+                  +91-8928984774
+                </a>
+              </dd>
+            </div>
+            <div className="bg-ink p-5">
+              <dt className="kicker text-[10px] text-white/50">Business Hours</dt>
+              <dd className="mt-2 font-bold">Mon – Fri: 9:30 AM – 9:00 PM IST</dd>
+            </div>
+            <div className="bg-ink p-5 sm:col-span-2">
+              <dt className="kicker text-[10px] text-white/50">Address</dt>
+              <dd className="mt-2 text-[13px] leading-relaxed text-white/70">23, 2nd Floor, Sharda Bhavan, Opposite Gala Provision Store, Fatak Road / Narayan Joshi Road, Kandivali West, Mumbai – 400067, Maharashtra, India</dd>
+            </div>
+          </dl>
         </div>
 
         <form id="review-form" onSubmit={handleSubmit} className="grid content-start gap-x-8 gap-y-7 sm:grid-cols-2">

@@ -31,7 +31,7 @@ const tilt = '[transform:perspective(1800px)_rotateY(-12deg)_rotateX(4deg)_rotat
 function HeroVisual() {
   return (
     <div
-      className="relative mx-auto mb-6 h-[460px] w-full max-w-[740px] sm:h-[560px] lg:mb-0 lg:absolute lg:right-0 lg:top-0 lg:h-[640px] lg:w-[51%] lg:max-w-none"
+      className="relative mx-auto mb-6 h-[460px] w-full max-w-[740px] sm:h-[560px] lg:mb-0 lg:absolute lg:right-0 lg:top-0 lg:h-[600px] lg:w-[51%] lg:max-w-none"
       role="img"
       aria-label="Illustration: Kola Communications shown in a Google search result and in a ChatGPT answer."
     >
@@ -58,7 +58,7 @@ function HeroVisual() {
       </div>
 
       {/* Google result card */}
-      <div className={`absolute left-[12%] top-[10%] w-[80%] sm:left-[17%] sm:top-[12%] sm:w-[62%] rounded-xl bg-white px-[3.5%] pb-[4%] pt-[3%] shadow-float ${tilt}`}>
+      <div className={`absolute left-[12%] top-[10%] w-[80%] sm:left-[17%] sm:top-[8%] sm:w-[62%] rounded-xl bg-white px-[3.5%] pb-[4%] pt-[3%] shadow-float ${tilt}`}>
         <div className="text-[26px] font-medium tracking-[-0.04em] sm:text-[32px]" aria-hidden="true" style={{ fontFamily: 'Arial, sans-serif' }}>
           {'Google'.split('').map((ch, i) => (
             <span key={i} style={{ color: googleColors[i] }}>
@@ -100,7 +100,7 @@ function HeroVisual() {
       </div>
 
       {/* ChatGPT answer card */}
-      <div className={`absolute left-[4%] top-[50%] w-[80%] sm:left-[12%] sm:top-[57%] sm:w-[57%] rounded-xl bg-[#111] px-[4%] pb-[4%] pt-[3.5%] text-white shadow-float ${tilt}`}>
+      <div className={`absolute left-[4%] top-[50%] w-[80%] sm:left-[12%] sm:top-[51%] sm:w-[57%] rounded-xl bg-[#111] px-[4%] pb-[4%] pt-[3.5%] text-white shadow-float ${tilt}`}>
         <div className="flex items-center gap-4 text-[11px] text-white/85 sm:text-[12px]">
           <ChatGptIcon />
           ChatGPT
@@ -185,17 +185,17 @@ const brands = [
 
 function TrustedBy() {
   return (
-    <div className="border-t border-line pb-6 pt-4">
-      <div className="text-[11px] font-bold uppercase tracking-[0.26em] text-muted">Trusted by growing businesses</div>
+    <section aria-label="Trusted by growing businesses" className="border-y border-line bg-white py-5">
+      <div className="wrap text-[11px] font-bold uppercase tracking-[0.26em] text-muted">Trusted by growing businesses</div>
       {/* Marquee: the list is rendered twice and shifted by -50% for a seamless loop */}
-      <div className="group mt-3 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
+      <div className="group mt-2 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
         <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
           {[0, 1].map((copy) => (
             <ul key={copy} aria-hidden={copy === 1 ? true : undefined} className="flex items-center text-[#5A5A5A]">
               {brands.map((b) => (
                 <li
                   key={b.name}
-                  className={`flex h-[72px] w-[220px] shrink-0 items-center justify-center border-l border-line sm:w-[260px] ${
+                  className={`flex h-[60px] w-[220px] shrink-0 items-center justify-center border-l border-line sm:w-[260px] ${
                     b.stacked ? 'flex-col gap-0.5' : 'gap-3'
                   }`}
                 >
@@ -207,15 +207,16 @@ function TrustedBy() {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
 export default function Hero() {
   return (
+    <>
     <section id="top" aria-labelledby="hero-title" className="relative overflow-hidden">
       <div className="wrap relative z-10">
-        <div className="pb-12 pt-14 sm:pt-20 lg:flex lg:min-h-[640px] lg:max-w-[50%] lg:flex-col lg:justify-center lg:py-12">
+        <div className="pb-8 pt-12 sm:pt-16 lg:flex lg:min-h-[600px] lg:max-w-[50%] lg:flex-col lg:justify-center lg:py-10">
           <h1 id="hero-title" className="text-[54px] font-bold leading-[0.93] tracking-[-0.055em] sm:text-[84px] lg:text-[78px] xl:text-[92px]">
             Own your
             <br />
@@ -236,9 +237,8 @@ export default function Hero() {
         </div>
       </div>
       <HeroVisual />
-      <div className="wrap relative z-10">
-        <TrustedBy />
-      </div>
     </section>
+    <TrustedBy />
+    </>
   );
 }

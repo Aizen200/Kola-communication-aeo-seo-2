@@ -29,44 +29,31 @@ export default function Approach() {
   return (
     <section id="approach" className="section border-y border-line bg-white">
       <div className="wrap">
-        <div className="mb-16 grid items-end gap-8 lg:grid-cols-[1.6fr_1fr]">
-          <div>
-            <span className="label">(06) How we work</span>
-            <h2 className="h-section">Every project starts with a clear goal and ends with a result we can point to.</h2>
-          </div>
-          <p className="text-[17px] leading-relaxed text-muted">
-            Design, data and strategy come together so nothing we build is just decoration, it is built to perform.
-          </p>
-        </div>
+        <span className="label">(06) How we work</span>
+        <h2 className="h-section max-w-[980px]">Every project starts with a clear goal and ends with a result we can point to.</h2>
 
-        <div className="grid border-t border-line md:grid-cols-3">
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
           {steps.map((s, i) => (
-            <article key={s.no} className={`py-10 ${i > 0 ? 'border-t border-line md:border-l md:border-t-0 md:pl-10' : ''} ${i < 2 ? 'md:pr-10' : ''}`}>
-              <div className={`display text-[96px] leading-[0.85] lg:text-[120px] ${i === 2 ? 'text-orange' : 'text-line'}`}>{s.no}</div>
-              <div className="kicker mt-8 text-[11px] text-muted">{s.kicker}</div>
-              <h3 className="display mt-3 text-[30px]">{s.title}</h3>
-              <p className="mt-3 text-[16px] leading-relaxed text-muted">{s.text}</p>
+            <article key={s.no} className={`relative overflow-hidden rounded-2xl p-8 ${i === 2 ? 'bg-ink text-white shadow-float' : 'border border-line bg-paper'}`}>
+              {i === 2 && <div aria-hidden="true" className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-orange/40 blur-[60px]" />}
+              <div className="relative flex items-center justify-between">
+                <span className={`kicker text-[11px] ${i === 2 ? 'text-white/60' : 'text-muted'}`}>{s.kicker}</span>
+                <span className={`display text-[56px] leading-none ${i === 2 ? 'text-orange' : 'text-line'}`}>{s.no}</span>
+              </div>
+              <h3 className="display relative mt-10 text-[28px]">{s.title}</h3>
+              <p className={`relative mt-3 text-[15px] leading-relaxed ${i === 2 ? 'text-white/70' : 'text-muted'}`}>{s.text}</p>
             </article>
           ))}
         </div>
 
-        <div className="relative mt-14 grid items-center gap-10 overflow-hidden rounded-2xl bg-ink p-8 text-white shadow-float sm:p-12 lg:grid-cols-[1.6fr_1fr]">
-          <div aria-hidden="true" className="absolute -bottom-32 -left-20 h-72 w-72 rounded-full bg-orange/35 blur-[90px]" />
-          <div className="relative">
-            <h3 className="display text-[30px] sm:text-[38px]">We care about the details most agencies skip:</h3>
-            <p className="mt-5 text-[16px] leading-relaxed text-white/75">
-              how a page loads on a slow connection, how a headline reads on a phone screen, how a campaign performs in week eight, not just week one. That care is what keeps our clients with us long after the first project ends.
-            </p>
-          </div>
-          <ul className="relative border-t border-white/15">
-            {values.map((v) => (
-              <li key={v} className="flex items-center justify-between border-b border-white/15 py-4 text-[20px] font-bold tracking-[-0.02em]">
-                {v}
-                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-orange" />
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul className="mt-10 flex flex-wrap gap-3">
+          {values.map((v) => (
+            <li key={v} className="flex items-center gap-2.5 rounded-full border border-line px-4 py-2 text-[14px] font-bold">
+              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-orange" />
+              {v}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

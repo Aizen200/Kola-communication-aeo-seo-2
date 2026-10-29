@@ -84,13 +84,6 @@ export default function Packages() {
             </div>
           </article>
         </div>
-
-        <div className="mt-14 flex flex-col items-start justify-between gap-6 border-t border-line pt-8 sm:flex-row sm:items-center">
-          <p className="display text-[24px] sm:text-[30px]">How do we choose between a monthly retainer and a one-time project?</p>
-          <a href="#contact" className="btn-link shrink-0">
-            Schedule a Discovery Call <Arrow />
-          </a>
-        </div>
       </div>
     </section>
   );

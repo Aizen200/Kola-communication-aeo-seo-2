@@ -153,14 +153,14 @@ export default function WebsiteAudit() {
             When ChatGPT answers a question and attributes the information to your website by name, that is a brand signal that is difficult to manufacture any other way.
           </p>
 
-          <p className="display mt-12 text-[26px]">Enter your website. Get a score for:</p>
+          <p className="mt-10 text-[13px] font-bold uppercase tracking-[0.2em] text-muted">Enter your website. Get a score for:</p>
           <ol className="mt-5 border-t border-line">
             {categories.map((cat) => {
               const mine = site?.categories.find((c) => c.id === cat.id)?.score;
               const theirs = rival?.categories.find((c) => c.id === cat.id)?.score;
               return (
-                <li key={cat.id} className="flex gap-5 border-b border-line py-6">
-                  <span className="display w-8 shrink-0 pt-1 text-[15px] tracking-normal text-orange">{cat.no}</span>
+                <li key={cat.id} className="flex items-center gap-5 border-b border-line py-4">
+                  <span className="display w-8 shrink-0 text-[15px] tracking-normal text-orange">{cat.no}</span>
                   <div className="flex-1">
                     <div className="flex flex-wrap items-baseline justify-between gap-2">
                       <h3 className="text-[19px] font-bold tracking-[-0.015em]">{cat.title}</h3>
@@ -170,8 +170,7 @@ export default function WebsiteAudit() {
                         </span>
                       )}
                     </div>
-                    <p className="mt-1.5 text-[15px] leading-relaxed text-muted">{cat.description}</p>
-                  </div>
+                                      </div>
                 </li>
               );
             })}
