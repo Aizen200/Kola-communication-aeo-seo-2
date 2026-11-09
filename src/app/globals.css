@@ -3,30 +3,36 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 96px;
-  }
-
   body {
     @apply bg-paper text-ink font-sans antialiased;
+    overflow-x: clip;
     font-size: 17px;
     line-height: 1.55;
   }
 
   ::selection {
-    @apply bg-orange text-white;
+    @apply bg-orange text-ink;
   }
 
   :focus-visible {
-    outline: 2px solid #ff5a1f;
+    outline: 2px solid #ff5a36;
     outline-offset: 3px;
   }
 
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
     *,
     *::before,
     *::after {
@@ -38,78 +44,172 @@
 
 @layer components {
   .wrap {
-    @apply mx-auto w-full max-w-[1540px] px-4 sm:px-8 lg:px-10;
+    @apply mx-auto w-full max-w-[1280px] px-5 sm:px-8 lg:px-10;
   }
 
   .section {
-    @apply py-14 sm:py-20 lg:py-24;
+    @apply py-20 sm:py-24 lg:py-32;
   }
 
-  /* Tight bold geometric headline */
+  /* Heavy, tightly tracked Archivo headline */
   .display {
     @apply font-display font-extrabold leading-[0.98] tracking-[-0.05em];
   }
 
   .h-section {
-    @apply display text-[40px] sm:text-[56px] lg:text-[68px];
+    @apply display text-[44px] sm:text-[64px] lg:text-[84px];
   }
 
-  /* Small letter-spaced eyebrow, e.g. "TRUSTED BY GROWING BUSINESSES" */
+  /* Small uppercase eyebrow, e.g. "01 / 03" */
   .label {
-    @apply mb-5 block text-[12px] font-bold uppercase leading-none tracking-[0.22em] text-muted;
+    @apply mb-5 block text-[12px] font-semibold uppercase leading-none tracking-[0.08em] text-muted;
   }
 
   .kicker {
-    @apply text-[12px] font-bold uppercase tracking-[0.16em];
+    @apply text-[12px] font-semibold uppercase tracking-[0.08em];
+  }
+
+  /* Orange marker behind a key word */
+  .mark {
+    background: linear-gradient(transparent 12%, #ff5a36 12%, #ff5a36 94%, transparent 94%);
+    padding: 0 0.06em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
 
   .card {
-    @apply rounded-2xl border border-line bg-white shadow-soft;
+    @apply rounded-2xl border border-ink/80 bg-paper;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-3 rounded-[3px] px-6 py-4 text-[16px] font-bold leading-tight tracking-[-0.01em] transition-colors duration-150;
+    @apply inline-flex min-h-[48px] items-center justify-center gap-3 rounded-full px-5 py-2 text-[15px] font-semibold leading-tight transition-colors duration-150;
   }
 
-  .btn-orange {
-    @apply btn bg-orange text-ink hover:bg-ink hover:text-white;
+  /* Arrow sits in a round chip at the end of the pill */
+  .btn:has(> svg:last-child) {
+    padding-right: 0.5rem;
+  }
+
+  .btn > svg {
+    @apply box-content h-4 w-4 shrink-0 rounded-full bg-orange p-[7px] text-ink transition-transform duration-200;
+  }
+
+  .btn:hover > svg {
+    transform: translateX(2px);
   }
 
   .btn-dark {
-    @apply btn bg-ink text-white hover:bg-orange hover:text-ink;
+    @apply btn bg-ink text-paper hover:bg-black;
+  }
+
+  .btn-orange {
+    @apply btn bg-orange text-ink hover:bg-ink hover:text-paper;
+  }
+
+  .btn-orange > svg {
+    @apply bg-ink text-orange;
   }
 
   .btn-outline {
-    @apply btn border border-ink bg-transparent text-ink hover:bg-ink hover:text-white;
+    @apply btn border border-ink bg-transparent text-ink hover:bg-ink hover:text-paper;
+  }
+
+  .btn-light {
+    @apply btn bg-paper text-ink hover:bg-white;
   }
 
   .btn-link {
-    @apply inline-flex items-center gap-3 border-b border-ink pb-1.5 text-[17px] font-bold tracking-[-0.01em] transition-colors hover:border-orange hover:text-orange;
+    @apply inline-flex items-center gap-2 border-b border-ink pb-1 text-[16px] font-semibold transition-colors hover:border-orange hover:text-orange;
   }
 
   .field-line {
-    @apply w-full rounded-none border-0 border-b border-white/30 bg-transparent px-0 py-2.5 text-[17px] text-white placeholder:text-white/40 focus:border-orange focus:outline-none focus:ring-0;
+    @apply w-full rounded-none border-0 border-b border-paper/25 bg-transparent px-0 py-2.5 text-[17px] text-paper placeholder:text-paper/40 focus:border-orange focus:outline-none focus:ring-0;
   }
 
   .field-box {
-    @apply w-full rounded-[3px] border border-line bg-paper px-4 py-3.5 text-[15px] text-ink placeholder:text-muted/70 focus:border-ink focus:outline-none focus:ring-0;
+    @apply w-full rounded-xl border border-ink/70 bg-paper px-4 py-3.5 text-[15px] text-ink placeholder:text-muted/70 focus:border-ink focus:outline-none focus:ring-0;
   }
 
-  /* Vertical fluted panel used in the hero backdrop */
-  .fluted {
-    background-image: repeating-linear-gradient(
-      90deg,
-      #fbfaf8 0px,
-      #e6e3de 7px,
-      #d7d4cf 12px,
-      #f3f1ee 16px
-    );
+  /* Halftone dot shadow behind a card: wrap the card in .dot-shadow */
+  .dot-shadow {
+    position: relative;
   }
 
-  .stone {
-    background:
-      radial-gradient(120% 80% at 20% 10%, rgba(255, 255, 255, 0.9), transparent 60%),
-      radial-gradient(60% 50% at 80% 70%, rgba(190, 186, 180, 0.35), transparent 70%),
-      linear-gradient(160deg, #eceae6 0%, #d6d2cb 55%, #c6c1b9 100%);
+  .dot-shadow::before {
+    content: "";
+    position: absolute;
+    inset: 10px -10px -10px 10px;
+    border-radius: 18px;
+    background-image: radial-gradient(circle, #141414 1.05px, transparent 1.35px);
+    background-size: 5px 5px;
+  }
+
+  .dot-shadow > * {
+    position: relative;
+  }
+
+  /* Stacked paper edges under a floating chip */
+  .stack-shadow {
+    box-shadow:
+      3px 3px 0 #f3f0e8,
+      4px 4px 0 #141414,
+      7px 7px 0 #f3f0e8,
+      8px 8px 0 #141414;
+  }
+
+  /* Grayscale photo printed as halftone dots */
+  .halftone {
+    @apply relative overflow-hidden bg-paper;
+  }
+
+  .halftone img {
+    filter: grayscale(1) contrast(1.15) brightness(1.05);
+  }
+
+  .halftone::after {
+    content: "";
+    @apply pointer-events-none absolute inset-0;
+    background-image: radial-gradient(circle, rgba(20, 20, 20, 0.55) 0.9px, transparent 1.2px);
+    background-size: 4px 4px;
+    mix-blend-mode: multiply;
+  }
+
+  /* Faint dot grid on dark sections */
+  .dot-grid {
+    background-image: radial-gradient(circle, rgba(243, 240, 232, 0.09) 1px, transparent 1.3px);
+    background-size: 14px 14px;
+  }
+
+  /* Reveal on enter: hidden only once JS has marked the page, played by Motion adding .in */
+  .js .label:not(.in),
+  .js .h-section:not(.in),
+  .js [data-reveal]:not(.in) {
+    opacity: 0;
+  }
+
+  .label.in,
+  .h-section.in,
+  [data-reveal].in {
+    animation: reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0ms) backwards;
+  }
+
+  .float {
+    animation: float 6s ease-in-out infinite alternate;
+  }
+
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+  }
+
+  @keyframes float {
+    from {
+      transform: translateY(-6px);
+    }
+    to {
+      transform: translateY(6px);
+    }
   }
 }

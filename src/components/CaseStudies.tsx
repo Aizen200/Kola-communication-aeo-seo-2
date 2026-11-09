@@ -44,7 +44,7 @@ export default function CaseStudies() {
       <div className="wrap">
         <div className="mb-10 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div>
-            <span className="label">(02) Projects</span>
+            <span className="label">Projects</span>
             <h2 className="h-section">Our Work</h2>
           </div>
           <a href="https://kolacommunications.com/projects" target="_blank" rel="noopener noreferrer" className="btn-link">
@@ -52,38 +52,31 @@ export default function CaseStudies() {
           </a>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {caseStudies.map((study) => (
+        <div className="grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          {caseStudies.map((study, i) => (
             <a
               key={study.client}
               href={`https://${study.website}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white transition-shadow hover:shadow-float"
+              data-reveal
+              style={{ '--d': `${i * 90}ms` } as React.CSSProperties}
+              className="group block"
             >
-              <div className="overflow-hidden border-b border-line">
+              <div className="halftone aspect-[4/3] rounded-2xl border border-ink">
                 <img
                   src={study.image}
                   alt={`${study.client} website homepage`}
                   width={1440}
                   height={900}
                   loading="lazy"
-                  className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+                  className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.05]"
                 />
               </div>
-              <div className="flex flex-1 flex-col p-5">
-                <div className="kicker line-clamp-1 text-[10px] text-muted">{study.industry}</div>
-                <h3 className="mt-2 flex items-center justify-between gap-3 text-[20px] font-bold tracking-[-0.025em]">
-                  {study.client}
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line transition-colors group-hover:border-orange group-hover:bg-orange">
-                    <Arrow size={12} />
-                  </span>
-                </h3>
-                <p className="mt-2 text-[14px] leading-snug text-muted">{study.description}</p>
-                <div className="mt-auto pt-4">
-                  <span className="inline-block rounded-full bg-paper px-3 py-1 text-[12px] font-bold">{study.result}</span>
-                </div>
-              </div>
+              <span className="mt-4 inline-block rounded-full bg-orange px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.05em]">{study.result}</span>
+              <h3 className="mt-3 text-[22px] font-bold leading-tight tracking-[-0.035em] transition-colors group-hover:text-orange">{study.client}</h3>
+              <p className="mt-1.5 text-[15px] leading-snug text-ink/70">{study.description}</p>
+              <div className="kicker mt-4 border-b border-ink/15 pb-3 text-[11px] text-muted">{study.website}</div>
             </a>
           ))}
         </div>

@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import Arrow from './Arrow';
+import Logo from './Logo';
 
 const links = [
-  { href: '#top', label: 'Home' },
   { href: '#expertise', label: 'SEO, AEO & GEO' },
   { href: '#case-studies', label: 'Projects' },
   { href: '#packages', label: 'Packages' },
@@ -13,22 +13,11 @@ const links = [
   { href: '#faq', label: 'FAQs' },
 ];
 
-export function Logo({ light = false }: { light?: boolean }) {
-  return (
-    <a href="#top" aria-label="Kola Communications home" className="flex flex-col">
-      <span className={`display text-[34px] leading-[0.8] tracking-[-0.06em] ${light ? 'text-white' : 'text-ink'}`}>
-        KOLA<span className="text-orange">.</span>
-      </span>
-      <span className={`mt-2 text-[10px] uppercase leading-none tracking-[0.42em] ${light ? 'text-white/70' : 'text-ink'}`}>
-        Communications
-      </span>
-    </a>
-  );
-}
+const pill = 'rounded-full border border-ink/15 bg-paper/75 backdrop-blur-md';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState('#top');
+  const [active, setActive] = useState('');
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
@@ -36,7 +25,7 @@ export default function Header() {
     return () => document.removeEventListener('keydown', onKey);
   }, []);
 
-  // Highlight the nav item for the section currently in view
+  // Highlight the link for the section currently in view
   useEffect(() => {
     const sections = links
       .map((l) => document.querySelector<HTMLElement>(l.href))
@@ -52,58 +41,60 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur-md">
-      <div className="wrap flex items-center justify-between gap-6 py-5">
-        <Logo />
-        <nav
-          id="navigation"
-          aria-label="Main navigation"
-          className={`${
-            open ? 'flex' : 'hidden'
-          } absolute inset-x-0 top-full flex-col gap-1 border-b border-line bg-paper px-4 py-4 lg:static lg:flex lg:flex-row lg:items-center lg:gap-8 lg:border-0 lg:bg-transparent lg:p-0`}
-        >
-          {links.map((l) => {
-            const isActive = active === l.href;
-            return (
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
+      <div className="flex items-center justify-between gap-3">
+        <div className={`flex items-center gap-6 py-2 pl-3 pr-3 lg:pr-6 ${pill}`}>
+          <a href="#top" aria-label="Kola Communications home">
+            <Logo />
+          </a>
+          <nav aria-label="Main navigation" className="hidden items-center gap-5 lg:flex">
+            {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                onClick={() => setOpen(false)}
-                aria-current={isActive ? 'true' : undefined}
-                className={`relative py-2 text-[15px] transition-colors hover:text-orange lg:py-0 ${isActive ? 'font-bold' : ''}`}
+                aria-current={active === l.href ? 'true' : undefined}
+                className={`text-[14px] transition-colors hover:text-orange ${active === l.href ? 'font-semibold text-ink' : 'text-ink/75'}`}
               >
                 {l.label}
-                <span
-                  aria-hidden="true"
-                  className={`absolute -bottom-3 left-1/2 hidden h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-orange ${isActive ? 'lg:block' : ''}`}
-                />
               </a>
-            );
-          })}
-          <a href="#contact" onClick={() => setOpen(false)} className="btn-dark mt-3 lg:hidden">
-            Book a strategy call <Arrow />
+            ))}
+          </nav>
+        </div>
+
+        <div className={`flex items-center gap-2 p-1.5 ${pill}`}>
+          <a href="#contact" className="btn-dark min-h-[40px] text-[14px]">
+            <span className="hidden sm:inline">Book a strategy call</span>
+            <span className="sm:hidden">Book a call</span>
+            <Arrow size={14} />
           </a>
-        </nav>
-        <a href="#contact" className="btn-dark hidden px-6 py-[15px] text-[17px] font-medium lg:inline-flex">
-          Book a strategy call <Arrow />
-        </a>
-        <button
-          type="button"
-          className="rounded-[3px] border border-ink p-2 lg:hidden"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-expanded={open}
-          aria-controls="navigation"
-          onClick={() => setOpen(!open)}
-        >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            {open ? (
-              <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.8" />
-            ) : (
-              <path d="M4 8h16M4 16h16" stroke="currentColor" strokeWidth="1.8" />
-            )}
-          </svg>
-        </button>
+          <button
+            type="button"
+            className="flex h-10 w-10 items-center justify-center rounded-full lg:hidden"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
+            onClick={() => setOpen(!open)}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              {open ? <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.8" /> : <path d="M4 9h16M4 15h16" stroke="currentColor" strokeWidth="1.8" />}
+            </svg>
+          </button>
+        </div>
       </div>
+
+      <nav
+        id="mobile-navigation"
+        aria-label="Mobile navigation"
+        className={`mt-2 origin-top rounded-2xl border border-ink/15 bg-paper p-3 shadow-[0_20px_40px_-20px_rgba(20,20,20,0.35)] transition-[opacity,transform,visibility] duration-300 lg:hidden ${
+          open ? 'visible scale-100 opacity-100' : 'invisible scale-95 opacity-0'
+        }`}
+      >
+        {links.map((l) => (
+          <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-[17px] font-semibold hover:bg-sand">
+            {l.label}
+          </a>
+        ))}
+      </nav>
     </header>
   );
 }

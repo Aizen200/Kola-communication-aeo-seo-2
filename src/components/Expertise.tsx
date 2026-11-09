@@ -3,7 +3,7 @@ import React from 'react';
 function K({ size = 22 }: { size?: number }) {
   return (
     <span
-      className="flex shrink-0 items-center justify-center bg-black font-extrabold text-orange"
+      className="flex shrink-0 items-center justify-center bg-black font-bold text-orange"
       style={{ width: size, height: size, fontSize: size * 0.55 }}
     >
       K
@@ -16,7 +16,7 @@ function SeoVisual() {
   return (
     <div className="w-[78%] space-y-2.5">
       {[0, 1, 2].map((i) => (
-        <div key={i} className={`flex items-center gap-3 rounded-lg px-3 py-2.5 ${i === 0 ? 'bg-white shadow-soft' : 'bg-white/50'}`}>
+        <div key={i} className={`flex items-center gap-3 px-3 py-2.5 ${i === 0 ? 'bg-white shadow-soft' : 'bg-white/50'}`}>
           <span className={`text-[11px] font-bold ${i === 0 ? 'text-orange' : 'text-muted/60'}`}>#{i + 1}</span>
           {i === 0 ? <K /> : <span className="h-[22px] w-[22px] rounded bg-line" />}
           <div className="flex-1 space-y-1.5">
@@ -33,14 +33,14 @@ function SeoVisual() {
 function AeoVisual() {
   return (
     <div className="w-[80%] space-y-3">
-      <div className="ml-auto w-[70%] rounded-2xl rounded-br-sm bg-white/10 px-4 py-3">
+      <div className="ml-auto w-[70%]  bg-white/10 px-4 py-3">
         <div className="h-1.5 w-full rounded bg-white/40" />
         <div className="mt-1.5 h-1.5 w-2/3 rounded bg-white/40" />
       </div>
-      <div className="w-[85%] rounded-2xl rounded-bl-sm bg-white px-4 py-3">
+      <div className="w-[85%]  bg-white px-4 py-3">
         <div className="h-1.5 w-full rounded bg-line" />
         <div className="mt-1.5 h-1.5 w-4/5 rounded bg-line" />
-        <div className="mt-3 flex items-center gap-2 rounded-md bg-paper px-2 py-1.5">
+        <div className="mt-3 flex items-center gap-2 bg-paper px-2 py-1.5">
           <K size={18} />
           <span className="text-[10px] font-bold text-ink">kolacommunications.com</span>
         </div>
@@ -57,16 +57,16 @@ function GeoVisual() {
   return (
     <svg viewBox="0 0 100 100" className="h-[150px] w-[150px]" aria-hidden="true">
       {nodes.map(([x, y], i) => (
-        <line key={i} x1="50" y1="50" x2={x} y2={y} stroke="#0E0E0E" strokeOpacity="0.15" strokeWidth="0.8" />
+        <line key={i} x1="50" y1="50" x2={x} y2={y} stroke="#111111" strokeOpacity="0.15" strokeWidth="0.8" />
       ))}
-      <line x1="20" y1="22" x2="50" y2="8" stroke="#0E0E0E" strokeOpacity="0.1" strokeWidth="0.6" />
-      <line x1="88" y1="62" x2="62" y2="88" stroke="#0E0E0E" strokeOpacity="0.1" strokeWidth="0.6" />
+      <line x1="20" y1="22" x2="50" y2="8" stroke="#111111" strokeOpacity="0.1" strokeWidth="0.6" />
+      <line x1="88" y1="62" x2="62" y2="88" stroke="#111111" strokeOpacity="0.1" strokeWidth="0.6" />
       {nodes.map(([x, y], i) => (
-        <circle key={i} cx={x} cy={y} r={i % 2 ? 5 : 4} fill="#fff" stroke="#E2E0DC" strokeWidth="1" />
+        <circle key={i} cx={x} cy={y} r={i % 2 ? 5 : 4} fill="#fff" stroke="#E4E4E4" strokeWidth="1" />
       ))}
-      <circle cx="50" cy="50" r="18" fill="#FF5A1F" fillOpacity="0.18" />
+      <circle cx="50" cy="50" r="18" fill="#FF4500" fillOpacity="0.18" />
       <rect x="40" y="40" width="20" height="20" fill="#000" />
-      <text x="50" y="55.5" textAnchor="middle" fontSize="13" fontWeight="800" fill="#FF5A1F">K</text>
+      <text x="50" y="55.5" textAnchor="middle" fontSize="13" fontWeight="800" fill="#FF4500">K</text>
     </svg>
   );
 }
@@ -126,59 +126,78 @@ const columns: Column[] = [
   },
 ];
 
+const toneList = [
+  { card: 'bg-paper', panel: 'bg-sand', muted: 'text-muted', line: 'border-ink/15', chip: 'border-ink/70' },
+  { card: 'bg-ink text-paper', panel: 'bg-[#222]', muted: 'text-paper/55', line: 'border-paper/15', chip: 'border-paper/40' },
+  { card: 'bg-orange', panel: 'bg-[#ff7656]', muted: 'text-ink/65', line: 'border-ink/20', chip: 'border-ink/70' },
+];
+
+function Plus() {
+  return (
+    <span aria-hidden="true" className="flex h-8 w-8 items-center justify-center rounded-full border border-current text-[18px] leading-none opacity-70">
+      +
+    </span>
+  );
+}
+
 export default function Expertise() {
   return (
     <section id="expertise" className="section">
       <div className="wrap">
-        <span className="label">(01) SEO, AEO &amp; GEO</span>
-        <h2 className="h-section max-w-[820px]">How is AEO different from SEO?</h2>
-        <p className="mb-14 mt-6 max-w-[680px] text-[18px] leading-relaxed text-muted">
-          SEO and AEO are not opposites, good SEO practice is a foundation for AEO. But they have different goals, different signals, and different outputs.
-        </p>
+        <div className="mb-12 grid items-end gap-6 lg:grid-cols-[1.4fr_1fr]">
+          <div>
+            <span className="label">SEO, AEO &amp; GEO</span>
+            <h2 className="h-section">
+              How is <span className="mark">AEO</span> different from SEO?
+            </h2>
+          </div>
+          <p data-reveal className="max-w-[420px] text-[16px] leading-relaxed text-ink/75 lg:justify-self-end">
+            SEO and AEO are not opposites, good SEO practice is a foundation for AEO. But they have different goals, different signals, and different outputs.
+          </p>
+        </div>
 
-        <div className="grid gap-5 md:grid-cols-3">
-          {columns.map((c) => (
-            <article
-              key={c.acronym}
-              className={`flex flex-col overflow-hidden rounded-2xl ${c.accent ? 'bg-ink text-white shadow-float' : 'border border-line bg-white'}`}
-            >
-              <div
-                aria-hidden="true"
-                className={`relative flex h-[210px] items-center justify-center ${c.accent ? 'bg-[#1a1a1a]' : 'bg-sand'}`}
+        <div className="grid gap-5 lg:grid-cols-3">
+          {columns.map((c, i) => {
+            const t = toneList[i];
+            return (
+              <article
+                key={c.acronym}
+                data-reveal
+                style={{ '--d': `${i * 90}ms` } as React.CSSProperties}
+                className={`flex flex-col rounded-2xl border border-ink p-6 sm:p-7 ${t.card}`}
               >
-                {c.accent && <div className="absolute h-32 w-32 rounded-full bg-orange/40 blur-[50px]" />}
-                <div className="relative flex w-full justify-center">{c.visual}</div>
-              </div>
-              <div className="flex flex-1 flex-col p-7 lg:p-8">
-                <div className="flex items-baseline justify-between gap-4">
-                  <div className={`display text-[48px] ${c.accent ? 'text-orange' : ''}`}>{c.acronym}</div>
-                  <div className={`kicker text-right text-[10px] ${c.accent ? 'text-white/50' : 'text-muted'}`}>{c.name}</div>
+                <div className="flex items-center justify-between">
+                  <span className="kicker text-[12px]">
+                    0{i + 1} {c.acronym}
+                  </span>
+                  <Plus />
                 </div>
-                <h3 className="mt-4 text-[20px] font-bold leading-snug tracking-[-0.02em]">{c.title}</h3>
+                <div aria-hidden="true" className={`relative mt-5 flex h-[180px] items-center justify-center overflow-hidden rounded-xl ${t.panel}`}>
+                  <div className="relative flex w-full justify-center">{c.visual}</div>
+                </div>
+                <div className={`kicker mt-6 text-[11px] ${t.muted}`}>{c.name}</div>
+                <h3 className="mt-2 text-[26px] font-bold leading-[1.08] tracking-[-0.04em]">{c.title}</h3>
                 {c.rows.length > 0 && (
-                  <dl className={`mt-5 border-t text-[14px] ${c.accent ? 'border-white/15' : 'border-line'}`}>
+                  <dl className={`mt-4 border-t text-[14px] ${t.line}`}>
                     {c.rows.map(([term, value]) => (
-                      <div key={term} className={`grid grid-cols-[110px_1fr] gap-3 border-b py-3 ${c.accent ? 'border-white/15' : 'border-line'}`}>
-                        <dt className={`font-bold ${c.accent ? 'text-white/50' : 'text-muted'}`}>{term}</dt>
+                      <div key={term} className={`grid grid-cols-[100px_1fr] gap-3 border-b py-2.5 ${t.line}`}>
+                        <dt className={t.muted}>{term}</dt>
                         <dd className="leading-snug">{value}</dd>
                       </div>
                     ))}
                   </dl>
                 )}
-                {c.text && <p className="mt-4 text-[15px] leading-relaxed text-muted">{c.text}</p>}
+                {c.text && <p className={`mt-4 text-[15px] leading-relaxed ${t.muted}`}>{c.text}</p>}
                 <ul className="mt-auto flex flex-wrap gap-2 pt-6">
                   {c.scope.map((s) => (
-                    <li
-                      key={s}
-                      className={`rounded-full px-3 py-1.5 text-[12px] font-bold ${c.accent ? 'bg-white/10' : 'border border-line bg-paper'}`}
-                    >
+                    <li key={s} className={`rounded-full border px-3 py-1 text-[12px] font-semibold ${t.chip}`}>
                       {s}
                     </li>
                   ))}
                 </ul>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

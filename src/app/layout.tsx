@@ -1,19 +1,11 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter_Tight, Plus_Jakarta_Sans } from 'next/font/google';
+import { Archivo } from 'next/font/google';
 import './globals.css';
 
-const sans = Plus_Jakarta_Sans({
-  weight: ['400', '500', '700', '800'],
+const sans = Archivo({
+  weight: ['400', '500', '600', '700', '800'],
   subsets: ['latin'],
   variable: '--font-kola',
-  display: 'swap',
-});
-
-// Display face for the hero headline and closing banner
-const tight = Inter_Tight({
-  weight: ['600', '700'],
-  subsets: ['latin'],
-  variable: '--font-tight',
   display: 'swap',
 });
 
@@ -29,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#F6F5F3',
+  themeColor: '#F3F0E8',
   width: 'device-width',
   initialScale: 1,
 };
@@ -40,7 +32,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${sans.variable} ${tight.variable}`}>
+    <html lang="en" className={sans.variable}>
+      <head>
+        {/* Lets CSS hide reveal targets only when JS can bring them back */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body>
         <a
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-ink focus:px-4 focus:py-2 focus:text-white"

@@ -58,27 +58,29 @@ export default function Faq() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <div className="wrap grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="lg:sticky lg:top-32 lg:self-start">
-          <span className="label">(07) FAQ</span>
-          <h2 className="h-section">Frequently Asked Questions</h2>
-          <a href="#contact" className="btn-orange mt-10">
+        <div className="lg:sticky lg:top-[20vh] lg:self-start">
+          <span className="label">FAQ</span>
+          <h2 className="h-section">
+            Frequently Asked <span className="mark">Questions</span>
+          </h2>
+          <a href="#contact" className="btn-dark mt-10">
             Book a Free Strategy Call <Arrow />
           </a>
         </div>
-        <div className="border-t border-line">
+        <div className="border-t border-ink/20">
           {faqs.map((faq) => (
-            <details key={faq.question} className="group border-b border-line">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-7 text-[19px] font-bold leading-snug tracking-[-0.015em] transition-colors hover:text-orange [&::-webkit-details-marker]:hidden">
+            <details key={faq.question} data-reveal className="group border-b border-ink/20">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-[20px] font-semibold tracking-[-0.02em] leading-snug tracking-[-0.015em] transition-colors hover:text-orange [&::-webkit-details-marker]:hidden">
                 {faq.question}
                 <span
                   aria-hidden="true"
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line text-[18px] text-ink transition-colors group-open:border-orange group-open:bg-orange"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ink text-[18px] text-ink transition-colors group-open:border-orange group-open:bg-orange"
                 >
                   <span className="group-open:hidden">+</span>
                   <span className="hidden group-open:inline">−</span>
                 </span>
               </summary>
-              <p className="max-w-[640px] pb-8 text-[16px] leading-relaxed text-muted">{faq.answer}</p>
+              <p className="max-w-[640px] pb-8 text-[16px] leading-relaxed text-ink/70">{faq.answer}</p>
             </details>
           ))}
         </div>

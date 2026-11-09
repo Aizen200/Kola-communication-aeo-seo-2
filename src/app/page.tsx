@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
+import KeywordStrip from '@/components/KeywordStrip';
+import TrustedBy from '@/components/TrustedBy';
 import Expertise from '@/components/Expertise';
 import CaseStudies from '@/components/CaseStudies';
 import Packages from '@/components/Packages';
@@ -11,19 +13,23 @@ import Faq from '@/components/Faq';
 import ClosingBanner from '@/components/ClosingBanner';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import Motion from '@/components/Motion';
 
 export default function Home() {
   return (
     <>
+      <Motion />
       <Header />
       <main id="main">
         <Hero />
+        <KeywordStrip />
+        <TrustedBy />
         <Expertise />
-        <CaseStudies />
-        <Packages />
-        <WebsiteAudit />
-        <WhoWeHelp />
         <Approach />
+        <WhoWeHelp />
+        <CaseStudies />
+        <WebsiteAudit />
+        <Packages />
         <Faq />
         <ClosingBanner />
         <Contact />

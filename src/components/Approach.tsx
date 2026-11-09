@@ -1,5 +1,4 @@
 import React from 'react';
-import Arrow from './Arrow';
 
 // Verbatim from kolacommunications.com/about
 const steps = [
@@ -23,38 +22,111 @@ const steps = [
   },
 ];
 
-const values = ['Results-Driven', 'Innovation First', 'Client-Centric', 'Quality Excellence'];
+// Verbatim from the kolacommunications.com homepage values.
+const values = [
+  { title: 'Results Driven', text: 'We focus on delivering measurable outcomes that directly impact your business growth and success.' },
+  { title: 'Innovation First', text: 'We stay ahead of digital trends and leverage cutting edge technologies to give you a competitive edge.' },
+  { title: 'Client Centric', text: 'Your success is our priority. We build lasting partnerships through transparent communication and dedicated support.' },
+  { title: 'Quality Excellence', text: 'We maintain the highest standards in every project, ensuring exceptional quality and attention to detail.' },
+];
+
+// Small dotted UI mocks, one per step
+function CallMock() {
+  return (
+    <div className="grid grid-cols-7 gap-1.5">
+      {Array.from({ length: 21 }, (_, i) => (
+        <span
+          key={i}
+          className={`aspect-square rounded-md border ${i === 11 ? 'border-orange bg-orange' : [3, 9, 17].includes(i) ? 'border-ink bg-[repeating-linear-gradient(0deg,#141414_0_1px,transparent_1px_4px)]' : 'border-ink/20'}`}
+        />
+      ))}
+    </div>
+  );
+}
+
+function ChecklistMock() {
+  return (
+    <ul className="space-y-3">
+      {[0.9, 0.7, 0.8, 0.55].map((w, i) => (
+        <li key={i} className="flex items-center gap-3 border-b border-ink/10 pb-3">
+          <span className="flex h-5 w-5 items-center justify-center rounded bg-ink text-[11px] text-paper">✓</span>
+          <span className="h-[3px] rounded bg-ink/60" style={{ width: `${w * 70}%` }} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function ChartMock() {
+  return (
+    <div className="flex h-[150px] items-end gap-3">
+      {[38, 55, 48, 72, 100].map((h, i) => (
+        <span
+          key={i}
+          className={`flex-1 rounded-t-md border border-ink ${i === 4 ? 'bg-orange' : 'bg-[radial-gradient(circle,#141414_1px,transparent_1.3px)] [background-size:5px_5px]'}`}
+          style={{ height: `${h}%` }}
+        />
+      ))}
+    </div>
+  );
+}
+
+const mocks = [<CallMock key="call" />, <ChecklistMock key="list" />, <ChartMock key="chart" />];
 
 export default function Approach() {
   return (
-    <section id="approach" className="section">
-      <div className="wrap">
-        <span className="label">(06) How we work</span>
-        <h2 className="h-section max-w-[980px]">Every project starts with a clear goal and ends with a result we can point to.</h2>
+    <>
+      <section id="approach" className="section bg-orange">
+        <div className="wrap">
+          <span className="label text-ink/60">How we work</span>
+          <h2 className="h-section max-w-[900px]">Every project starts with a clear goal and ends with a result we can point to.</h2>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-3">
-          {steps.map((s, i) => (
-            <article key={s.no} className={`relative overflow-hidden rounded-2xl p-8 ${i === 2 ? 'bg-ink text-white shadow-float' : 'border border-line bg-white'}`}>
-              {i === 2 && <div aria-hidden="true" className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-orange/40 blur-[60px]" />}
-              <div className="relative flex items-center justify-between">
-                <span className={`kicker text-[11px] ${i === 2 ? 'text-white/60' : 'text-muted'}`}>{s.kicker}</span>
-                <span className={`display text-[56px] leading-none ${i === 2 ? 'text-orange' : 'text-line'}`}>{s.no}</span>
+          <div className="mt-16 space-y-20 lg:space-y-28">
+            {steps.map((s, i) => (
+              <div key={s.no} className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+                <div data-reveal>
+                  <div className="kicker text-[12px] text-ink/60">
+                    {s.no} / 0{steps.length}
+                  </div>
+                  <h3 className="display mt-4 text-[46px] sm:text-[64px]">{s.title}</h3>
+                  <p className="mt-5 max-w-[480px] text-[17px] leading-relaxed text-ink/80">{s.text}</p>
+                </div>
+                <div data-reveal className="dot-shadow mx-auto w-full max-w-[460px]">
+                  <div className="rounded-2xl border border-ink bg-paper p-6">
+                    <div className="mb-5 flex items-center justify-between">
+                      <span className="kicker text-[11px] text-muted">{s.kicker}</span>
+                      <span className="kicker text-[11px]">{s.no}</span>
+                    </div>
+                    {mocks[i]}
+                  </div>
+                </div>
               </div>
-              <h3 className="display relative mt-10 text-[28px]">{s.title}</h3>
-              <p className={`relative mt-3 text-[15px] leading-relaxed ${i === 2 ? 'text-white/70' : 'text-muted'}`}>{s.text}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section aria-label="Our values" className="section pb-0">
+        <div className="wrap grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {values.map((v, i) => (
+            <article
+              key={v.title}
+              data-reveal
+              style={{ '--d': `${i * 80}ms` } as React.CSSProperties}
+              className={`flex min-h-[250px] flex-col rounded-2xl border border-ink p-6 ${i === 1 ? 'bg-ink text-paper' : i === 2 ? 'bg-orange' : 'bg-paper'}`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="kicker text-[12px]">0{i + 1}</span>
+                <span aria-hidden="true" className="flex h-8 w-8 items-center justify-center rounded-full border border-current text-[18px] opacity-70">
+                  +
+                </span>
+              </div>
+              <h3 className="mt-auto text-[26px] font-bold leading-[1.05] tracking-[-0.04em]">{v.title}</h3>
+              <p className={`mt-3 text-[14px] leading-relaxed ${i === 1 ? 'text-paper/65' : 'text-ink/70'}`}>{v.text}</p>
             </article>
           ))}
         </div>
-
-        <ul className="mt-10 flex flex-wrap gap-3">
-          {values.map((v) => (
-            <li key={v} className="flex items-center gap-2.5 rounded-full border border-line px-4 py-2 text-[14px] font-bold">
-              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-orange" />
-              {v}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

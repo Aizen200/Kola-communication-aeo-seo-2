@@ -20,40 +20,47 @@ const practices = [
 export default function WhoWeHelp() {
   return (
     <section id="who-we-help" className="section">
-      <div className="wrap grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-        <div className="relative">
-          <img
-            src="/images/aeo-chatgpt.jpg"
-            alt="Person typing a question into ChatGPT on a laptop"
-            width={1400}
-            height={787}
-            loading="lazy"
-            className="aspect-[4/3.4] w-full rounded-2xl object-cover object-[60%_center]"
-          />
-          <blockquote className="absolute -bottom-6 left-4 right-4 rounded-2xl bg-white p-6 shadow-float sm:left-auto sm:right-[-24px] sm:max-w-[380px]">
-            <p className="text-[17px] font-bold leading-snug tracking-[-0.02em]">
-              SEO is about getting someone to your page.{' '}
-              <span className="text-orange">AEO is about getting your page to answer the question before someone even visits it.</span>
-            </p>
-          </blockquote>
+      <div className="wrap grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
+        <div data-reveal className="dot-shadow mr-3">
+          <div className="halftone aspect-[4/3.4] rounded-2xl border border-ink">
+            <img
+              src="/images/aeo-chatgpt.jpg"
+              alt="Person typing a question into ChatGPT on a laptop"
+              width={1400}
+              height={787}
+              loading="lazy"
+              className="h-full w-full object-cover object-[60%_center]"
+            />
+          </div>
         </div>
-        <div className="pt-10 lg:pt-0">
-          <span className="label">(05) What is AEO</span>
-          <h2 className="h-section">Why does AEO matter more than ever in 2026?</h2>
-          <ol className="mt-10 space-y-3">
+        <div>
+          <span className="label">What is AEO</span>
+          <h2 className="h-section !text-[40px] sm:!text-[56px] lg:!text-[64px]">
+            Why does <span className="mark">AEO</span> matter more than ever in 2026?
+          </h2>
+          <ol className="mt-10 border-t border-ink/15">
             {practices.map((p, i) => (
-              <li key={p.title} className="flex items-center gap-5 rounded-xl border border-line bg-white px-5 py-4">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange/10 text-[14px] font-bold text-orange">
-                  0{i + 1}
-                </span>
-                <h3 className="text-[17px] font-bold leading-snug tracking-[-0.015em]">{p.title}</h3>
+              <li key={p.title} data-reveal style={{ '--d': `${i * 80}ms` } as React.CSSProperties} className="flex items-center gap-5 border-b border-ink/15 py-4">
+                <span className="kicker w-8 shrink-0 text-[12px] text-muted">0{i + 1}</span>
+                <h3 className="text-[19px] font-semibold leading-snug tracking-[-0.02em]">{p.title}</h3>
               </li>
             ))}
           </ol>
-          <a href="#contact" className="btn-orange mt-10">
+          <a href="#contact" className="btn-dark mt-10">
             Book a Free Strategy Call <Arrow />
           </a>
         </div>
+      </div>
+
+      <div className="wrap mt-20">
+        <blockquote data-reveal className="rounded-3xl bg-sand p-8 sm:p-12">
+          <svg width="34" height="26" viewBox="0 0 34 26" fill="none" aria-hidden="true" className="text-orange">
+            <path d="M2 24V14C2 7 6 3 13 2l1 3c-4 1-6 4-6 8h6v11H2Zm18 0V14c0-7 4-11 11-12l1 3c-4 1-6 4-6 8h6v11H20Z" stroke="currentColor" strokeWidth="2" />
+          </svg>
+          <p className="mt-6 max-w-[1000px] text-[28px] font-semibold leading-[1.15] tracking-[-0.035em] sm:text-[40px]">
+            SEO is about getting someone to your page. <span className="text-orange">AEO is about getting your page to answer the question before someone even visits it.</span>
+          </p>
+        </blockquote>
       </div>
     </section>
   );

@@ -49,16 +49,12 @@ const plans = [
 ];
 
 function Check() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="mt-[3px] shrink-0 text-orange">
-      <path d="m5 12.5 4.2 4.2L19 7" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
+  return <span aria-hidden="true" className="mx-[5px] mt-[8px] h-2 w-2 shrink-0 rounded-full bg-orange" />;
 }
 
 function Cross() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="mt-[3px] shrink-0 text-muted/40">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="mt-[3px] shrink-0 opacity-70">
       <path d="M7 7l10 10M17 7 7 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
@@ -68,44 +64,46 @@ export default function Packages() {
   return (
     <section id="packages" className="section">
       <div className="wrap">
-        <span className="label">(03) Packages</span>
-        <h2 className="h-section mb-14 max-w-[900px]">Transparent ways to collaborate.</h2>
+        <span className="label">Packages</span>
+        <h2 className="h-section mb-14 max-w-[900px]">
+          Transparent ways to <span className="mark">collaborate.</span>
+        </h2>
 
-        <div className="grid items-stretch gap-x-5 gap-y-14 pt-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid items-stretch gap-x-5 gap-y-10 pt-4 md:grid-cols-2 lg:grid-cols-3">
           {plans.map((plan) => {
             const popular = Boolean(plan.badge);
             return (
               <article
                 key={plan.name}
-                className={`relative flex flex-col rounded-2xl bg-white p-7 sm:p-8 ${
-                  popular ? 'border-2 border-orange shadow-float' : 'border border-line'
-                }`}
+                data-reveal
+                style={{ '--d': `${plans.indexOf(plan) * 90}ms` } as React.CSSProperties}
+                className={`relative flex flex-col rounded-2xl border border-ink p-7 sm:p-8 ${popular ? 'bg-ink text-paper' : 'bg-paper'}`}
               >
                 {popular && (
-                  <div className="absolute inset-x-[-2px] -top-9 flex h-10 items-center justify-center rounded-t-2xl bg-orange text-[13px] font-bold uppercase tracking-[0.14em] text-ink">
+                  <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-ink bg-orange px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.06em] text-ink">
                     {plan.badge}
                   </div>
                 )}
-                <span className="kicker text-[11px] text-muted">{plan.tag}</span>
-                <h3 className="mt-3 text-[26px] font-bold leading-tight tracking-[-0.03em]">{plan.name}</h3>
-                <p className="mt-2 text-[15px] lg:min-h-[66px] leading-snug text-muted">{plan.description}</p>
+                <span className={`kicker text-[11px] ${popular ? 'text-paper/55' : 'text-muted'}`}>{plan.tag}</span>
+                <h3 className="mt-3 text-[26px] font-bold leading-tight tracking-[-0.04em]">{plan.name}</h3>
+                <p className={`mt-2 text-[15px] leading-snug lg:min-h-[66px] ${popular ? 'text-paper/65' : 'text-muted'}`}>{plan.description}</p>
 
                 <div className="mt-6 flex items-baseline gap-1.5">
-                  <span className="display text-[46px] leading-none">{plan.price}</span>
-                  <span className="text-[15px] font-bold text-muted">{plan.period}</span>
+                  <span className="display text-[50px] leading-none">{plan.price}</span>
+                  <span className={`text-[15px] ${popular ? 'text-paper/55' : 'text-muted'}`}>{plan.period}</span>
                 </div>
 
-                <a href="#contact" className={`${popular ? 'btn-orange' : 'btn-outline'} mt-7 w-full justify-between`}>
+                <a href="#contact" className={`${popular ? 'btn-orange' : 'btn-outline'} order-last mt-8 w-full justify-between`}>
                   {plan.ctaText} <Arrow />
                 </a>
 
-                <div className="mt-8 border-t border-line pt-6">
-                  <div className="kicker text-[11px] text-muted">Key Deliverables:</div>
+                <div className={`mt-7 border-t pt-6 ${popular ? 'border-paper/15' : 'border-ink/15'}`}>
+                  <div className={`kicker text-[11px] ${popular ? 'text-paper/55' : 'text-muted'}`}>Key Deliverables:</div>
                   <ul className="mt-4 space-y-3.5">
                     {features.map((f, i) => {
                       const on = i < plan.included;
                       return (
-                        <li key={f} className={`flex gap-3 text-[15px] leading-snug ${on ? 'font-bold text-ink' : 'text-muted/50 line-through decoration-muted/30'}`}>
+                        <li key={f} className={`flex gap-3 text-[15px] leading-snug ${on ? 'font-semibold' : 'line-through opacity-40'}`}>
                           {on ? <Check /> : <Cross />}
                           <span>
                             {f}

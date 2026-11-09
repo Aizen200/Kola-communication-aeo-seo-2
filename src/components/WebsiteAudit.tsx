@@ -39,7 +39,7 @@ type SiteResult = { url: string; score: number; categories: Category[] };
 type AuditResponse = { site: SiteResult };
 
 const GOOD = '#3FA06B';
-const scoreColor = (n: number) => (n >= 80 ? GOOD : n >= 50 ? '#F2C14E' : '#FF5A2C');
+const scoreColor = (n: number) => (n >= 80 ? GOOD : n >= 50 ? '#F2C14E' : '#FF4500');
 const hostOf = (url: string) => {
   try {
     return new URL(url).hostname.replace(/^www\./, '');
@@ -66,14 +66,14 @@ function ScoreRing({ value, label }: { value: number; label?: string }) {
           strokeDashoffset={c * (1 - value / 100)}
           transform="rotate(-90 48 48)"
         />
-        <text x="48" y="54" textAnchor="middle" fontSize="28" fill="#FFFFFF" style={{ fontFamily: 'var(--font-display)' }}>
+        <text x="48" y="54" textAnchor="middle" fontSize="28" fill="#F3F0E8" style={{ fontFamily: 'var(--font-kola)' }}>
           {value}
         </text>
-        <text x="48" y="70" textAnchor="middle" fontSize="10" fill="#FFFFFF" opacity="0.6">
+        <text x="48" y="70" textAnchor="middle" fontSize="10" fill="#F3F0E8" opacity="0.6">
           /100
         </text>
       </svg>
-      {label && <span className="kicker max-w-[130px] truncate text-[10px] text-white/70">{label}</span>}
+      {label && <span className="kicker max-w-[130px] truncate text-[10px] text-paper/70">{label}</span>}
     </div>
   );
 }
@@ -82,7 +82,7 @@ function StatusIcon({ state }: { state: 'pass' | 'partial' | 'fail' }) {
   const styles = {
     pass: { bg: GOOD, mark: '✓' },
     partial: { bg: '#F2C14E', mark: '!' },
-    fail: { bg: '#FF5A2C', mark: '✕' },
+    fail: { bg: '#FF4500', mark: '✕' },
   }[state];
   return (
     <span
@@ -149,22 +149,23 @@ export default function WebsiteAudit() {
   const site = result?.site;
 
   return (
-    <section id="audit" className="section relative overflow-hidden">
-      <div aria-hidden="true" className="absolute -left-24 top-24 h-80 w-80 rounded-full bg-orange/30 blur-[110px]" />
+    <section id="audit" className="section">
       <div className="wrap relative grid items-start gap-12 lg:grid-cols-[1.1fr_1fr]">
         <div>
-          <span className="label">(04) Website audit</span>
-          <h2 className="h-section">Does ChatGPT know your business?</h2>
+          <span className="label">Website audit</span>
+          <h2 className="h-section">
+            Does <span className="mark">ChatGPT</span> know your business?
+          </h2>
           <p className="mt-7 max-w-[520px] text-[18px] leading-relaxed text-muted">
             When ChatGPT answers a question and attributes the information to your website by name, that is a brand signal that is difficult to manufacture any other way.
           </p>
 
           <p className="mt-10 text-[13px] font-bold uppercase tracking-[0.2em] text-muted">Enter your website. Get a score for:</p>
-          <ol className="mt-5 border-t border-line">
+          <ol className="mt-5 border-t border-ink/15">
             {categories.map((cat) => {
               const mine = site?.categories.find((c) => c.id === cat.id)?.score;
               return (
-                <li key={cat.id} className="flex items-center gap-5 border-b border-line py-4">
+                <li key={cat.id} className="flex items-center gap-5 border-b border-ink/15 py-4">
                   <span className="display w-8 shrink-0 text-[15px] tracking-normal text-orange">{cat.no}</span>
                   <div className="flex-1">
                     <div className="flex flex-wrap items-baseline justify-between gap-2">
@@ -189,7 +190,7 @@ export default function WebsiteAudit() {
                     <div className="kicker mb-3 text-[11px] text-muted">{cat.title}</div>
                     <ul className="space-y-2">
                       {mine.items.map((item) => (
-                          <li key={item.id} className="flex items-start gap-3 rounded-xl border border-line bg-white px-4 py-3 text-[14px]">
+                          <li key={item.id} className="flex items-start gap-3 rounded-xl border border-ink/20 bg-paper px-4 py-3 text-[14px]">
                             <StatusIcon state={item.pass ? 'pass' : 'fail'} />
                             <span className="min-w-0 flex-1">
                               <span className="font-bold">{item.label}</span>
@@ -207,7 +208,8 @@ export default function WebsiteAudit() {
         </div>
 
         <div className="space-y-8 lg:sticky lg:top-28">
-          <div className="card p-7 sm:p-9">
+          <div data-reveal className="dot-shadow">
+            <div className="rounded-2xl border border-ink bg-paper p-7 sm:p-9">
             <div className="kicker text-[11px] text-muted">Free website audit</div>
             <h3 className="display mt-4 text-[32px] sm:text-[40px]">Does ChatGPT know your business?</h3>
             <p className="mt-4 text-[15px] leading-relaxed text-muted">
@@ -222,17 +224,18 @@ export default function WebsiteAudit() {
                 </p>
               )}
               {error && (
-                <p className="mt-3 rounded-[3px] bg-orange px-3 py-2 text-[14px] font-bold" role="alert">
+                <p className="mt-3 bg-orange px-3 py-2 text-[14px] font-bold" role="alert">
                   {error}
                 </p>
               )}
             </div>
+            </div>
           </div>
 
-          <div className="rounded-2xl bg-ink p-7 text-white shadow-float sm:p-8" aria-live="polite">
+          <div className="rounded-2xl bg-ink p-7 text-paper sm:p-8" aria-live="polite">
             {!site ? (
               <>
-                <div className="kicker text-[11px] text-white/70">Sample report preview, not a real site</div>
+                <div className="kicker text-[11px] text-paper/70">Sample report preview, not a real site</div>
                 <div className="mt-5 flex items-center gap-6">
                   <ScoreRing value={72} />
                   <ul className="space-y-3 text-[15px]">
@@ -250,7 +253,7 @@ export default function WebsiteAudit() {
               </>
             ) : (
               <>
-                <div className="kicker text-[11px] text-white/70">Your report</div>
+                <div className="kicker text-[11px] text-paper/70">Your report</div>
                 <div className="mt-5 flex flex-wrap items-start justify-around gap-6">
                   <ScoreRing value={site.score} label={hostOf(site.url)} />
                 </div>
@@ -276,7 +279,7 @@ export default function WebsiteAudit() {
                     <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z" />
                   </svg>
                 </a>
-                <p className="mt-2 text-center text-[12px] text-white/60">Opens WhatsApp with your report summary.</p>
+                <p className="mt-2 text-center text-[12px] text-paper/60">Opens WhatsApp with your report summary.</p>
               </>
             )}
           </div>
