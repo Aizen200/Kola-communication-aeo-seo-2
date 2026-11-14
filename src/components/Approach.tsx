@@ -81,18 +81,22 @@ export default function Approach() {
           <span className="label text-ink/60">How we work</span>
           <h2 className="h-section max-w-[900px]">Every project starts with a clear goal and ends with a result we can point to.</h2>
 
-          <div className="mt-16 space-y-20 lg:space-y-28">
+          <div className="mt-12 space-y-6 pb-4">
             {steps.map((s, i) => (
-              <div key={s.no} className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-                <div data-reveal>
+              <div
+                key={s.no}
+                className="sticky grid items-center gap-8 rounded-3xl border border-ink bg-paper p-6 shadow-[0_-12px_30px_-18px_rgba(20,20,20,0.45)] sm:p-10 lg:grid-cols-2 lg:gap-16"
+                style={{ top: `${88 + i * 28}px` }}
+              >
+                <div>
                   <div className="kicker text-[12px] text-ink/60">
                     {s.no} / 0{steps.length}
                   </div>
-                  <h3 className="display mt-4 text-[46px] sm:text-[64px]">{s.title}</h3>
-                  <p className="mt-5 max-w-[480px] text-[17px] leading-relaxed text-ink/80">{s.text}</p>
+                  <h3 className="display mt-3 text-[32px] sm:text-[40px]">{s.title}</h3>
+                  <p className="mt-4 max-w-[480px] text-[16px] leading-relaxed text-ink/80">{s.text}</p>
                 </div>
-                <div data-reveal className="dot-shadow mx-auto w-full max-w-[460px]">
-                  <div className="rounded-2xl border border-ink bg-paper p-6">
+                <div className="dot-shadow mx-auto w-full max-w-[460px]">
+                  <div className="rounded-2xl border border-ink bg-sand p-6">
                     <div className="mb-5 flex items-center justify-between">
                       <span className="kicker text-[11px] text-muted">{s.kicker}</span>
                       <span className="kicker text-[11px]">{s.no}</span>
@@ -113,14 +117,9 @@ export default function Approach() {
               key={v.title}
               data-reveal
               style={{ '--d': `${i * 80}ms` } as React.CSSProperties}
-              className={`flex min-h-[250px] flex-col rounded-2xl border border-ink p-6 ${i === 1 ? 'bg-ink text-paper' : i === 2 ? 'bg-orange' : 'bg-paper'}`}
+              className={`flex min-h-[220px] flex-col rounded-2xl border border-ink p-6 ${i === 1 ? 'bg-ink text-paper' : i === 2 ? 'bg-orange' : 'bg-paper'}`}
             >
-              <div className="flex items-center justify-between">
-                <span className="kicker text-[12px]">0{i + 1}</span>
-                <span aria-hidden="true" className="flex h-8 w-8 items-center justify-center rounded-full border border-current text-[18px] opacity-70">
-                  +
-                </span>
-              </div>
+              <span className="kicker text-[12px]">0{i + 1}</span>
               <h3 className="mt-auto text-[26px] font-bold leading-[1.05] tracking-[-0.04em]">{v.title}</h3>
               <p className={`mt-3 text-[14px] leading-relaxed ${i === 1 ? 'text-paper/65' : 'text-ink/70'}`}>{v.text}</p>
             </article>

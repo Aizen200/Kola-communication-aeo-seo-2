@@ -44,7 +44,7 @@ export default function Contact() {
       <div className="wrap relative grid gap-14 lg:grid-cols-2">
         <div>
           <span className="label text-paper/50">Contact</span>
-          <h2 className="h-section !text-[44px] sm:!text-[60px] lg:!text-[72px]">
+          <h2 className="h-section">
             Let&apos;s build something{" "}
             <span className="block text-orange">extraordinary together.</span>
           </h2>
@@ -61,19 +61,19 @@ export default function Contact() {
 
           <dl className="mt-10 grid gap-px overflow-hidden rounded-2xl bg-paper/10 text-[14px] sm:grid-cols-2">
             <div className="bg-ink p-5">
-              <dt className="kicker text-[10px] text-paper/50">Phone</dt>
+              <dt className="kicker text-[11px] text-paper/50">Phone</dt>
               <dd className="mt-2">
-                <a href="tel:+918928984774" className="font-bold hover:text-orange">
+                <a href="tel:+918928984774" className="inline-block py-2 font-bold hover:text-orange">
                   +91-8928984774
                 </a>
               </dd>
             </div>
             <div className="bg-ink p-5">
-              <dt className="kicker text-[10px] text-paper/50">Business Hours</dt>
+              <dt className="kicker text-[11px] text-paper/50">Business Hours</dt>
               <dd className="mt-2 font-bold">Mon – Fri: 9:30 AM – 9:00 PM IST</dd>
             </div>
             <div className="bg-ink p-5 sm:col-span-2">
-              <dt className="kicker text-[10px] text-paper/50">Address</dt>
+              <dt className="kicker text-[11px] text-paper/50">Address</dt>
               <dd className="mt-2 text-[13px] leading-relaxed text-paper/70">23, 2nd Floor, Sharda Bhavan, Opposite Gala Provision Store, Fatak Road / Narayan Joshi Road, Kandivali West, Mumbai – 400067, Maharashtra, India</dd>
             </div>
           </dl>

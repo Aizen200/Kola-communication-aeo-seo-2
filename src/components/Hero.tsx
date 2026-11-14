@@ -43,7 +43,7 @@ function HeroVisual() {
     <div
       role="img"
       aria-label="Illustration: Kola Communications as a Google search result and as the source cited in a ChatGPT answer."
-      className="relative mx-auto h-[640px] w-full max-w-[580px] sm:h-[600px]"
+      className="relative mx-auto h-[600px] w-full max-w-[540px] sm:h-[560px] lg:h-[min(560px,calc(100svh-150px))]"
     >
       <div aria-hidden="true" className="absolute inset-0 overflow-hidden rounded-[28px] border border-ink bg-orange">
         <div className="absolute inset-0 bg-[radial-gradient(circle,#141414_1.1px,transparent_1.4px)] [background-size:9px_9px] [mask-image:radial-gradient(circle_at_70%_30%,#000,transparent_70%)] opacity-40" />
@@ -118,23 +118,23 @@ function HeroVisual() {
 
 export default function Hero() {
   return (
-    <section id="top" aria-labelledby="hero-title" className="pb-16 pt-28 sm:pt-32 lg:pb-24 lg:pt-36">
+    <section id="top" aria-labelledby="hero-title" className="flex flex-col justify-center pb-12 pt-24 lg:min-h-[100svh] lg:pb-8 lg:pt-24">
       <div className="wrap grid items-center gap-14 lg:grid-cols-[1.12fr_1fr] lg:gap-12">
         <div>
           <div data-reveal className="inline-flex items-center gap-2 rounded-full border border-ink/15 bg-paper py-1 pl-1 pr-3 text-[12px] font-semibold uppercase tracking-[0.06em]">
             <span className="rounded-full bg-orange px-2 py-0.5 text-ink">SEO</span>
             AEO &amp; GEO
           </div>
-          <h1 id="hero-title" data-reveal className="display mt-6 text-[50px] sm:text-[72px] lg:text-[80px]">
+          <h1 id="hero-title" data-reveal className="display mt-5 text-[44px] sm:text-[60px] lg:text-[clamp(44px,6.2vh,64px)]">
             Own your visibility across Google and <span className="mark">AI search.</span>
           </h1>
-          <p data-reveal className="mt-6 max-w-[540px] text-[17px] leading-relaxed text-ink/75">
+          <p data-reveal className="mt-4 max-w-[540px] text-[16px] leading-relaxed text-ink/75">
             Search is evolving rapidly. We optimize your digital presence not only for traditional search engines like Google and Bing, but also for generative AI answer engines (ChatGPT, Perplexity, Google Gemini).
           </p>
-          <div data-reveal className="mt-8">
+          <div data-reveal className="mt-6">
             <HeroAuditForm />
           </div>
-          <div data-reveal className="mt-10 flex items-center gap-4 border-l border-ink pl-4">
+          <div data-reveal className="mt-6 flex items-center gap-4 border-l border-ink pl-4">
             <div className="flex -space-x-2">
               {avatars.map((id, i) => (
                 <img

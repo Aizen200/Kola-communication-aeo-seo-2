@@ -66,7 +66,7 @@ export default function Packages() {
       <div className="wrap">
         <span className="label">Packages</span>
         <h2 className="h-section mb-14 max-w-[900px]">
-          Transparent ways to <span className="mark">collaborate.</span>
+          Transparent ways to collaborate.
         </h2>
 
         <div className="grid items-stretch gap-x-5 gap-y-10 pt-4 md:grid-cols-2 lg:grid-cols-3">

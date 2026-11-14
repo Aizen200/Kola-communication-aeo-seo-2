@@ -40,14 +40,14 @@ const caseStudies = [
 
 export default function CaseStudies() {
   return (
-    <section id="case-studies" className="section">
+    <section id="case-studies" className="pb-20 pt-10 sm:pb-24 sm:pt-12 lg:pb-32 lg:pt-14">
       <div className="wrap">
         <div className="mb-10 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div>
             <span className="label">Projects</span>
             <h2 className="h-section">Our Work</h2>
           </div>
-          <a href="https://kolacommunications.com/projects" target="_blank" rel="noopener noreferrer" className="btn-link">
+          <a href="https://kolacommunications.com/projects" target="_blank" rel="noopener noreferrer" className="btn-link py-2">
             View Projects <Arrow />
           </a>
         </div>

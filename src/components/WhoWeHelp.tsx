@@ -19,7 +19,7 @@ const practices = [
 
 export default function WhoWeHelp() {
   return (
-    <section id="who-we-help" className="section">
+    <section id="who-we-help" className="section pb-10 sm:pb-12 lg:pb-14">
       <div className="wrap grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
         <div data-reveal className="dot-shadow mr-3">
           <div className="halftone aspect-[4/3.4] rounded-2xl border border-ink">
@@ -35,8 +35,8 @@ export default function WhoWeHelp() {
         </div>
         <div>
           <span className="label">What is AEO</span>
-          <h2 className="h-section !text-[40px] sm:!text-[56px] lg:!text-[64px]">
-            Why does <span className="mark">AEO</span> matter more than ever in 2026?
+          <h2 className="h-section">
+            Why does AEO matter more than ever in 2026?
           </h2>
           <ol className="mt-10 border-t border-ink/15">
             {practices.map((p, i) => (

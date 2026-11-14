@@ -28,7 +28,7 @@ export default function Footer() {
     <footer className="dot-grid relative overflow-hidden bg-ink text-paper">
       <div className="wrap relative grid gap-10 border-t border-paper/10 pb-10 pt-14 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]">
         <div className="sm:col-span-2 lg:col-span-1">
-          <a href="#top" aria-label="Kola Communications home">
+          <a href="#top" aria-label="Kola Communications home" className="inline-block py-2">
             <Logo light />
           </a>
           <p className="mt-4 text-[15px] text-paper/60">Get found. Get chosen.</p>
@@ -36,10 +36,10 @@ export default function Footer() {
         {columns.map((c) => (
           <nav key={c.title} aria-label={`${c.title} links`}>
             <div className="kicker text-[11px] text-paper/45">{c.title}</div>
-            <ul className="mt-4 space-y-2.5 text-[15px]">
+            <ul className="mt-3 text-[15px]">
               {c.links.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} className="transition-colors hover:text-orange">
+                  <a href={l.href} className="inline-block py-2 transition-colors hover:text-orange">
                     {l.label}
                   </a>
                 </li>
@@ -53,9 +53,9 @@ export default function Footer() {
         KOLA.
       </div>
 
-      <div className="wrap relative flex items-center justify-between gap-4 border-t border-paper/10 py-5 text-[12px] font-semibold uppercase tracking-[0.06em] text-paper/50">
+      <div className="wrap relative flex items-center justify-between gap-4 border-t border-paper/10 py-5 text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.06em] text-paper/50">
         <span>© 2026 Kola Communications. All rights reserved.</span>
-        <a href="#top" aria-label="Back to top" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-orange text-ink transition-colors hover:bg-paper">
+        <a href="#top" aria-label="Back to top" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-orange text-ink transition-colors hover:bg-paper">
           <Arrow size={14} className="-rotate-90" />
         </a>
       </div>

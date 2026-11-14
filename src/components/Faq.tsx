@@ -61,7 +61,7 @@ export default function Faq() {
         <div className="lg:sticky lg:top-[20vh] lg:self-start">
           <span className="label">FAQ</span>
           <h2 className="h-section">
-            Frequently Asked <span className="mark">Questions</span>
+            Frequently Asked Questions
           </h2>
           <a href="#contact" className="btn-dark mt-10">
             Book a Free Strategy Call <Arrow />

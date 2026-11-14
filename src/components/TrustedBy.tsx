@@ -37,11 +37,10 @@ export default function TrustedBy() {
     <section aria-labelledby="trusted-title" className="pb-6 pt-20 sm:pt-24">
       <div className="wrap flex flex-col items-center text-center">
         <span className="label">Trusted by growing businesses</span>
-        <h2 id="trusted-title" className="h-section !text-[36px] sm:!text-[48px]">199+ Global Founders &amp; Clients</h2>
+        <h2 id="trusted-title" className="h-section">199+ Global Founders &amp; Clients</h2>
       </div>
       <div data-reveal className="mt-10 space-y-4">
         <LogoRow logos={clientLogos} />
-        <LogoRow logos={[...clientLogos.slice(3), ...clientLogos.slice(0, 3)]} reverse hidden />
       </div>
     </section>
   );

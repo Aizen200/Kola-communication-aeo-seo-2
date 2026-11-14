@@ -57,7 +57,7 @@
   }
 
   .h-section {
-    @apply display text-[44px] sm:text-[64px] lg:text-[84px];
+    @apply display text-[34px] sm:text-[44px] lg:text-[48px];
   }
 
   /* Small uppercase eyebrow, e.g. "01 / 03" */
@@ -162,17 +162,6 @@
     @apply relative overflow-hidden bg-paper;
   }
 
-  .halftone img {
-    filter: grayscale(1) contrast(1.15) brightness(1.05);
-  }
-
-  .halftone::after {
-    content: "";
-    @apply pointer-events-none absolute inset-0;
-    background-image: radial-gradient(circle, rgba(20, 20, 20, 0.55) 0.9px, transparent 1.2px);
-    background-size: 4px 4px;
-    mix-blend-mode: multiply;
-  }
 
   /* Faint dot grid on dark sections */
   .dot-grid {

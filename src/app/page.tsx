@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import KeywordStrip from '@/components/KeywordStrip';
 import TrustedBy from '@/components/TrustedBy';
 import Expertise from '@/components/Expertise';
 import CaseStudies from '@/components/CaseStudies';
@@ -22,7 +21,6 @@ export default function Home() {
       <Header />
       <main id="main">
         <Hero />
-        <KeywordStrip />
         <TrustedBy />
         <Expertise />
         <Approach />

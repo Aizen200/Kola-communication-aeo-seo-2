@@ -73,7 +73,7 @@ function ScoreRing({ value, label }: { value: number; label?: string }) {
           /100
         </text>
       </svg>
-      {label && <span className="kicker max-w-[130px] truncate text-[10px] text-paper/70">{label}</span>}
+      {label && <span className="kicker max-w-[130px] truncate text-[11px] text-paper/70">{label}</span>}
     </div>
   );
 }
@@ -154,7 +154,7 @@ export default function WebsiteAudit() {
         <div>
           <span className="label">Website audit</span>
           <h2 className="h-section">
-            Does <span className="mark">ChatGPT</span> know your business?
+            Does ChatGPT know your business?
           </h2>
           <p className="mt-7 max-w-[520px] text-[18px] leading-relaxed text-muted">
             When ChatGPT answers a question and attributes the information to your website by name, that is a brand signal that is difficult to manufacture any other way.
